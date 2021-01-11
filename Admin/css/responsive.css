@@ -1,0 +1,914 @@
+/*=====================================================
+                Bootstrap media quaries
+======================================================*/
+
+/*==============================
+            Mobile Menu
+================================*/
+.navbar-header {
+    position: relative;
+}
+#mobile-nav-open-btn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    right: 15px;
+    top: 3px;
+    /* hide mobile nav open button */
+    display: none;
+}
+#mobile-nav {
+    /* By default mobile nav is hidden with height 0%*/
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(255,255,255,0.9);
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    overflow-y: hidden;
+}
+#mobile-nav-close-btn {
+    font-family: "Raleway", sans-serif;
+    font-size: 70px;
+    color: #6255a5;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    top: -9px;
+    right: 13px; 
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+#mobile-nav-content {
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    position: relative;
+    top: 10%;
+}
+#mobile-nav ul li {
+    padding: 0;
+    height: 50px;
+    border-top: 1px solid #999999;
+}
+#mobile-nav ul li:last-child {
+    border-bottom: 1px solid #999999;
+}
+#mobile-nav a {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    line-height: 50px;
+    color: #333333;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline; 
+    -webkit-transition: .3s;
+    transition: .3s;
+    letter-spacing: .9px;
+}
+#mobile-nav a:hover,
+#mobile-nav a:focus,
+#mobile-nav-close-btn:hover,
+#mobile-nav-close-btn:focus {
+    color: #6255a5;
+    background: none;
+}
+#mobile-nav li.active-link,
+#mobile-nav .dropdown-menu a.active-link{
+    background-color: rgba(0,0,0,0.05);
+}
+#mobile-nav li.active-link a{
+    color: #333333 !important;
+}
+
+/*===========================
+        mobile-dropdown
+============================*/
+#mobile-dropdown button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+#mobile-dropdown button span {
+    line-height: 50px;
+    font-size: 16px;
+    letter-spacing: .9px;
+    color: #333333;
+    font-family: "Open Sans", sans-serif;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+#mobile-dropdown .dropdown-menu {
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+}
+li.active-link #mobile-dropdown .dropdown-menu a,
+#mobile-dropdown .dropdown-menu a {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    color: #333333;
+    transition: none;
+    border-bottom: 1px solid #999999;
+}
+
+
+
+/* large devices (Desktop & laptops) */
+
+@media (min-width: 1200px) and (max-width: 1299px) {
+
+}
+
+/* medium devices ( Landscape tablets & medium laptops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 200px;
+    }
+    .navbar .nav li a {
+        font-size: 12px;
+        margin: 0 10px;
+        padding: 15px 0px;
+    }
+    #profile-submenu button span {
+        margin: 0 8px;
+        padding: 15px 0px;
+        font-size: 12px;
+    }
+    .navbar .nav li #profile-submenu .profile-img {
+        margin-top: 3px;
+        height: 35px;
+        width: 35px;
+    }
+    .navbar .nav .submit-btn {
+        height: 35px;
+        margin: 3px 0;
+        font-size: 12px;
+    }
+    
+    
+    /* User Profile */
+    .form-details .form-inner {
+        padding: 50px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner .form-control {
+        height: 44px;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 90px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 130px;
+        height: 32px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .notes-details-left .book-cover-section {
+        height: 300px;
+        width: 250px;
+    }
+    #notes-details-inner .notes-details-left .book-cover {
+        height: 270px;
+        width: 210px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        font-size: 26px;
+    }
+    #notes-details-inner .notes-details-right {
+        padding-left: 0;
+    }
+    
+    /* Member Details */
+    #member-details-inner .member-img img{
+        height: 110px;
+        width: 110px;
+    }
+    #member-details-inner .personal-info .member-personal-info {
+        padding-left: 0px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 20px 0;
+    }
+}
+
+/* small devices ( Portrait tablets & small laptops) */
+@media (min-width: 768px) and (max-width: 991px) {
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 170px;
+        top: -4px;
+    }
+    .navbar .nav li {
+        padding-top: 5px;
+    }
+    .navbar .nav li a {
+        font-size: 11px;
+        margin: 0 8px;
+        padding: 15px 0px;
+        padding-bottom: 8px;
+    }
+    #profile-submenu button span {
+        margin: 0 5px;
+        padding: 15px 0px;
+        padding-bottom: 8px;
+        font-size: 11px;
+    }
+    .navbar .nav li #profile-submenu .profile-img {
+        height: 29px;
+        width: 29px;
+    }
+    .navbar .nav .submit-btn {
+        font-size: 11px;
+        line-height: 12px;
+        padding: 6px;
+        width: 60px;
+        height: 30px;
+    }
+    
+    /* Form Field */
+	.form-inner {
+        width: 480px;
+	}
+	.form-inner label {
+		width: 380px;
+	}
+	.form-inner .title {
+		font-size: 28px;
+		margin-bottom: 12px;
+	}
+	.form-inner .form-control {
+		width: 380px;
+		height: 40px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -30px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 16px;
+	}
+	.form-inner #remember-check {
+		width: 24px;
+		height: 24px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 380px;
+		height: 40px;
+		font-size: 15px;
+	}
+    
+    /* Form Details */
+    .form-details .form-inner {
+        padding: 40px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner label {
+        font-size: 13px;
+    }
+    .form-details .form-inner .form-control {
+        font-size: 13px;
+        height: 36px;
+    }
+    .form-details .form-inner select {
+        background-position: 96% 50%;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 80px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .upload-picture #profile-picture {
+        height: 40px;
+        padding-top: 0;
+    }
+    .form-details .form-inner .upload-picture h5 {
+        font-size: 13px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* Table */
+    .table-heading .heading {
+        margin-top: 10px;
+        font-size: 26px;
+        line-height: 30px;
+    }
+    /* Dashboard */
+    #dashboard-inner .heading-section .heading {
+        font-size: 28px;
+        line-height: 32px;     
+    }
+    #dashboard-inner .top-section {
+        padding: 10px;
+    }
+    #dashboard-inner .top-section .top-section-no {
+        font-size: 26px;
+    }
+    #dashboard-inner .top-section .top-section-text {
+        font-size: 14px;
+    }
+    
+    /* Member Details */
+    #member-details-inner .personal-info {
+        border: none;
+    }
+    #member-details-inner .member-personal-info {
+        padding-bottom: 30px;
+        border-bottom: 1px solid #d1d1d1;
+    }
+    #member-details-inner .address-info {
+        padding: 30px 0 0 175px;
+    }
+    #member-details-inner .personal-info .member-personal-info {
+        padding-left: 0px;
+    }
+    #member-details-inner hr {
+        background: #d1d1d1;
+    }
+    #member-details-inner .table-section {
+        margin-top: 50px;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 14px;
+    }
+    .pagination-area li span {
+        padding: 6px 12px;
+    }
+    .pagination-area li span img {
+        height: 12px;
+    }
+    
+    /*==========================================
+            Manage Admin, Type, Country, etc..
+    ============================================*/
+    .manage-profile-admin-etc {
+        margin: 90px 0 30px 0;
+    }
+    .manage-profile-admin-etc .heading-section .heading {
+        font-size: 28px;
+        line-height: 34px;
+        margin-bottom: 30px;
+    }
+    .manage-profile-admin-etc .table-heading .submit-btn {
+        font-size: 16px;
+    }
+    .manage-profile-admin-etc .table-section .table-search {
+        padding-left: 30px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .notes-details-right {
+        margin-top: 50px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        margin-top: 10px;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right {
+        text-align: left;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right .rate {
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    #notes-details-inner .customer-review {
+        margin-top: 50px;
+    }
+    
+    /* Downloaded Notes */
+    #downloaded-notes {
+        margin: 100px 0 30px 0;
+    }
+    #downloaded-notes .heading-section .heading {
+        font-size: 30px;
+    }
+    #downloaded-notes .table-section .buyer-search {
+        padding-right: 0;
+    }
+    #downloaded-notes .table-section .table-search {
+        padding-left: 0;
+        left: -18px;
+        margin: 25px 0;
+    }
+    
+    /* Members */
+    #members-inner .table-search {
+        padding-left: 30px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 16px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 11px;
+    }
+}
+
+/* extra small devices ( Landscape phones) */
+@media (max-width: 767px) {
+    
+    /* Mobile Navigation */
+    /* show mobile nav open button */
+    #mobile-nav-open-btn {
+        font-size: 28px;;
+        display: block;
+        top: 5px;
+    }
+    #mobile-nav a {
+        font-size: 15px;
+    }
+    #mobile-nav-close-btn {
+        margin-top: 5px;
+        font-size: 60px;
+    }
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 180px;
+        top: -5px;
+    }
+    
+    /* Form Fields */
+    .form-inner {
+        width: 460px;
+	}
+	.form-inner label {
+		width: 360px;
+	}
+	.form-inner .title {
+		font-size: 28px;
+		margin-bottom: 10px;
+	}
+	.form-inner .text-1 {
+		margin-bottom: 35px;
+	}
+	.form-inner .form-group {
+		margin-bottom: 25px;
+	}
+	.form-inner .form-control {
+		height: 40px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -30px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 16px;
+	}
+	.form-inner #remember-check {
+		width: 24px;
+		height: 24px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 360px;
+		height: 40px;
+		font-size: 15px;
+	}
+    
+    /* Form Fields*/
+    .form-details .form-inner {
+        padding: 30px 0;
+    }
+    .form-details .form-inner .row {
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+    .form-details .form-inner .title {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner label {
+        font-size: 13px;
+    }
+    .form-details .form-inner .form-group {
+        width: 100%;
+        margin-left: 0; 
+    }
+    .form-details .form-group .col-md-3 {
+        padding-left: 0;
+    }
+    .form-details .form-group .col-md-9 {
+        padding-right: 0;
+    }
+    .form-details .form-inner .form-control {
+        font-size: 13px;
+        height: 36px;
+    }
+    .form-details .form-inner select {
+        background-position: 96% 50%;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 80px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .upload-picture #profile-picture {
+        height: 40px;
+        padding-top: 0;
+    }
+    .form-details .form-inner .upload-picture h5 {
+        font-size: 13px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 13px;
+    }
+    .pagination-area li span {
+        padding: 8px 12px;
+    }
+    .pagination-area li span img {
+        height: 11px;
+    }
+    
+    /* Dashboard */
+    #dashboard-inner .heading-section .heading {
+        font-size: 28px;
+        line-height: 32px;     
+    }
+    #dashboard-inner .top-section .top-section-no {
+        font-size: 26px;
+    }
+    #dashboard-inner .top-section .top-section-text {
+        font-size: 14px;
+    }
+    
+    /* Table */
+    .publish-reject-download .table-section #table-content,
+    .table-section #table-content {
+        padding-top: 0px;
+    }
+    .table-section .table-search {
+        margin: 25px 0px;
+    }
+    .table-section .submit-btn {
+        font-size: 16px;
+    }
+    .table-section #input-month {
+        margin-right: 15px;
+    }
+    
+    /*==============================
+        Manage Admin, Category, etc..
+    ================================*/
+    .manage-profile-admin-etc {
+        margin: 90px 0 30px 0;
+    }
+    .manage-profile-admin-etc .heading-section .heading {
+        font-size: 24px;
+        line-height: 34px;
+        margin-bottom: 30px;
+    }
+    .manage-profile-admin-etc .table-heading .submit-btn {
+        font-size: 14px;
+    }
+    .manage-profile-admin-etc .table-section .table-search {
+        margin: 0;
+        padding-left: 0;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner {
+        padding-top: 85px;
+    }
+    #notes-details-inner .notes-details-left .book-cover-section {
+        width: 100%;
+    }
+    #notes-details-inner .notes-details-right {
+        margin-top: 50px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        margin-top: 15px;
+        font-size: 20px;
+    }
+    #notes-details-inner .notes-details-left .note-type {
+        font-size: 16px;
+    }
+    #notes-details-inner .notes-details-left .note-details-text {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right {
+        text-align: left;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right .rate {
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    #notes-details-inner .p1-line-p2 {
+        margin: 30px 0;
+    }
+    #notes-details-inner .customer-review {
+        margin-top: 30px;
+    }
+    
+    /* Member Details */
+    #member-details-inner {
+        margin: 80px 0 30px 0;
+    }
+    #member-details-inner .member-img {
+        padding: 0 0 30px 0;
+    }
+    #member-details-inner .heading-section .heading {
+        font-size: 30px;
+        line-height: 38px;
+    }
+    #member-details-inner .personal-info {
+        border: none;
+    }
+    #member-details-inner .member-personal-info {
+        padding: 30px 0;
+        border-top: 1px solid #d1d1d1;
+        border-bottom: 1px solid #d1d1d1;
+    }
+    #member-details-inner .address-info {
+        padding: 30px 0 0 0px;
+    }
+    #member-details-inner .personal-info .member-personal-info {
+        padding-left: 0px;
+    }
+    #member-details-inner .personal-info .info-title,
+    #member-details-inner .address-info .info-title,
+    #member-details-inner .personal-info .info-text,
+    #member-details-inner .address-info .info-text {
+        font-size: 13px;
+    }
+    #member-details-inner hr {
+        background: #d1d1d1;
+    }
+    #member-details-inner .table-section {
+        margin-top: 50px;
+    }
+    
+    /* Notes Under review */
+    .publish-reject-download .table-section .table-search {
+        margin-top: 35px;
+    }
+    .publish-reject-download .table-section .table-heading {
+        padding-bottom: 120px;
+    }
+    
+    /* Members */
+    #members-inner {
+        margin: 40px 0 30px 0;
+    }
+    #members-inner .table-search {
+        padding: 0;
+        left: -18px;
+        margin: 25px 0;
+    }
+    
+    /* Spam Reports */
+    #spam-reports-inner .table-search {
+        padding: 0;
+        left: -18px;
+        margin: 25px 0;
+    }
+    
+    /* Downloaded Notes */
+    #downloaded-notes {
+        margin: 90px 0 30px 0;
+    }
+    #downloaded-notes .heading-section .heading {
+        font-size: 28px;
+    }
+    #downloaded-notes .table-section .buyer-search {
+        padding-right: 0;
+    }
+    #downloaded-notes .table-section .table-search {
+        padding-left: 0;
+        left: -18px;
+        margin: 25px 0;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 16px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 11px;
+    }
+    
+}
+
+/* extra small devices ( Portrait phones and smaller devices) */
+@media (max-width: 480px) {
+    
+    /* Mobile Navigation */
+    /* show mobile nav open button */
+    #mobile-nav-open-btn {
+        display: block;
+        font-size: 25px;
+    }
+
+    /* Navbar logo */
+    .navbar .navbar-header .logo {
+        width: 170px;
+        top: -6px;
+    }
+    
+    /* Top logo of login,signup,etc.. */
+	#top-logo .logo {
+        width: 180px;
+	}
+    
+    /* Form fields */
+    .form-inner {
+		padding: 30px;
+        width: 320px;
+	}
+	.form-inner label {
+		width: 260px;
+		font-size: 13px;
+	}
+	.form-inner .form-control {
+		font-size: 13px;
+	}
+	.form-inner .title {
+		font-size: 23px;
+		margin-bottom: 10px;
+	}
+	.form-inner .text-1 {
+		font-size: 11px;
+		margin-bottom: 20px;
+	}
+	.form-inner .form-group {
+		margin-bottom: 20px;
+	}
+	.form-inner .form-control {
+		width: 260px;
+		height: 40px;
+		border-radius: 3px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -28px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 13px;
+	}
+	.form-inner #remember-check {
+		width: 20px;
+		height: 20px;
+	}
+	.form-inner label.form-check-label {
+		padding-bottom: 12px;
+	}
+	.form-inner .form-check {
+		margin-bottom: 10px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 260px;
+		height: 40px;
+		font-size: 12px;
+	}
+	.form-inner .text-2 {
+		font-size: 13px;
+	}
+    
+    /* Dashboard */
+    #dashboard-inner .top-section .top-section-no {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    #dashboard-inner .top-section .top-section-text {
+        font-size: 12px;
+    }
+    
+    /*==============================
+        Manage admin category etc.
+    ================================*/
+    .manage-profile-admin-etc .table-section .table-search{
+        margin: 30px 0;
+        left: -18px;
+    }
+    .manage-profile-admin-etc .table-heading .submit-btn {
+        font-size: 12px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .customer-review .col-md-2 {
+        padding-left: 15px;
+    }
+    
+    /* Manage System Configuration */
+    #manage-system-configuration .title {
+        font-size: 18px;
+    }
+    
+    /* Downloaded Notes */
+    #downloaded-notes .heading-section .heading {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    #downloaded-notes .table-section .search-dropdown {
+        padding-right: 0;
+    }
+    
+    /* Table */
+    .table-section {
+        margin-top: 50px;
+    }
+    
+    /* Reject Popup */
+    .modal-body .popup-review-title {
+        font-size: 18px;
+    }
+    #notes-under-review .modal-body .popup-text-02 {
+        font-size: 14px;
+    }
+    .modal-body .reject-btn,
+    .modal-body .inreview-btn{
+        font-size: 14px;
+        width: 80px !important;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 12px;
+    }
+    .pagination-area li span {
+        padding: 7px 12px;
+    }
+    .pagination-area li span img {
+        height: 10px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 13px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 10px;
+    }
+    
+
+}
+
+/* extra small devices ( extra-small phones) */
+@media (max-width: 351px) {
+    
+    .form-details .form-group .col-md-3 {
+        padding-right: 0;
+    }
+    
+    /* Manage System Configuration */
+    #manage-system-configuration .title {
+        font-size: 16px;
+    }
+    
+    #footer-inner .col-xs-6 {
+        padding-right: 0;
+    }
+}

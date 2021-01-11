@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Profile</title>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 ,user-scalable=no">
+
+    <!-- Favicon -->
+    <link href="../images/assets/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+
+<body>
+
+    <div id="my-profile" class="form-details">
+        <!-- Header -->
+        <header id="top-fixed-nav">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Mobile menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+
+                        <!-- Logo -->
+                        <a href="dashboard.html" class="navbar-brand">
+                            <img class="logo img-responsive" src="../images/assets/logo-img.png" alt="logo">
+                        </a>
+                    </div>
+
+                    <!-- Main menu -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <!-- Notes Dropdown -->
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Notes</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="notes-under-review.html">Notes Under Review</a>
+                                        <a class="dropdown-item" href="published-notes.html">Published Notes</a>
+                                        <a class="dropdown-item" href="downloaded-notes.html">Downloaded Notes</a>
+                                        <a class="dropdown-item" href="rejected-notes.html">Rejected Notes</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <!--- Notes Dropdown Ends -->
+                            <li><a href="members.html">Members</a></li>
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Reports</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="spam-reports.html">Spam Reports</a>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                            <!-- Settings Dropdown -->
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Settings</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="manage-system-configuration.html">Manage System Configuration</a>
+                                        <a class="dropdown-item" href="manage-administrator.html">Manage Administrator</a>
+                                        <a class="dropdown-item" href="manage-category.html">Manage Category</a>
+                                        <a class="dropdown-item" href="manage-type.html">Manage Type</a>
+                                        <a class="dropdown-item" href="manage-country.html">Manage Countries</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <!--- Settings Dropdown Ends -->
+                            <li>
+                                <!-- Profile Dropdown -->
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="profile-img img-responsive img-circle" src="../images/User-Profile/profile-img.png" alt="logo">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item active-link" href="my-profile.html">Update Profile</a>
+                                        <a class="dropdown-item" href="change-password.html">Change Password</a>
+                                        <a class="dropdown-item" href="#" id="submenu-logout">LOGOUT</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="#"><button type="submit" class="btn submit-btn">Logout</button></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <!-- Mobile menu Close Button -->
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="dashboard.html">Dashboard</a></li>
+                                <li>
+                                    <!-- Notes Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Notes</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="notes-under-review.html">Notes Under Review</a>
+                                            <a class="dropdown-item" href="published-notes.html">Published Notes</a>
+                                            <a class="dropdown-item" href="downloaded-notes.html">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="rejected-notes.html">Rejected Notes</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="members.html">Members</a></li>
+                                <li>
+                                    <!-- Reports Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Reports</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="spam-reports.html">Spam Reports</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- Setting Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Settings</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="manage-system-configuration.html">Manage System Configuration</a>
+                                            <a class="dropdown-item" href="manage-administrator.html">Manage Administrator</a>
+                                            <a class="dropdown-item" href="manage-category.html">Manage Category</a>
+                                            <a class="dropdown-item" href="manage-type.html">Manage Type</a>
+                                            <a class="dropdown-item" href="manage-country.html">Manage Countries</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="active-link">
+                                    <!-- Profile Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>My Profile</span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item active-link" href="my-profile.html">Update Profile</a>
+                                            <a class="dropdown-item" href="change-password.html">Change Password</a>
+                                            <a class="dropdown-item" href="#" id="submenu-logout">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <!-- Header ends -->
+
+        <!-- Profile form -->
+        <div class="profile-admin-etc-inner">
+            <div class="container">
+                <div class="form-inner">
+                    
+
+                        <!-- Basic Profile Details -->
+                        <div class="row">
+                            <form>
+
+                            <h2 class="title text-left">My Profile</h2>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input-first-name">First Name *</label>
+                                    <input type="text" class="form-control" id="input-first-name" placeholder="Enter your first name" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input-last-name">Last Name *</label>
+                                    <input type="text" class="form-control" id="input-last-name" placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input-email">Email *</label>
+                                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter your email address" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input--secondary-email">Secondary Email</label>
+                                    <input type="email" class="form-control" id="input-secondary-email" aria-describedby="emailHelp" placeholder="Enter your email address">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input-phone-number">Phone Number</label>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                            <select id="input-country-code" class="form-control" placeholder="Country code">
+                                                <option selected>+91</option>
+                                                <option>+1</option>
+                                                <option>+49</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9 col-sm-9 col-xs-9">
+                                            <input type="tel" class="form-control" id="input-phone-number" placeholder="Enter your phone number" pattern="[0-9]{10}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <label for="input-profile-picture">Profile Picture</label>
+                                    <div type=file id="input-profile-picture" class="form-control upload-picture">
+                                        <img src="../images/assets/upload.png" id="profile-picture" alt="Upload Profile Picture">
+                                        <h5>Upload a picture</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn submit-btn">Submit</button>
+                            </form>
+                        </div>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer-inner">
+            <div class="container">
+                <div class="row footer-content">
+                    <div class="col-md-6 col-sm-6 col-xs-3 text-left">
+                        <h5>Version : 1.1.24</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-9">
+                        <ul class="social-list text-right">
+                            <h5>Copyright &copy; TatvaSoft All Rights Reserved.</h5>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuaery libraries -->
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="../js/Bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+</body>
+
+</html>

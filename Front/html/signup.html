@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sign Up</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- Favicon -->
+      <link href="../images/assets/favicon.ico" rel="icon">
+      
+	  <!-- Google Fonts -->
+	  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+	  <!-- Bootstrap CSS -->	
+	  <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+	  <!-- fontawesome -->
+      <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+
+	  <!-- Custom CSS -->
+	  <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+<body>
+
+	<div id="signup" class="full-background">
+		<!-- Logo img -->
+		<div id="top-logo">
+			<div id="top-logo-inner" class="text-center">
+				<a href="#">
+					<img class="logo" src="../images/assets/top-logo.png" alt="logo">
+				</a>
+			</div>
+		</div>
+		<!-- Signup form -->
+		<div class="container text-center">
+			<div class="row">
+					<div class="form-inner">
+						<h2 class="title">Create an Account</h2>
+						<h5 class="text-1">Enter your details to signup</h5>
+				        <h5 class="text-3"><i class="fa fa-check-circle"></i> Your account has been successfully created.</h5>
+						
+						<form>
+						  <div class="form-group text-left signup-first-name">
+						    <label for="input-first-name">First Name *</label>
+						    <input type="text" class="form-control" id="input-first-name" placeholder="Enter your first name" required>
+						  </div>
+						  <div class="form-group text-left">
+						    <label for="input-last-name">Last Name *</label>
+						    <input type="text" class="form-control" id="input-last-name" placeholder="Enter your last name" required>
+						  </div>
+						  <div class="form-group text-left">
+						    <label for="input-email">Email *</label>
+						    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter your email address" required>
+						  </div>
+						  <div class="form-group text-left">
+						    <label for="input-password">Password</label>
+						    <input type="password" class="form-control" id="input-password" placeholder="Enter your password">
+						    <span toggle="#input-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						  </div>
+						  <div class="form-group text-left">
+						    <label for="input-confirm-password">Confirm Password</label>
+						    <input type="password" class="form-control" id="input-confirm-password" placeholder="Re-enter your password">
+						    <span toggle="#input-confirm-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+						  </div>
+						  <button type="submit" class="btn login-btn">Sign up</button>
+						</form>
+						<h5 class="text-2">Already have an account? <a href="login.html">Login</a></h5>
+					</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuaery libraries -->
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="../js/Bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+</body>
+</html>

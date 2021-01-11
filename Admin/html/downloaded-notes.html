@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Downloaded Notes</title>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 ,user-scalable=no">
+
+    <!-- Favicon -->
+    <link href="../images/assets/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+
+<body>
+
+    <div id="downloaded-notes">
+        <!-- Header -->
+        <header id="top-fixed-nav">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Mobile menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+
+                        <!-- Logo -->
+                        <a href="dashboard.html" class="navbar-brand">
+                            <img class="logo img-responsive" src="../images/assets/logo-img.png" alt="logo">
+                        </a>
+                    </div>
+
+                    <!-- Main menu -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <!-- Notes Dropdown -->
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="active-link">Notes</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="notes-under-review.html">Notes Under Review</a>
+                                        <a class="dropdown-item" href="published-notes.html">Published Notes</a>
+                                        <a class="dropdown-item active-link" href="downloaded-notes.html">Downloaded Notes</a>
+                                        <a class="dropdown-item" href="rejected-notes.html">Rejected Notes</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <!--- Notes Dropdown Ends -->
+                            <li><a href="members.html">Members</a></li>
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Reports</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="spam-reports.html">Spam Reports</a>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                            <!-- Settings Dropdown -->
+                            <li>
+
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span>Settings</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="manage-system-configuration.html">Manage System Configuration</a>
+                                        <a class="dropdown-item" href="manage-administrator.html">Manage Administrator</a>
+                                        <a class="dropdown-item" href="manage-category.html">Manage Category</a>
+                                        <a class="dropdown-item" href="manage-type.html">Manage Type</a>
+                                        <a class="dropdown-item" href="manage-country.html">Manage Countries</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <!--- Settings Dropdown Ends -->
+                            <li>
+                                <!-- Profile Dropdown -->
+                                <div class="dropdown" id="profile-submenu">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="profile-img img-responsive img-circle" src="../images/User-Profile/profile-img.png" alt="logo">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="my-profile.html">Update Profile</a>
+                                        <a class="dropdown-item" href="change-password.html">Change Password</a>
+                                        <a class="dropdown-item" href="#" id="submenu-logout">LOGOUT</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="#"><button type="submit" class="btn submit-btn">Logout</button></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <!-- Mobile menu Close Button -->
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                <li><a href="dashboard.html">Dashboard</a></li>
+                                <li class="active-link">
+                                    <!-- Notes Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Notes</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="notes-under-review.html">Notes Under Review</a>
+                                            <a class="dropdown-item" href="published-notes.html">Published Notes</a>
+                                            <a class="dropdown-item active-link" href="downloaded-notes.html">Downloaded Notes</a>
+                                            <a class="dropdown-item" href="rejected-notes.html">Rejected Notes</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="members.html">Members</a></li>
+                                <li>
+                                    <!-- Reports Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Reports</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-link" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="spam-reports.html">Spam Reports</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- Setting Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>Settings</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="manage-system-configuration.html">Manage System Configuration</a>
+                                            <a class="dropdown-item" href="manage-administrator.html">Manage Administrator</a>
+                                            <a class="dropdown-item" href="manage-category.html">Manage Category</a>
+                                            <a class="dropdown-item" href="manage-type.html">Manage Type</a>
+                                            <a class="dropdown-item" href="manage-country.html">Manage Countries</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <!-- Profile Dropdown -->
+                                    <div class="dropdown" id="mobile-dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle link-submenu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span>My Profile</span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="my-profile.html">Update Profile</a>
+                                            <a class="dropdown-item" href="change-password.html">Change Password</a>
+                                            <a class="dropdown-item" href="#" id="submenu-logout">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <!-- Header ends -->
+
+        <div id="downloaded-notes-inner" class="publish-reject-download">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="heading-section">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <h2 class="heading">Downloaded Notes</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-section">
+
+                    <div class="table-heading">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-4 col-sm-4 col-xs-4 search-dropdown notes-search">
+                               <h5 class="note-label">Note</h5>
+                                <select id="input-note" class="form-control">
+                                    <option selected>Select note</option>
+                                    <option>Software Development</option>
+                                    <option>Computer Basic</option>
+                                    <option>Human Body</option>
+                                    <option>World War 2</option>
+                                    <option>Accoounting</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 search-dropdown">
+                               <h5 class="seller-label">Seller</h5>
+                                <select id="input-seller" class="form-control">
+                                    <option selected>Select seller</option>
+                                    <option>Khayati Patel</option>
+                                    <option>Rahul Shah</option>
+                                    <option>Suman Trivedi</option>
+                                    <option>Raj Malhotra</option>
+                                    <option>Niya Patel</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 search-dropdown buyer-search">
+                               <h5 class="buyer-label">Buyer</h5>
+                                <select id="input-buyer" class="form-control">
+                                    <option selected>Select buyer</option>
+                                    <option>Khayati Patel</option>
+                                    <option>Nikunj Shah</option>
+                                    <option>Raj SHeth</option>
+                                    <option>Niya Patel</option>
+                                    <option>Rohit Gajera</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 table-search text-right">
+                            <img class="search-icon" src="../images/assets/search.jpg" alt="search">
+                            <input type="text" class="form-control" id="input-search" placeholder="Search">
+                            <button type="submit" class="btn submit-btn">search</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-lg" id="table-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">sr no.</th>
+                                    <th scope="col">note title</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">buyer</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">seller</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">sell type</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">downloaded<br>date/time</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Software Development</td>
+                                    <td>IT</td>
+                                    <td>Rahul Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Khayati Patel</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Paid</td>
+                                    <td>$145</td>
+                                    <td>25-11-2020, 11:08</td>
+                                    <td>
+                                        <div class="dropdown" id="row-details-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="row-details-icon" src="../images/assets/dots.png" alt="details">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Computer Basic</td>
+                                    <td>Computer</td>
+                                    <td>Rahul Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Nikunj Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td>20-11-2020, 10:08</td>
+                                    <td>
+                                        <div class="dropdown" id="row-details-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="row-details-icon" src="../images/assets/dots.png" alt="details">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Human Body</td>
+                                    <td>Science</td>
+                                    <td>Rahul Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Raj Sheth</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Paid</td>
+                                    <td>$204</td>
+                                    <td>08-11-2020, 04:07</td>
+                                    <td>
+                                        <div class="dropdown" id="row-details-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="row-details-icon" src="../images/assets/dots.png" alt="details">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>World War 2</td>
+                                    <td>History</td>
+                                    <td>Rahul Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Niya Patel</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Paid</td>
+                                    <td>$58</td>
+                                    <td>17-10-2020, 12:30</td>
+                                    <td>
+                                        <div class="dropdown" id="row-details-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="row-details-icon" src="../images/assets/dots.png" alt="details">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Accounting</td>
+                                    <td>Account</td>
+                                    <td>Rahul Shah</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Rohit Gajera</td>
+                                    <td>
+                                        <img class="table-eye" src="../images/assets/eye.png" alt="show">
+                                    </td>
+                                    <td>Free</td>
+                                    <td>$0</td>
+                                    <td>12-12-2019, 17:45</td>
+                                    <td>
+                                        <div class="dropdown" id="row-details-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="row-details-icon" src="../images/assets/dots.png" alt="details">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-area text-center">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <span class="page-link" href="#" aria-label="Previous">
+                                <img src="../images/assets/left-arrow.png">
+                            </span>
+                        </li>
+                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <span class="page-link" href="#" aria-label="Next">
+                                <img src="../images/assets/right-arrow.png">
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <footer id="footer-inner">
+            <div class="container">
+                <div class="row footer-content">
+                    <div class="col-md-6 col-sm-6 col-xs-3 text-left">
+                        <h5>Version : 1.1.24</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-9">
+                        <ul class="social-list text-right">
+                            <h5>Copyright &copy; TatvaSoft All Rights Reserved.</h5>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuaery libraries -->
+    <script src="../js/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="../js/Bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+
+</body>
+
+</html>
