@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "Notes Details";
+    ViewBag.MainClass = "notes-details";
+    if (ViewBag.valid == true)
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.valid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/NonRegister.cshtml";
+    }
+}
+
+<!-- Notes Details -->
+<div id="notes-details-inner">
+    <div class="container">
+        <h3 class="notes-details-title">Notes Details</h3>
+        <div class="row">
+            <div class="col-md-7 col-sm-12 col-xs-12 notes-details-left">
+
+                <div class="col-md-6 col-sm-5 col-xs-12 book-cover-section">
+                    <img class="book-cover img-responsive" src="~/Content/images/Front/Notes-details/1.jpg" alt="book-cover">
+                </div>
+                <div class="col-md-6 col-sm-7 col-xs-12">
+                    <h2 class="note-title">Computer Science</h2>
+                    <h5 class="note-type">Sciences</h5>
+                    <p class="note-details-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eaque, quos consectetur voluptatem nemo totam consequatur quibusdam, consequuntur, ab fuga, quis ullam praesentium autem minus perspiciatis temporibus debitis minima odit.</p>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal">
+                        Download / $15
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="close-popup">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="success-image-section text-center">
+                                        <img class="success-image" src="~/Content/images/Front/Notes-details/SUCCESS.png" alt="success">
+                                    </div>
+                                    <h2 class="popup-success text-center">Thank you for purchasing!</h2>
+                                    <h5 class="popup-text-01">Dear Smith,</h5>
+                                    <h5 class="popup-text-02">
+                                        As this is paid notes - you need to pay to Rahil Shah offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.<br>
+                                        <br>
+                                        In case, you have urgency,<br>
+                                        Please contact us on +9195377345959.<br>
+                                        <br>
+                                        Once he will receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.<br>
+                                        <br>
+                                        Have a good day.
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12 col-xs-12 notes-details-right">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Institution:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">University of California, US</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Country:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">United States</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Course Name:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">Computer Engineering</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Country Code:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">248705</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Professor:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">Mr. Richard Brown</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Number of Pages:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">277</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Approved Date:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <h5 class="book-info-text">Novenber 25, 2020</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-left">
+                        <h5 class="book-info-caption">Rating:</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
+                        <div class="rate">
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="5 star">1 star</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="4 star">2 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="3 star">3 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="2 star">4 stars</label>
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="1 star">5 stars</label>
+                        </div>
+                        <h5 class="book-rating-text"> 100 Reviews</h5>
+                    </div>
+                </div>
+                <h5 class="col-md-12 col-sm-12 col-xs-12 info-red-text">5 Users marked this note as inappropriate</h5>
+            </div>
+        </div>
+        <hr class="p1-line-p2">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 col-xs-12 notes-preview">
+                <h3 class="notes-details-title">Notes Preview</h3>
+                <iframe src="~/Content/images/Front/Notes-details/sample-pdf.png"></iframe>
+            </div>
+
+            <div class="col-md-7 col-sm-12 col-xs-12 customer-review">
+                <h3 class="notes-details-title">Customer Reviews</h3>
+                <div class="customer-review-inner">
+                    <div class="row review-01">
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-1.png" alt="customer">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h3 class="customer-name">Richard Brown</h3>
+                            <div class="rate">
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="5 star">1 star</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="4 star">2 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3 star">3 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="2 star">4 stars</label>
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="1 star">5 stars</label>
+                            </div>
+                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row review-02">
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-2.png" alt="customer">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h3 class="customer-name">Alice Ortiaz</h3>
+                            <div class="rate">
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="5 star">1 star</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="4 star">2 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3 star">3 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="2 star">4 stars</label>
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="1 star">5 stars</label>
+                            </div>
+                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row review-03">
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-3.png" alt="customer">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h3 class="customer-name">Sara Passmore</h3>
+                            <div class="rate">
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="5 star">1 star</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="4 star">2 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3 star">3 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="2 star">4 stars</label>
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="1 star">5 stars</label>
+                            </div>
+                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

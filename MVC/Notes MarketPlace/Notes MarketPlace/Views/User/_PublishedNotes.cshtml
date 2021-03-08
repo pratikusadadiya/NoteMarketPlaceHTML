@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNote>
+<div class="table-section">
+
+    <div class="table-heading">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <h3 class="heading">Published Notes</h3>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+            <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
+            <input type="text" class="form-control" id="input-search" placeholder="Search">
+            <button type="submit" class="btn submit-btn">search</button>
+        </div>
+    </div>
+
+    <div class="table-responsive-lg" id="table-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Added date</th>
+                    <th scope="col">title</th>
+                    <th scope="col">category</th>
+                    <th scope="col">sell type</th>
+                    <th scope="col">price</th>
+                    <th scope="col">action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var note in Model)
+                {
+                    if (note.SellerID == ViewBag.userid && note.Status == "Published")
+                    {
+
+                        <tr>
+                            <td>@note.CreatedDate</td>
+                            <td>@note.Title</td>
+                            <td>@note.Categories.Where(l => l.Value.Equals(note.Category))</td>
+
+                            @if (note.IsPaid == false)
+                            {
+                                <td>Free</td>
+                            }
+                            else
+                            {
+                                <td>Paid</td>
+                            }
+
+                            <td>@note.SellingPrice</td>
+                            <td>
+                                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+                @*<tr>
+                        <td>09-10-2020</td>
+                        <td>Data Science</td>
+                        <td>Science</td>
+                        <td>Paid</td>
+                        <td>$575</td>
+                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
+                    </tr>
+                    <tr>
+                        <td>10-10-2020</td>
+                        <td>Accounts</td>
+                        <td>Commerce</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
+                    </tr>
+                    <tr>
+                        <td>11-10-2020</td>
+                        <td>Social Studies</td>
+                        <td>Scocial</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
+                    </tr>
+                    <tr>
+                        <td>12-10-2020</td>
+                        <td>AI</td>
+                        <td>IT</td>
+                        <td>Paid</td>
+                        <td>$3542</td>
+                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
+                    </tr>
+                    <tr>
+                        <td>13-10-2020</td>
+                        <td>Lorem ipsum dolor sit amet</td>
+                        <td>Lorem</td>
+                        <td>Free</td>
+                        <td>$0</td>
+                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+<div class="pagination-area text-center">
+    <ul class="pagination">
+        <li class="page-item">
+            <span class="page-link" href="#" aria-label="Previous">
+                <img src="~/Content/images/Front/assets/left-arrow.png">
+            </span>
+        </li>
+        <li class="page-item"><a class="page-link active" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        <li class="page-item">
+            <span class="page-link" href="#" aria-label="Next">
+                <img src="~/Content/images/Front/assets/right-arrow.png">
+            </span>
+        </li>
+    </ul>
+</div>

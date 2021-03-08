@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f8be097714d4b13a6258d65982febec" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Download" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NoteCategory" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.NoteType" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ReferenceDate" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNote" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesAttachement" Width="1.5" PointX="10.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesReportedIssue" Width="1.5" PointX="13.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesReview" Width="1.5" PointX="10.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SystemConfiguration" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserRole" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_SellerNotes_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Downloads_SellerNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Downloads_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Downloads_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReportedIssues_Downloads" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReviews_Downloads" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotes_NoteCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotes_NoteTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotes_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesAttachements_SellerNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReportedIssues_SellerNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReviews_SellerNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReportedIssues_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SellerNotesReviews_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UserProfile_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Users_UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

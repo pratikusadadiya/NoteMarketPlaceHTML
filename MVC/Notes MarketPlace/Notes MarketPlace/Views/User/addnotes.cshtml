@@ -1,0 +1,136 @@
+﻿@model Notes_MarketPlace.SellerNote
+@{
+    ViewBag.Title = "Add Notes";
+    ViewBag.MainClass = "add-notes";
+    Layout = "~/Views/Shared/Register.cshtml";
+}
+
+<!-- Top profile title -->
+<div id="top-title">
+    <div id="top-title-inner" class="text-center">
+        <h1 id="top-title-text">Add Notes</h1>
+    </div>
+</div>
+<!-- Add Notes form -->
+<div class="container form-details">
+    <div class="form-inner">
+        <form enctype="multipart/form-data" method="post">
+
+            <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
+            <!-- Basic Note Details -->
+            <div class="row">
+                <h2 class="title text-left">Basic Note Details</h2>
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-first-name">Title *</label>
+                    @Html.TextBoxFor(l => l.Title, new { @placeholder = "Enter note title", @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-category">Category</label>
+                    
+                    @Html.DropDownListFor(l => l.CategoryId , Model.Categories as SelectList, "Select your category", new { @class = "form-control", @id = "input-category" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <label for="input-book-picture">Display Picture</label>
+                    @*<div type=file id="input-book-picture" class="form-control upload-picture">
+                    <img src="~/Content/images/Front/assets/upload.png" id="profile-picture" alt="Upload Book Picture">
+                    <h5>Upload a picture</h5>
+                </div>*@
+                    @Html.TextBoxFor(l => l.DisplayImageFile, new { @type = "file", @class = "form-control upload-picture" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <label for="input-book-picture">Upload Notes *</label>
+                    @*<div type=file id="input-book-picture" class="form-control upload-picture">
+                    <img src="~/Content/images/Front/assets/upload-note.png" id="profile-picture" alt="Upload Notes">
+                    <h5>Upload your notes</h5>
+                </div>*@
+                    @Html.TextBoxFor(l => l.NotesAttachmentFile, new { @type = "file", @class = "form-control upload-picture" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-type">Type</label>
+                    @Html.DropDownListFor(l => l.NoteTypeId, Model.NoteTypes as SelectList, "Select your note type", new { @class = "form-control", @id = "input-type" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-no-of-pages">Number of Pages</label>
+                    @Html.TextBoxFor(l => l.NumberofPages, new { @placeholder = "Enter number of note pages", @class = "form-control", @pattern = "[0-9]{1-4}" })
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label for="input-description">Description *</label>
+                    @Html.TextAreaFor(l => l.Description, new { @placeholder = "Enter your description", @class = "form-control", @id = "input-description", @rows = "10" })
+                </div>
+            </div>
+
+            <!-- Institution Information -->
+            <div class="row">
+                <h2 class="title text-left">Institution Information</h2>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <label for="input-country">Country *</label>
+                    @Html.DropDownListFor(l => l.CountryId, Model.CountryList as SelectList, "Select your country", new { @class = "form-control", @id = "input-country" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <label for="input-institution">Institution Name</label>
+                    @Html.TextBoxFor(l => l.UniversityName, new { @placeholder = "Enter your institution name", @class = "form-control" })
+                </div>
+            </div>
+
+            <!-- Course Details -->
+            <div class="row">
+                <h2 class="title text-left">Course Details</h2>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-course-name">Course Name</label>
+                    @Html.TextBoxFor(l => l.Course, new { @placeholder = "Enter your course name", @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-course-code">Course Code</label>
+                    @Html.TextBoxFor(l => l.CourseCode, new { @placeholder = "Enter your course code", @class = "form-control" })
+
+                </div>
+
+                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label for="input-professor-name">Professor / Lecturer</label>
+                    @Html.TextBoxFor(l => l.Professor, new { @placeholder = "Enter your professor name", @class = "form-control" })
+                </div>
+            </div>
+
+            <!-- Selling Information -->
+            <div class="row sell-info">
+                <h2 class="title text-left">Selling Information</h2>
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-5">
+                        <label>Sell For *</label><br>
+                        <div class="radio-btn">
+                            @Html.RadioButtonFor(l => l.IsPaid, false, new { @class = "sell-for", @id = "free", @value = "0" })
+                            <label for="free">Free</label>
+                            @Html.RadioButtonFor(l => l.IsPaid, true, new { @class = "sell-for", @id = "paid", @value = "1" })
+                            <label for="paid">Paid</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12 col-xs-7">
+                        <label for="input-sell-price">Sell Price *</label>
+                        @Html.TextBoxFor(l => l.SellingPrice, new { @placeholder = "Enter your price", @class = "form-control", @pattern = "[0-9]{1-4}" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                    <label for="input-note-preview">Note Preview</label>
+                    @*<div type=file id="input-note-preview" class="form-control upload-picture">
+                    <img src="~/Content/images/Front/assets/upload.png" id="profile-picture" alt="Upload Notes">
+                    <h5>Upload a file</h5>
+                </div>*@
+                    @Html.TextBoxFor(l => l.NotesPreviewFile, new { @type = "file", @class = "form-control upload-picture" })
+                </div>
+                <input type="submit" class="btn submit-btn" value="save">
+                <input type="submit" class="btn submit-btn" value="publish">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@model Notes_MarketPlace.Models.ContactUs
+@{
+    ViewBag.Title = "Contact Us";
+    ViewBag.MainClass = "contact-us";
+    ViewBag.ContactUs = "active-link";
+    if (ViewBag.valid == true)
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.valid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/NonRegister.cshtml";
+    }
+}
+
+<!-- Top profile title -->
+<div id="top-title">
+    <div id="top-title-inner" class="text-center">
+        <h1 id="top-title-text">Contact Us</h1>
+    </div>
+</div>
+
+<!-- FAQ section -->
+<div class="contact-us-inner form-details">
+    <div class="container">
+
+        <div class="form-inner">
+            <form method="post">
+                <div class="row">
+                    <h2 class="title text-left">Get In Touch</h2>
+                    <h5 class="title-line">Let us know how to get back to you</h5>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label for="input-full-name">Full Name *</label>
+                            @Html.TextBoxFor(l => l.FullName, new { @placeholder = "Enter your full name", @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label for="input-email">Email Address *</label>
+                            @Html.TextBoxFor(l => l.EmailID, new { @placeholder = "Enter your email", @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label for="input-subject">Subject *</label>
+                            @Html.TextBoxFor(l => l.Subject, new { @placeholder = "Enter your subject", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label for="input-comments">Comments / Questions *</label>
+                            @Html.TextAreaFor(l => l.Comment, new { @placeholder = "Comments...", @class = "form-control", @id = "input-comments", @rows = "10" })
+                        </div>
+                    </div>
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                    <h5 style="color:forestgreen;">@ViewBag.SuccessMsg</h5>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

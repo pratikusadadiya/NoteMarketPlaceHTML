@@ -1,0 +1,50 @@
+﻿@model Notes_MarketPlace.User
+@{
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/CenterForm.cshtml";
+}
+
+<!-- Signup form -->
+<div class="container text-center">
+    <div class="row">
+        <div class="form-inner">
+            <h2 class="title">Create an Account</h2>
+            <h5 class="text-1">Enter your details to signup</h5>
+            <h5 class="text-3"><i class="fa fa-check-circle"></i> Your account has been successfully created.</h5>
+            <h5 style="color:forestgreen;">@ViewBag.SuccessMsg</h5>
+
+            <form method="post">
+                <div class="form-group text-left signup-first-name">
+                    <label for="input-first-name">First Name *</label>
+                    @Html.TextBoxFor(l => l.FirstName, new { @placeholder = "Enter your first name", @class = "form-control" })
+                    @Html.ValidationMessageFor(l => l.FirstName)
+                </div>
+                <div class="form-group text-left">
+                    <label for="input-last-name">Last Name *</label>
+                    @Html.TextBoxFor(l => l.LastName, new { @placeholder = "Enter your last name", @class = "form-control" })
+                    @Html.ValidationMessageFor(l => l.LastName)
+                </div>
+                <div class="form-group text-left">
+                    <label for="input-email">Email *</label>
+                    @Html.TextBoxFor(l => l.EmailID, new { @type = "email", @placeholder = "Enter your email address", @class = "form-control" })
+                    @Html.ValidationMessageFor(l => l.EmailID)
+                    <h5 style="color:red;">@ViewBag.DuplicateMsg</h5>
+                </div>
+                <div class="form-group text-left">
+                    <label for="input-password">Password</label>
+                    @Html.TextBoxFor(l => l.Password, new { @type = "password", @placeholder = "Enter your password", @id = "input-password", @class = "form-control" })
+                    <span toggle="#input-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    @Html.ValidationMessageFor(l => l.Password)
+                </div>
+                <div class="form-group text-left">
+                    <label for="input-confirm-password">Confirm Password</label>
+                    @Html.TextBoxFor(l => l.ConfirmPassword, new { @type = "password", @placeholder = "Re-enter your password", @id = "input-confirm-password", @class = "form-control" })
+                    <span toggle="#input-confirm-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    @Html.ValidationMessageFor(l => l.ConfirmPassword)
+                </div>
+                <button type="submit" class="btn login-btn">Sign up</button>
+            </form>
+            <h5 class="text-2">Already have an account? @Html.ActionLink("Login", "login")</h5>
+        </div>
+    </div>
+</div>

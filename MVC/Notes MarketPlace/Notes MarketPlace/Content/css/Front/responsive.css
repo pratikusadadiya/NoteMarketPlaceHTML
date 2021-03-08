@@ -1,0 +1,1248 @@
+/*=====================================================
+                Bootstrap media quaries
+======================================================*/
+
+/*==============================
+            Mobile Menu
+================================*/
+.navbar-header {
+    position: relative;
+}
+#mobile-nav-open-btn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    right: 15px;
+    top: 3px;
+    /* hide mobile nav open button */
+    display: none;
+}
+#mobile-nav {
+    /* By default mobile nav is hidden with height 0%*/
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(255,255,255,0.9);
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    overflow-y: hidden;
+}
+#mobile-nav-close-btn {
+    font-family: "Raleway", sans-serif;
+    font-size: 70px;
+    color: #6255a5;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    top: -9px;
+    right: 13px; 
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+#mobile-nav-content {
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    position: relative;
+    top: 10%;
+}
+#mobile-nav ul li {
+    padding: 0;
+    height: 50px;
+    border-top: 1px solid #999999;
+}
+#mobile-nav ul li:last-child {
+    border-bottom: 1px solid #999999;
+}
+#mobile-nav a {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    line-height: 50px;
+    color: #333333;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline; 
+    -webkit-transition: .3s;
+    transition: .3s;
+    letter-spacing: .9px;
+}
+#mobile-nav a:hover,
+#mobile-nav a:focus,
+#mobile-nav-close-btn:hover,
+#mobile-nav-close-btn:focus {
+    color: #6255a5;
+    background: none;
+}
+#mobile-nav li.active-link,
+#mobile-nav .dropdown-menu a.active-link{
+    background-color: rgba(0,0,0,0.05);
+}
+#mobile-nav li.active-link a{
+    color: #333333 !important;
+}
+
+/*===========================
+        mobile-dropdown
+============================*/
+#mobile-dropdown button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+#mobile-dropdown button span {
+    line-height: 50px;
+    font-size: 16px;
+    letter-spacing: .9px;
+    color: #333333;
+    font-family: "Open Sans", sans-serif;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+#mobile-dropdown .dropdown-menu {
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+}
+li.active-link #mobile-dropdown .dropdown-menu a,
+#mobile-dropdown .dropdown-menu a {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    color: #333333;
+    transition: none;
+    border-bottom: 1px solid #999999;
+}
+
+/* large devices (Desktop & laptops) */
+
+@media (min-width: 1200px) and (max-width: 1299px) {
+
+}
+
+/* medium devices ( Landscape tablets & medium laptops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 200px;
+    }
+    .navbar .nav li a {
+        font-size: 12px;
+        margin: 0 10px;
+        padding: 15px 0px;
+    }
+    .navbar .nav li #profile-submenu .profile-img {
+        height: 35px;
+        width: 35px;
+    }
+    .navbar .nav .submit-btn {
+        margin-bottom: 3px;
+        font-size: 11px;
+    }
+    
+    /* Top Title */
+    #top-title #top-title-inner {
+        height: 200px;
+    }
+    #top-title #top-title-text {
+        padding-top: 75px;
+        font-size: 40px;
+        line-height: 42px;
+    }
+    
+    /* User Profile */
+    .form-details .form-inner {
+        padding: 50px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner .form-control {
+        height: 44px;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 90px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 130px;
+        height: 32px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* Home*/
+    #home #about-content .about-right {
+        padding-left: 40px;
+    }
+    #home #about-content .about-right-text {
+        margin-bottom: 30px;
+    }
+    #home #customers .customer-review .customer-photo {
+        width: 90px;
+        height: 90px;
+    }
+    #home #customers .customer-review .customer-name{
+        padding-left: 10px;
+    }
+    #home #customers .customer-review .customer-post {
+        font-size: 13px;
+        padding-left: 10px;
+    }
+    
+    /* Search Notes */
+    #search-notes #search-notes-inner {
+        padding: 40px 0;
+    }
+    #search-notes-inner .filter-notes-title,
+    #search-notes-inner .notes-list .no-of-books{
+        font-size: 22px;
+        line-height: 26px;
+    }
+    #search-notes-inner .book-details .book-title {
+        font-size: 12.5px;
+        line-height: 26px;
+        padding: 20px;
+        padding-bottom: 0;
+    }
+    #search-notes-inner .book-details .book-info-icon {
+        height: 18px;
+    }
+    #search-notes-inner .book-details .book-info-text {
+        font-size: 11px;
+        line-height: 18px;
+    }
+    #search-notes-inner .book-details .book-info .book-rating {
+        padding-left: 10px;
+        top: -2px;
+    }
+    #search-notes-inner .book-details .book-info .book-rating-text {
+        font-size: 11px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .notes-details-left .book-cover-section {
+        height: 300px;
+        width: 250px;
+    }
+    #notes-details-inner .notes-details-left .book-cover {
+        height: 270px;
+        width: 210px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        font-size: 26px;
+    }
+    #notes-details-inner .notes-details-right {
+        padding-left: 0;
+    }
+    
+    /* Dashboard */
+    #dashboard-inner .left-section {
+        padding: 15px 5px;
+    }
+    #dashboard-inner .top-section-no {
+        font-size: 26px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 20px 0;
+    }
+}
+
+/* small devices ( Portrait tablets & small laptops) */
+@media (min-width: 768px) and (max-width: 991px) {
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 170px;
+        top: -4px;
+    }
+    .navbar .nav li {
+        padding-top: 5px;
+    }
+    .navbar .nav li a {
+        font-size: 11px;
+        margin: 0 8px;
+        padding: 15px 0px;
+    }
+    .navbar .nav li #profile-submenu .profile-img {
+        height: 24px;
+        width: 24px;
+    }
+    .navbar .nav .submit-btn {
+        font-size: 11px;
+        line-height: 12px;
+        padding: 6px;
+        width: 60px;
+    }
+    
+    /* Navbar edjustment */
+    #top-fixed-nav .navbar .nav li a {
+        margin: 0 5.5px;
+    }
+    #top-fixed-nav .navbar .nav li:nth-child(7) a {
+        margin-right: 0px;
+    }
+    #search-notes .navbar .nav li:nth-child(5),
+    #home .navbar .nav li:nth-child(5){
+        padding-top: 10px;
+    }
+    #home .navbar .nav li:nth-child(5) a {
+        padding-right: 8px;
+    }
+    #search-notes .navbar .nav li:nth-child(5) a {
+        margin-right: 0px;
+    }
+    
+    /* Form Field */
+	.form-inner {
+        width: 480px;
+	}
+	.form-inner label {
+		width: 380px;
+	}
+	.form-inner .title {
+		font-size: 28px;
+		margin-bottom: 12px;
+	}
+	.form-inner .form-control {
+		width: 380px;
+		height: 40px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -30px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 16px;
+	}
+	.form-inner #remember-check {
+		width: 24px;
+		height: 24px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 380px;
+		height: 40px;
+		font-size: 15px;
+	}
+    
+    /* Sign Up */
+    #signup #top-logo .logo {
+		margin-top: 60px;
+	}
+    
+    /* email verification */
+    #email-verification .form-inner .submit-btn {
+        width: 420px;
+    }
+    
+    /* Top title */
+    #top-title #top-title-inner {
+        margin-top: 80px;
+        height: 200px;
+    }
+    #top-title #top-title-text {
+        padding-top: 80px;
+        font-size: 35px;
+        line-height: 40px;
+    }
+    
+    /* Form Details */
+    .form-details .form-inner {
+        padding: 40px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner label {
+        font-size: 13px;
+    }
+    .form-details .form-inner .form-control {
+        font-size: 13px;
+        height: 36px;
+    }
+    .form-details .form-inner select {
+        background-position: 96% 50%;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 80px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .upload-picture #profile-picture {
+        height: 40px;
+        padding-top: 0;
+    }
+    .form-details .form-inner .upload-picture h5 {
+        font-size: 13px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* User Profile */
+    #user-profile .form-inner #input-country-code {
+        background-position: 90% 50%;
+    }
+    
+    /* Home */
+    #top-home #top-home-inner #top-home-title {
+        font-size: 40px;
+    }
+    #top-home #top-home-inner #top-home-text {
+        font-size: 18px;
+    }
+    #top-home #top-home-inner .learn-more-btn {
+        font-size: 16px;
+        padding: 7px 0;
+    }
+    #home-content .about-title {
+        font-size: 30px;
+    }
+    #about-content .about-left {
+        text-align: center;
+    }
+    #about-content .about-right {
+        margin-top: 40px;
+    }
+    #home #about-content .about-right-text {
+        margin-bottom: 30px;
+    }
+    #home #how-it-works .download-logo {
+        width: 120px;
+        height: 120px;
+        padding: 32px 0;
+    }
+    #home #how-it-works .work-text-01 {
+        font-size: 22px;
+    }
+    #home #how-it-works .work-text-02 {
+        font-size: 16px;
+    }
+    #home #how-it-works .download-btn {
+        width: 162px;
+        font-size: 16px;
+    }
+    #home #how-it-works .seller-btn {
+        width: 140px;
+        font-size: 16px;
+    }
+    #home #customers .customer-review .customer-photo {
+        width: 80px;
+        height: 80px;
+    }
+    #home #customers .customer-review .customer-text {
+        margin-top: 24px;
+        font-size: 14px;
+        line-height: 30px;
+    }
+    
+    /* Search Notes */
+    #search-notes #search-notes-inner {
+        padding: 40px 0;
+    }
+    #search-notes .notes-list .col-md-12:nth-child(3) .col-md-4:nth-child(3) {
+        display: none;
+    }
+    #search-notes .form-control {
+        margin-top: 10px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .notes-details-right {
+        margin-top: 50px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        margin-top: 10px;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right {
+        text-align: left;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right .rate {
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    #notes-details-inner .customer-review {
+        margin-top: 50px;
+    }
+    
+    /* Dashboard */
+    #dashboard-inner .heading-section .heading {
+        font-size: 28px;
+        line-height: 32px;     
+    }
+    #dashboard-inner .heading-section .submit-btn {
+        font-size: 16px;
+    }
+    #dashboard-inner .top-section-right {
+        margin-top: 30px;
+    }
+    
+    /* Table */
+    .table-section .table-search {
+        padding-left: 0px;
+    }
+    /* Review Popup */
+    .modal-body .form-control {
+        height: 90px;
+    }
+    
+    /*==================================================
+            My Downloads & Sold Notes & rejected Notes
+    ====================================================*/
+    .book-table-data{
+        margin: 40px 0;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 14px;
+    }
+    .pagination-area li span {
+        padding: 6px 12px;
+    }
+    .pagination-area li span img {
+        height: 12px;
+    }
+    
+    /* FAQ */
+    .faq-inner .faq-title {
+        margin-top: 40px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .faq-inner .faq-question {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .faq-inner .faq-answer {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    /* Contact Us */
+    #contact-us .navbar .collapse li:nth-child(5) a {
+        padding-right: 0px;
+        padding-top: 10px;
+    }
+    #contact-us .contact-us-inner .title-line {
+        font-size: 13px;
+    }
+    #contact-us .form-inner #input-comments {
+        height: 228px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 16px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 11px;
+    }
+    ul.social-list li a {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+    }
+    ul.social-list li a i {
+        font-size: 13px;
+    }
+}
+
+/* extra small devices ( Landscape phones) */
+@media (max-width: 767px) {
+    
+    /* Mobile Navigation */
+    /* show mobile nav open button */
+    #mobile-nav-open-btn {
+        font-size: 28px;;
+        display: block;
+        top: 5px;
+    }
+    #mobile-nav a {
+        font-size: 15px;
+    }
+    #mobile-nav-close-btn {
+        margin-top: 5px;
+        font-size: 60px;
+    }
+    
+    /* Navbar */
+    .navbar .navbar-header .logo {
+        width: 180px;
+        top: -5px;
+    }
+    
+    /* top logo of login, signup,forgot password...*/
+    #top-logo .logo {
+        width: 230px;
+	}
+    
+    /* Form Fields */
+    .form-inner {
+        width: 460px;
+	}
+	.form-inner label {
+		width: 360px;
+	}
+	.form-inner .title {
+		font-size: 28px;
+		margin-bottom: 10px;
+	}
+	.form-inner .text-1 {
+		margin-bottom: 35px;
+	}
+	.form-inner .form-group {
+		margin-bottom: 25px;
+	}
+	.form-inner .form-control {
+		width: 360px;
+		height: 40px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -30px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 16px;
+	}
+	.form-inner #remember-check {
+		width: 24px;
+		height: 24px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 360px;
+		height: 40px;
+		font-size: 15px;
+	}
+    
+    
+    /* Email verification */
+    #email-verification #top-logo .logo {
+        width: 230px;
+    }
+    #email-verification .form-inner .title {
+        margin-top: 30px;
+        margin-bottom: 18px;
+        font-size: 22px;
+    }
+    #email-verification .form-inner span {
+        font-size: 16px;
+    }
+    #email-verification .form-inner .text-1 {
+        font-size: 12px;
+    }
+    #email-verification .form-inner .submit-btn {
+        width: 390px;
+        font-size: 13px;
+    }
+    
+    /* Top Title */
+    #top-title #top-title-inner {
+        margin-top: 70px;
+        height: 180px;
+    }
+    #top-title #top-title-text {
+        padding-top: 68px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    
+    /* Form Fields*/
+    .form-details .form-inner {
+        padding: 30px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner label {
+        font-size: 13px;
+    }
+    .form-details .form-inner .form-control {
+        font-size: 13px;
+        height: 36px;
+    }
+    .form-details .form-inner select {
+        background-position: 96% 50%;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 80px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .upload-picture #profile-picture {
+        height: 40px;
+        padding-top: 0;
+    }
+    .form-details .form-inner .upload-picture h5 {
+        font-size: 13px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* User Profile */
+    #user-profile .form-inner #input-country-code {
+        background-position: 90% 50%;
+    }
+    
+    /* Home */
+    #top-home #top-home-inner {
+        padding-top: 200px;
+    }
+    #top-home #top-home-inner #top-home-title {
+        font-size: 28px;
+    }
+    #top-home #top-home-inner #top-home-text {
+        font-size: 14px;
+    }
+    #top-home #top-home-inner .learn-more-btn {
+        font-size: 14px;
+        padding: 7px 0;
+        width: 140px;
+    }
+    #home-content .about-title {
+        font-size: 28px;
+    }
+    #about-content .about-left {
+        text-align: center;
+    }
+    #about-content .about-right {
+        margin-top: 30px;
+    }
+    #home #about-content .about-right-text {
+        margin-bottom: 24px;
+    }
+    #home #how-it-works .download-logo {
+        width: 100px;
+        height: 100px;
+        padding: 28px 0;
+    }
+    #home #how-it-works .download-logo img {
+        height: 44px;
+        width: 44px;
+    }
+    #home #how-it-works .work-text-01 {
+        font-size: 20px;
+    }
+    #home #how-it-works .work-text-02 {
+        font-size: 14px;
+    }
+    #home #how-it-works .download-btn {
+        width: 132px;
+        font-size: 14px;
+    }
+    #home #how-it-works .seller-btn {
+        width: 132px;
+        font-size: 14px;
+    }
+    #home #customers .customer-review {
+        padding: 30px;
+    }
+    #home #customers .customer-review .customer-photo {
+        width: 70px;
+        height: 70px;
+    }
+    #home #customers .customer-review .customer-name {
+        font-size: 20px;
+    }
+    #home #customers .customer-review .customer-post {
+        font-size: 14px;
+    }
+    #home #customers .customer-review .customer-text {
+        margin-top: 24px;
+        font-size: 14px;
+        line-height: 24px;
+    }
+    
+    /* Search Notes */
+    #search-notes #search-notes-inner {
+        padding: 40px 0;
+    }
+    #search-notes .form-control {
+        margin-top: 10px;
+    }
+    #search-notes-inner .col-xs-12 {
+        width: 100%;
+        
+    }
+    #search-notes-inner .book-details {
+        width: 450px;
+    }
+    #search-notes-inner .notes-list .book-details {
+        margin: 15px auto;
+    }
+    #search-notes-inner .book-details .book-cover {
+        width: 100%;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner {
+        padding-top: 85px;
+    }
+    /* Notes Details */
+    #notes-details-inner .notes-details-left .book-cover-section {
+        width: 100%;
+    }
+    #notes-details-inner .notes-details-right {
+        margin-top: 50px;
+    }
+    #notes-details-inner .notes-details-left .note-title {
+        margin-top: 15px;
+        font-size: 20px;
+    }
+    #notes-details-inner .notes-details-left .note-type {
+        font-size: 16px;
+    }
+    #notes-details-inner .notes-details-left .note-details-text {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right {
+        text-align: left;
+    }
+    #notes-details-inner .notes-details-right .notes-info-right .rate {
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    #notes-details-inner .p1-line-p2 {
+        margin: 30px 0;
+    }
+    #notes-details-inner .customer-review {
+        margin-top: 30px;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 13px;
+    }
+    .pagination-area li span {
+        padding: 6px 12px;
+    }
+    .pagination-area li span img {
+        height: 11px;
+    }
+    
+    /* Dashboard */
+    #dashboard-inner .heading-section .heading {
+        font-size: 28px;
+        line-height: 32px;     
+    }
+    #dashboard-inner .heading-section .submit-btn {
+        font-size: 16px;
+    }
+    #dashboard-inner .earning-section {
+        text-align: center;
+    }
+    #dashboard-inner .left-section {
+        padding: 20px 0;
+        border: 1px solid #d1d1d1;
+    }
+    
+    /* Table */
+    .table-heading {
+        padding-bottom: 90px;
+    }
+    #table-content {
+        padding-top: 0px;
+    }
+    .table-section .table-search {
+        padding-left: 0px;
+    }
+    .table-section .submit-btn {
+        font-size: 16px;
+    }
+    
+    /* Contact Us */
+    #contact-us .contact-us-inner .title-line {
+        font-size: 13px;
+    }
+    #contact-us .form-inner #input-comments {
+        height: 200px;
+    }
+
+    /* Review Popup */
+    .modal-body .form-control {
+        height: 90px;
+    }
+    
+    /*==================================================
+            My Downloads & Sold Notes & rejected Notes
+    ====================================================*/
+    .book-table-data{
+        margin: 30px 0;
+    }
+    
+    /* FAQ */
+    .faq-inner .faq-title {
+        margin-top: 35px;
+        font-size: 22px;
+        line-height: 28px;
+    }
+    .faq-inner .faq-question {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .faq-inner .faq-answer {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 16px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 11px;
+    }
+    ul.social-list li a {
+        width: 28px;
+        height: 28px;
+        line-height: 26px;
+    }
+    ul.social-list li a i {
+        font-size: 13px;
+    }
+    
+}
+
+/* extra small devices ( Portrait phones and smaller devices) */
+@media (max-width: 480px) {
+    
+    /* Mobile Navigation */
+    /* show mobile nav open button */
+    #mobile-nav-open-btn {
+        display: block;
+        font-size: 25px;
+    }
+
+    /* Navbar logo */
+    .navbar .navbar-header .logo {
+        width: 170px;
+        top: -6px;
+    }
+    
+    /* Top logo of login,signup,etc.. */
+	#top-logo .logo {
+        width: 180px;
+	}
+    
+    /* Form fields */
+    .form-inner {
+		padding: 30px;
+        width: 320px;
+	}
+	.form-inner label {
+		width: 220px;
+		font-size: 13px;
+	}
+	.form-inner .form-control {
+		font-size: 13px;
+	}
+	.form-inner .title {
+		font-size: 23px;
+		margin-bottom: 10px;
+	}
+	.form-inner .text-1 {
+		font-size: 11px;
+		margin-bottom: 20px;
+	}
+	.form-inner .form-group {
+		margin-bottom: 20px;
+	}
+	.form-inner .form-control {
+		width: 260px;
+		height: 40px;
+		border-radius: 3px;
+	}
+	.field-icon {
+	  margin-left: -25px;
+	  margin-top: -28px;
+	}
+	.form-inner .form-group .fa-eye,
+	.form-inner .form-group .fa-eye-slash {
+		font-size: 13px;
+	}
+	.form-inner #remember-check {
+		width: 20px;
+		height: 20px;
+	}
+	.form-inner label.form-check-label {
+		padding-bottom: 12px;
+	}
+	.form-inner .form-check {
+		margin-bottom: 10px;
+	}
+	.form-inner .login-btn,
+	.form-inner .submit-btn {
+		width: 260px;
+		height: 40px;
+		font-size: 12px;
+	}
+	.form-inner .text-2 {
+		font-size: 13px;
+	}
+    
+    /* Email verification */
+    #email-verification #top-logo .logo {
+        width: 180px;
+    }
+    #email-verification .form-inner .title {
+        font-size: 18px;
+    }
+    #email-verification .form-inner .submit-btn {
+        width: 250px;
+        height: 35px;
+        font-size: 12px;
+    }
+    
+    /* Top Title*/
+    #top-title #top-title-inner {
+        height: 180px;
+    }
+    #top-title #top-title-text {
+        padding-top: 68px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+    
+    /* User Profile*/
+    .form-details .form-inner {
+        padding: 30px 0; 
+    }
+    .form-details .form-inner .title {
+        font-size: 21px;
+        margin-bottom: 15px;
+    }
+    .form-details .form-inner label {
+        font-size: 13px;
+    }
+    .form-details .form-inner .form-control {
+        font-size: 13px;
+        height: 36px;
+    }
+    .form-details .form-inner select {
+        background-position: 96% 50%;
+    }
+    .form-details .form-inner #input-country-code {
+        background-position: 90% 50%;
+    }
+    .form-details .form-inner .upload-picture {
+        height: 80px;
+        padding-top: 8px;
+    }
+    .form-details .form-inner .upload-picture #profile-picture {
+        height: 40px;
+        padding-top: 0;
+    }
+    .form-details .form-inner .upload-picture h5 {
+        font-size: 13px;
+    }
+    .form-details .form-inner .submit-btn {
+        margin-left: 15px;
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+    
+    /* Home */
+    #top-home #top-home-inner #top-home-title {
+        font-size: 20px;
+    }
+    #top-home #top-home-inner #top-home-text {
+        font-size: 11px;
+    }
+    #top-home #top-home-inner .learn-more-btn {
+        font-size: 10.5px;
+        padding: 7px 0;
+        width: 120px;
+    }
+    #home-content .about-title {
+        font-size: 22px;
+    }
+    #home #about-content p {
+        font-size: 12px;
+    }
+    #home #how-it-works .download-logo {
+        width: 80px;
+        height: 80px;
+        padding: 23px 0;
+    }
+    #home #how-it-works .download-logo img {
+        height: 34px;
+        width: 34px;
+    }
+    #home #how-it-works .work-text-01 {
+        font-size: 17px;
+    }
+    #home #how-it-works .work-text-02 {
+        font-size: 12px;
+    }
+    #home #how-it-works .download-btn {
+        width: 112px;
+        font-size: 12px;
+    }
+    #home #how-it-works .seller-btn {
+        width: 112px;
+        font-size: 12px;
+    }
+    #home #customers .customer-review .customer-photo {
+        width: 60px;
+        height: 60px;
+    }
+    #home #customers .customer-review .customer-name {
+        font-size: 17px;
+    }
+    #home #customers .customer-review .customer-post {
+        font-size: 12px;
+    }
+    #home #customers .customer-review .customer-text {
+        margin-top: 24px;
+        font-size: 12px;
+        line-height: 22px;
+    }
+    
+    /* Search Notes */
+    #search-notes-inner .notes-list .book-details {
+        width: 300px;
+        margin: 10px auto;
+    }
+    #search-notes-inner .notes-list {
+        padding-top: 40px;
+    }
+    #search-notes-inner .notes-list .no-of-books {
+        margin-bottom: 20px;
+    }
+    #search-notes-inner .rate:not(:checked) > label {
+        padding-top: 1px;
+        font-size: 18px;
+    }
+    
+    /* Notes Details */
+    #notes-details-inner .customer-review .col-md-2 {
+        padding-left: 15px;
+    }
+    
+    /* Thanks Popup */
+    .modal-body {
+        padding: 0px 30px 30px 30px;
+    }
+    
+    /* Table */
+    .table-section {
+        margin-top: 50px;
+    }
+    #table-content {
+        padding-top: 0px;
+    }
+    .table-section .table-search {
+        left: -18px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .table-section .submit-btn {
+        margin-right: 10px;
+    }
+    
+    /* Pagination */
+    .pagination-area li a {
+        font-size: 12px;
+    }
+    .pagination-area li span {
+        padding: 7px 12px;
+    }
+    .pagination-area li span img {
+        height: 10px;
+    }
+    
+    /* Review Popup */
+    #my-downloads .rate:not(:checked) > label {
+        width: 40px;
+        font-size: 40px;
+    }
+    .modal-body .form-control {
+        height: 80px;
+    }
+    
+    /* footer */
+    #footer-inner {
+        padding: 13px 0;
+    }
+    #footer-inner .footer-content h5 {
+        font-size: 10px;
+    }
+    ul.social-list {
+        padding-top: 7px;
+    }
+    ul.social-list li a {
+        width: 24px;
+        height: 24px;
+        line-height: 20px;
+    }
+    ul.social-list li a i {
+        font-size: 10px;
+    }
+    
+
+}
+
+/* extra small devices ( extra-small phones) */
+@media (max-width: 351px) {
+    #top-title #top-title-inner {
+        width: 100%;
+    }
+    
+    #user-profile .form-group .col-md-3 {
+        padding-right: 0;
+    }
+    .form-details .form-group .radio-btn label {
+        margin-left: 5px;
+    }
+    
+    /* Search Notes */
+    #search-notes-inner .notes-list .book-details {
+        width: 290px;
+    }
+    #search-notes-inner .book-details .book-info .book-rating {
+        padding-left: 12.5px;
+    }
+    
+    #footer-inner .col-xs-6 {
+        padding-right: 0;
+    }
+    #top-home #top-home-inner {
+        padding-top: 150px;
+    }
+}

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNote>
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.MainClass = "dashboard";
+    ViewBag.dashboard = "active-link";
+    Layout = "~/Views/Shared/Register.cshtml";
+}
+
+<div id="dashboard-inner">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <h2 class="heading">Dashboard</h2>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                    <button onclick="location.href='@Url.Action("addnotes")'" type="submit" class="btn submit-btn">Add note</button>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="top-section-left">
+                    <div class="col-md-4 col-sm-4 col-xs-12 left-section earning-section">
+                        <img class="earning-icon text-left" src="~/Content/images/Front/assets/my-earning.png" alt="earning-icon">
+                        <h3 class="earning-text">My Earning</h3>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12 left-section">
+                        <h3 class="top-section-no text-center">100</h3>
+                        <h5 class="top-section-text text-center">Number of Notes Sold</h5>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12 left-section">
+                        <h3 class="top-section-no text-center">$10,00,000</h3>
+                        <h5 class="top-section-text text-center">Money Earned</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12 top-section-right">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="right-section">
+                        <h3 class="top-section-no text-center">38</h3>
+                        <h5 class="top-section-text text-center">My Downloads</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="right-section">
+                        <h3 class="top-section-no text-center">12</h3>
+                        <h5 class="top-section-text text-center">My Rejected Notes</h5>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="right-section">
+                        <h3 class="top-section-no text-center">102</h3>
+                        <h5 class="top-section-text text-center">Buyer Requests</h5>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        @Html.Partial("_SubmittedNotes", Model.ToList())
+
+        @Html.Partial("_PublishedNotes", Model.ToList())
+
+    </div>
+
+</div>

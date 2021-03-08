@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 ,user-scalable=no">
+
+    <!-- Favicon -->
+    <link href="~/Content/images/Front/assets/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <!-- fontawesome -->
+    @Styles.Render("~/bundles/css")
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Front/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/Content/css/Front/responsive.css">
+</head>
+<body>
+
+    <div id="login" class="full-background">
+        <!-- Logo img -->
+        <div id="top-logo">
+            <div id="top-logo-inner" class="text-center">
+                <a href="@Url.Action("home","User")">
+                    <img class="logo" src="~/Content/images/Front/assets/top-logo.png" alt="logo">
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <!-- jQuaery libraries
+    <script src="~/Scripts/Front/jquery.min.js"></script>
+    Bootstrap JS
+    <script src="~/Scripts/Front/Bootstrap/bootstrap.min.js"></script> -->
+    @Scripts.Render("~/bundles/js")
+
+    <!-- Custom JS -->
+    <script src="~/Scripts/Front/main.js"></script>
+
+</body>
+</html>
+

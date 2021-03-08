@@ -1,0 +1,349 @@
+﻿@{
+    Layout = null;
+    if (ViewBag.valid == true)
+    {
+        ViewBag.NavClass = "logged-in";
+    }
+    else
+    {
+        ViewBag.NavClass = "logged-out";
+    }
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Home</title>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 ,user-scalable=no">
+
+    <!-- Favicon -->
+    <link href="~/Content/images/Front/assets/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <!-- fontawesome -->
+    @Styles.Render("~/bundles/css")
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/Front/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/Content/css/Front/responsive.css">
+
+</head>
+<body>
+
+    <div id="home">
+        <!-- Header -->
+        <header>
+            <nav class="navbar navbar-fixed-top">
+                <div class="container @ViewBag.NavClass">
+                    <div class="navbar-header">
+                        <!-- Mobile menu Open Button -->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+
+                        <!-- Logo -->
+                        <a href="@Url.Action("home","User")" class = "navbar-brand">
+                            <img class="logo img-responsive" src="~/Content/images/Front/assets/logo-img.png" alt="logo">
+                        </a>
+                    </div>
+
+                    <!-- Main menu -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            @if (ViewBag.valid == true)
+                            {
+                                <li>
+                                    @Html.ActionLink("Search Notes", "Search")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Sell Your Notes", "dashboard")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Buyer Requests", "buyerRequests")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("FAQ", "faq")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Contact Us", "contactUs")
+                                </li>
+                                <li>
+                                    <!-- Profile Dropdown -->
+                                    <div class="dropdown" id="profile-submenu">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img class="profile-img img-responsive img-circle" src="~/Content/images/Front/User-Profile/profile-img.png" alt="logo">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @Html.ActionLink("My Profile", "UserProfile")
+                                            @Html.ActionLink("My Downloads", "MyDownloads")
+                                            @Html.ActionLink("My Sold Notes", "MySoldNotes")
+                                            @Html.ActionLink("My Rejected Notes", "MyRejectedNotes")
+                                            @Html.ActionLink("Change Password", "changePassword")
+                                            @Html.ActionLink("LOGOUT", "logout", null, new { @id = "submenu-logout" })
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a><button onclick="location.href='@Url.Action("logout")'" type="submit" class="btn submit-btn">Logout</button></a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink("Search Notes", "Search")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Sell Your Notes", "dashboard")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("FAQ", "faq")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Contact Us", "contactUs")
+                                </li>
+                                <li>
+                                    <a><button onclick="location.href='@Url.Action("login")'" type="submit" class="btn submit-btn">Login</button></a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-nav">
+                        <!-- Mobile menu Close Button -->
+                        <span id="mobile-nav-close-btn">&times;</span>
+
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+                                @if (ViewBag.valid == true)
+                                {
+                                    <li>
+                                        @Html.ActionLink("Search Notes", "Search")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Sell Your Notes", "dashboard")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Buyer Requests", "buyerRequests")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("FAQ", "faq")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Contact Us", "contactUs")
+                                    </li>
+                                    <li>
+                                        <!-- Profile Dropdown -->
+                                        <div class="dropdown" id="profile-submenu">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="profile-img img-responsive img-circle" src="~/Content/images/Front/User-Profile/profile-img.png" alt="logo">
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                @Html.ActionLink("My Profile", "UserProfile")
+                                                @Html.ActionLink("My Downloads", "MyDownloads")
+                                                @Html.ActionLink("My Sold Notes", "MySoldNotes")
+                                                @Html.ActionLink("My Rejected Notes", "MyRejectedNotes")
+                                                @Html.ActionLink("Change Password", "changePassword")
+                                                @Html.ActionLink("LOGOUT", "logout", null, new { @id = "submenu-logout" })
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>@Html.ActionLink("Logout", "logout")</li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @Html.ActionLink("Search Notes", "Search")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Sell Your Notes", "dashboard")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("FAQ", "faq")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Contact Us", "contactUs")
+                                    </li>
+                                    <li>@Html.ActionLink("Login", "login")</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <!-- Header ends -->
+
+        <!-- Home top text -->
+        <div id="top-home">
+            <div id="top-home-inner">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h1 id="top-home-title">Download Free/Paid Notes<br>or Sale your Book</h1>
+                        <p id="top-home-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>1500s, when an unknown printer took a gallery of type.</p>
+                        <button onclick="location.href='@Url.Action("faq")'" type="submit" class="btn learn-more-btn">Learn more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Home content -->
+        <div id="home-content">
+            <!-- about content -->
+            <div id="about-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 about-left">
+                            <h2 class="about-title">About<br>NotesMarketPlace</h2>
+                        </div>
+                        <div class="col-md-8 col-xs-12 about-right">
+                            <p class="about-right-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At hic eos minus rerum eligendi magni, exercitationem sed minima quam repellat, quasi.exercitationem sed minima quam repellat, quasi ratione ipsam numquam itaque error doloremque dolore tempore modi. exercitationem sed minima quam repellat, consectetur adipisicing elit. At hic eos minus rerum eligendi magni exercitationem.</p>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At hic eos minus rerum eligendi magni, exercitationem sed minima quam repellat, quasi ratione ipsam error doloremque dolore tempore modi. quasi ratione ipsam numquam itaque error doloremque dolore tempore modi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- How-it-works-text -->
+            <div id="how-it-works">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="about-title text-center">How it works</h2>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
+                            <div class="download-logo"><img src="~/Content/images/Front/home/download.png" alt="download"></div>
+                            <h3 class="work-text-01">Download Free/Paid Notes</h3>
+                            <h5 class="work-text-02">Get Material for your<br>Cource etc.</h5>
+                            <button onclick="location.href='@Url.Action("Search")'" type="submit" class="btn download-btn">download</button>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 text-center">
+                            <div class="download-logo"><img src="~/Content/images/Front/home/seller.png" alt="download"></div>
+                            <h3 class="work-text-01">Seller</h3>
+                            <h5 class="work-text-02">Upload and Download Cource<br>and Materials etc.</h5>
+                            <button onclick="location.href='@Url.Action("dashboard")'" type="submit" class="btn seller-btn">sell book</button>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How-it-works-text -->
+            <div id="customers">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="about-title text-center">What our Customers are Saying</h2>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="customer-photo img-circle" src="~/Content/images/Front/home/customer-1.png" alt="customer">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="customer-name">Walter Maller</h3>
+                                        <h5 class="customer-post">Founder & CEO, Matrix Group</h5>
+                                    </div>
+                                </div>
+                                <div class="customer-text">
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="customer-photo img-circle" src="~/Content/images/Front/home/customer-2.png" alt="customer">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="customer-name">Jonnie Riley</h3>
+                                        <h5 class="customer-post">Employee, Curious Snacks</h5>
+                                    </div>
+                                </div>
+                                <div class="customer-text">
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="customer-photo img-circle" src="~/Content/images/Front/home/customer-3.png" alt="customer">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="customer-name">Amilia Luna</h3>
+                                        <h5 class="customer-post">Teacher, Saint Joseph High School</h5>
+                                    </div>
+                                </div>
+                                <div class="customer-text">
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="customer-review">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="customer-photo img-circle" src="~/Content/images/Front/home/customer-4.png" alt="customer">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="customer-name">Daniel Cardos</h3>
+                                        <h5 class="customer-post">Software Engineer, Infinitum Company</h5>
+                                    </div>
+                                </div>
+                                <div class="customer-text">
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit. Lorem ipsum dolor sit amet, consectetur adipisicing elit."</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer-inner">
+            <div class="container">
+                <div class="row footer-content">
+                    <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                        <h5>Copyright &copy; TatvaSoft All Rights Reserved.</h5>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <ul class="social-list text-right">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuaery libraries
+        <script src="~/Scripts/Front/jquery.min.js"></script>
+    Bootstrap JS
+    <script src="~/Scripts/Front/Bootstrap/bootstrap.min.js"></script> -->
+    @Scripts.Render("~/bundles/js")
+
+    <!-- Custom JS -->
+    <script src="~/Scripts/Front/main.js"></script>
+
+</body>
+</html>

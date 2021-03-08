@@ -1,0 +1,39 @@
+﻿@model Notes_MarketPlace.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/CenterForm.cshtml";
+}
+
+<!-- Login form -->
+<div class="container text-center">
+    <div class="row">
+        <div class="form-inner">
+            <h2 class="title">Login</h2>
+            <h5 class="text-1">Enter your email address and password to login</h5>
+            <form method="post">
+                <div class="form-group text-left">
+                    <label for="input-email">Email address</label>
+                    <!--<input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter your email">-->
+                    @Html.TextBoxFor(l => l.EmailID, new { @placeholder = "Enter your email", @class = "form-control" })
+                </div>
+
+                <div class="form-group text-left login-password">
+                    <label for="input-password">Password @Html.ActionLink("Forgot Password?", "forgotPassword", null, new { @class = "forgot-password" })</label>
+                    <!--<input type="password" class="form-control" id="input-password" placeholder="Enter your password"> -->
+                    @Html.TextBoxFor(l => l.Password, new { Type = "password", @placeholder = "Enter your password", @id = "input-password", @class = "form-control" })
+                    <span toggle="#input-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+                <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
+                <div class="form-group form-check text-left">
+                    @Html.CheckBoxFor(l => l.RememberMe, new { @class = "form-check-input", @id = "remember-check" })
+                    <label class="form-check-label" for="remember-check">Remember Me</label>
+                </div>
+                <button type="submit" class="btn login-btn">Login</button>
+                <h5 class="text-2">
+                    Don't have an account? @Html.ActionLink("Sign Up", "signup")
+                    <!--<a href="signup.cshtml">Sign Up</a>-->
+                </h5>
+            </form>
+        </div>
+    </div>
+</div>
