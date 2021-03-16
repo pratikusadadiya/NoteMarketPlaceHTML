@@ -48,11 +48,8 @@
                     <form method="post">
                         <h2 class="title text-left">Email Verification</h2>
                         <h5 style="color:red; text-align:left;">@ViewBag.Msg</h5>
-                        <h5 class="text-left"><span>Dear User,</span></h5>
-                        @Html.TextBoxFor(l => l.ID)
-                        @Html.TextBoxFor(l => l.EmailID)
-                        @Html.TextBoxFor(l => l.RoleID)
-                        @Html.TextBoxFor(l => l.IsEmailVerified)
+                        <h5 class="text-left"><span>Dear @Model.FirstName,</span></h5>
+                        <input hidden name="ID" value="@Model.ID" />
                         <h5 class="text-1 text-left">Thanks for Signing up!<br>Simply click below for email verification.</h5>
                         <button type="submit" class="btn submit-btn">verify email address</button>
                     </form>

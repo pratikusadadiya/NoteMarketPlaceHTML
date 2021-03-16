@@ -15,10 +15,14 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap CSS -->
     <!-- fontawesome -->
     @Styles.Render("~/bundles/css")
+
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="~/Content/css/Front/style.css">
@@ -162,8 +166,46 @@
     <script src="~/Scripts/Front/Bootstrap/bootstrap.min.js"></script> -->
     @Scripts.Render("~/bundles/js")
 
-    <!-- Custom JS
-    <script src="~/Scripts/Front/main.js"></script> -->
+    <!-- DataTable JS -->
+    <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#in-progress,#published,#buyer-request-notes').DataTable({
+                "info": false,
+                "iDisplayLength": 5
+            });
+
+            $("#submitted-pagination").append($("#in-progress_paginate"));
+            $("#published-pagination").append($("#published_paginate"));
+            $("#buyer-request-pagination").append($("#buyer-request-notes_paginate"));
+
+            oTable = $('#in-progress').DataTable();
+            $('#submitted-search').keyup(function () {
+                oTable.search($(this).val()).draw();
+            });
+
+            oTable1 = $('#published').DataTable();
+            $('#published-search').keyup(function () {
+                oTable1.search($(this).val()).draw();
+            });
+
+            oTable2 = $('#buyer-request-notes').DataTable();
+            $('#buyer-request-search').keyup(function () {
+                oTable2.search($(this).val()).draw();
+            });
+
+        });
+        //$(document).ready(function () {
+        //    var str = '<i class="fa fa-arrow-right"></i>';
+        //    document.getElementById('in-progress_next').innerHTML = str;
+        //    var str = '<i class="fa fa-arrow-left"></i>';
+        //    document.getElementById('in-progress_previous').innerHTML = str;
+        //});
+        
+    </script>
+
+    <!-- Custom JS -->
     <script src="~/Scripts/Front/main.js"></script>
 
 </body>

@@ -4,7 +4,16 @@
     ViewBag.MainClass = "dashboard";
     ViewBag.dashboard = "active-link";
     Layout = "~/Views/Shared/Register.cshtml";
+
 }
+<style>
+    .dataTables_wrapper .dataTables_length {
+        display: none;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        display: none;
+    }
+</style>
 
 <div id="dashboard-inner">
 
@@ -73,3 +82,4 @@
     </div>
 
 </div>
+

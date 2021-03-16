@@ -1,10 +1,19 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Buyer Requests";
     ViewBag.MainClass = "dashboard";
+    ViewBag.buyerRequests = "active-link";
     Layout = "~/Views/Shared/Register.cshtml";
 }
 
+<style>
+    .dataTables_wrapper .dataTables_length {
+        display: none;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        display: none;
+    }
+</style>
 
 <div id="buyer-requests-inner" class="book-table-data">
 
@@ -18,13 +27,13 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
                     <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
-                    <input type="text" class="form-control" id="input-search" placeholder="Search">
+                    <input type="text" class="form-control input-search" id="buyer-request-search" placeholder="Search">
                     <button type="submit" class="btn submit-btn">search</button>
                 </div>
             </div>
 
             <div class="table-responsive-lg" id="table-content">
-                <table class="table">
+                <table class="table" id="buyer-request-notes">
                     <thead>
                         <tr>
                             <th scope="col">sr no.</th>
@@ -245,8 +254,8 @@
         </div>
 
         <!-- Pagination -->
-        <div class="pagination-area text-center">
-            <ul class="pagination">
+        <div class="pagination-area text-center" id="buyer-request-pagination">
+            @*<ul class="pagination">
                 <li class="page-item">
                     <span class="page-link" href="#" aria-label="Previous">
                         <img src="~/Content/images/Front/assets/left-arrow.png">
@@ -262,7 +271,7 @@
                         <img src="~/Content/images/Front/assets/right-arrow.png">
                     </span>
                 </li>
-            </ul>
+            </ul>*@
         </div>
 
     </div>

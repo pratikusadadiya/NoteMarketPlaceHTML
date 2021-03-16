@@ -59,7 +59,7 @@ namespace Notes_MarketPlace.Controllers
 
                 MailMessage mail = new MailMessage("poojapatel102938@gmail.com", user.EmailID.ToString());
                 mail.Subject = "Notes MarketPlace - Email Verification";
-                string Body = "Dear " + user.FirstName + " " + user.LastName + ",\n\n Thank you for signing up with Notes MarketPlace. Please click on below link to verify your email http://localhost:52734/User/emailVerification?id="+user.EmailID;
+                string Body = "Dear " + user.FirstName + " " + user.LastName + ",\n\n Thank you for signing up with Notes MarketPlace. Please click on below link to verify your email http://localhost:52734/User/emailVerification?emailid="+user.EmailID;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
 
@@ -82,9 +82,9 @@ namespace Notes_MarketPlace.Controllers
         }
 
         [HttpGet]
-        public ActionResult emailVerification(string id)
+        public ActionResult emailVerification(string emailid)
         {
-            User user = db.Users.FirstOrDefault(u => u.EmailID.Equals(id));
+            User user = db.Users.FirstOrDefault(u => u.EmailID.Equals(emailid));
             try
             {
                 if(user != null)
@@ -104,20 +104,21 @@ namespace Notes_MarketPlace.Controllers
         }
 
         [HttpPost]
-        public ActionResult emailVerification(User us)
+        public ActionResult emailVerification(int ID)
         {
-            try
+           // try
             {
-                User user = db.Users.FirstOrDefault(u => u.EmailID == us.EmailID);
+                User user = db.Users.FirstOrDefault(u => u.ID == ID);
                 if(user != null)
                 {
                     user.IsEmailVerified = true;
+                    user.ConfirmPassword = user.Password;
                     db.SaveChanges();
                     return RedirectToAction("login");
                 }
                 return HttpNotFound();
             }
-            catch(Exception e)
+          //  catch(Exception e)
             {
                 return HttpNotFound();
             }
@@ -335,9 +336,11 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.ErrorMsg = "Please select proper file.";
                 return View(note);
             }
+        }
 
-
-
+        public ActionResult buyerRequests()
+        {
+            return View();
         }
 
         public ActionResult UserProfile()
@@ -407,7 +410,7 @@ namespace Notes_MarketPlace.Controllers
         public ActionResult logout()
         {
             userid = 0;
-            return View("home");
+            return RedirectToAction("home");
         }
     }
 }

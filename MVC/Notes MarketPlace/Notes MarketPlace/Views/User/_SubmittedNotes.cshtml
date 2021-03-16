@@ -7,13 +7,13 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
             <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
-            <input type="text" class="form-control" id="input-search" placeholder="Search">
+            <input type="search" class="form-control input-search" id="submitted-search" placeholder="Search">
             <button type="submit" class="btn submit-btn">search</button>
         </div>
     </div>
 
     <div class="table-responsive-lg" id="table-content">
-        <table class="table">
+        <table class="table" id="in-progress">
             <thead>
                 <tr>
                     <th scope="col">Added date</th>
@@ -27,11 +27,11 @@
 
                 @foreach (var note in Model)
                 {
-                    if (note.SellerID == ViewBag.userid)
+                    if (note.SellerID == ViewBag.userid && note.Status != "Published" && note.IsActive == true)
                     {
 
                         <tr>
-                            <td>@note.CreatedDate.ToString().Substring(0,10)</td>
+                            <td>@note.CreatedDate.ToString().Substring(0, 10)</td>
                             <td>@note.Title</td>
                             <td>@note.Category</td>
                             <td>@note.Status</td>
@@ -51,52 +51,6 @@
                         </tr>
                     }
                 }
-
-                @*<tr>
-                        <td>09-10-2020</td>
-                        <td>Data Science</td>
-                        <td>Science</td>
-                        <td>Draft</td>
-                        <td>
-                            <div class="edit-delete">
-                                <img class="table-edit" src="~/Content/images/Front/assets/edit.png" alt="edit">
-                                <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="edit">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10-10-2020</td>
-                        <td>Accounts</td>
-                        <td>Commerce</td>
-                        <td>In Review</td>
-                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
-                    </tr>
-                    <tr>
-                        <td>11-10-2020</td>
-                        <td>Social Studies</td>
-                        <td>Scocial</td>
-                        <td>Submitted</td>
-                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
-                    </tr>
-                    <tr>
-                        <td>12-10-2020</td>
-                        <td>AI</td>
-                        <td>IT</td>
-                        <td>Submitted</td>
-                        <td><img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"></td>
-                    </tr>
-                    <tr>
-                        <td>13-10-2020</td>
-                        <td>Lorem ipsum dolor sit amet</td>
-                        <td>Lorem</td>
-                        <td>Draft</td>
-                        <td>
-                            <div class="edit-delete">
-                                <img class="table-edit" src="~/Content/images/Front/assets/edit.png" alt="edit">
-                                <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="edit">
-                            </div>
-                        </td>
-                    </tr>*@
             </tbody>
         </table>
     </div>
@@ -104,22 +58,24 @@
 </div>
 
 <!-- Pagination -->
-<div class="pagination-area text-center">
-    <ul class="pagination">
+<div class="pagination-area text-center" id="submitted-pagination">
+    @*<ul class="pagination">
         <li class="page-item">
-            <span class="page-link" href="#" aria-label="Previous">
+            <span class="page-link" href="#" aria-label="Previous" id="paginate_left">
                 <img src="~/Content/images/Front/assets/left-arrow.png">
             </span>
         </li>
         <li class="page-item"><a class="page-link active" href="#">1</a></li>
         <li class="page-item"><a class="page-link" href="#">2</a></li>
         <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>  
         <li class="page-item"><a class="page-link" href="#">5</a></li>
         <li class="page-item">
-            <span class="page-link" href="#" aria-label="Next">
+            <span class="page-link" href="#" aria-label="Next" id="paginate_right">
                 <img src="~/Content/images/Front/assets/right-arrow.png">
             </span>
         </li>
-    </ul>
+    </ul>*@
 </div>
+
+
