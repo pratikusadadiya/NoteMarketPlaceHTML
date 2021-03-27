@@ -11,16 +11,21 @@ namespace Notes_MarketPlace
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class UserProfile
     {
         public int ID { get; set; }
         public int UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailID { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> Gender { get; set; }
         public string ScondaryEmailAddress { get; set; }
         public string Phone_number___Country_Code { get; set; }
         public string Phone_number { get; set; }
+        public HttpPostedFileBase ProfilePictureFile { get; set; }
         public string Profile_Picture { get; set; }
         public string Address_Line_1 { get; set; }
         public string Address_Line_2 { get; set; }

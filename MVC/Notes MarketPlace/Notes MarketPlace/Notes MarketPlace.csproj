@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -307,6 +313,7 @@
     <Content Include="Content\images\Front\Search\6.jpg" />
     <Content Include="Content\images\Front\User-Profile\banner-with-overlay.jpg" />
     <Content Include="Content\images\Front\User-Profile\profile-img.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -328,7 +335,6 @@
     <Content Include="Scripts\Front\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Front\jquery.js" />
-    <Content Include="Scripts\jquery.filtertable.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\Front\main.js" />
     <Content Include="Web.config" />
@@ -401,6 +407,10 @@
     <Content Include="Views\User\_SubmittedNotes.cshtml" />
     <Content Include="Views\User\_PublishedNotes.cshtml" />
     <Content Include="Views\User\NotesDetails.cshtml" />
+    <Content Include="Views\User\MyDownloads.cshtml" />
+    <Content Include="Views\User\MyRejectedNotes.cshtml" />
+    <Content Include="Views\User\MySoldNotes.cshtml" />
+    <Content Include="Views\User\SearchNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -18,6 +18,7 @@
 
             <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
             <!-- Basic Note Details -->
+            @Html.HiddenFor(l => l.ID)
             <div class="row">
                 <h2 class="title text-left">Basic Note Details</h2>
                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
@@ -27,8 +28,25 @@
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                     <label for="input-category">Category</label>
-                    
-                    @Html.DropDownListFor(l => l.CategoryId , Model.Categories as SelectList, "Select your category", new { @class = "form-control", @id = "input-category" })
+                    <select name="Category" id="input-category" class="form-control" placeholder="Select your category" required>
+
+                        <option hidden>Select your category</option>
+                        @{
+                            List<NoteCategory> categories = ViewBag.Categories;
+                            foreach (NoteCategory item in categories)
+                            {
+                                if (item.Name != null)
+                                {
+                                    if (item.Name.Equals(Model.Category))
+                                    {
+                                        <option selected>@item.Name</option>
+                                        continue;
+                                    }
+                                }
+                                <option>@item.Name</option>
+                            }
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -37,6 +55,10 @@
                     <img src="~/Content/images/Front/assets/upload.png" id="profile-picture" alt="Upload Book Picture">
                     <h5>Upload a picture</h5>
                 </div>*@
+                    @if (Model.DisplayPicture != null)
+                    {
+                        @Html.HiddenFor(l => l.DisplayPicture)
+                    }
                     @Html.TextBoxFor(l => l.DisplayImageFile, new { @type = "file", @class = "form-control upload-picture" })
                 </div>
 
@@ -46,12 +68,34 @@
                     <img src="~/Content/images/Front/assets/upload-note.png" id="profile-picture" alt="Upload Notes">
                     <h5>Upload your notes</h5>
                 </div>*@
+                    @if (Model.NoteAttachment != null)
+                    {
+                        @Html.HiddenFor(l => l.NoteAttachment)
+                    }
                     @Html.TextBoxFor(l => l.NotesAttachmentFile, new { @type = "file", @class = "form-control upload-picture" })
                 </div>
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                     <label for="input-type">Type</label>
-                    @Html.DropDownListFor(l => l.NoteTypeId, Model.NoteTypes as SelectList, "Select your note type", new { @class = "form-control", @id = "input-type" })
+                    <select name="NoteType" id="input-note-type" class="form-control" placeholder="Select your country" required>
+
+                        <option hidden>Select your note type</option>
+                        @{
+                            List<NoteType> noteTypes = ViewBag.NoteTypes;
+                            foreach (NoteType item in noteTypes)
+                            {
+                                if (item.Name != null)
+                                {
+                                    if (item.Name.Equals(Model.NoteType))
+                                    {
+                                        <option selected>@item.Name</option>
+                                        continue;
+                                    }
+                                }
+                                <option>@item.Name</option>
+                            }
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
@@ -70,7 +114,25 @@
                 <h2 class="title text-left">Institution Information</h2>
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                     <label for="input-country">Country *</label>
-                    @Html.DropDownListFor(l => l.CountryId, Model.CountryList as SelectList, "Select your country", new { @class = "form-control", @id = "input-country" })
+                    <select name="Country" id="input-country" class="form-control" required>
+
+                        <option hidden>Select your country</option>
+                        @{
+                            List<Country> countries = ViewBag.Countries;
+                            foreach (Country item2 in countries)
+                            {
+                                if (item2.Name != null)
+                                {
+                                    if (item2.Name.Equals(Model.Country))
+                                    {
+                                        <option selected>@item2.Name</option>
+                                        continue;
+                                    }
+                                }
+                                <option>@item2.Name</option>
+                            }
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -126,10 +188,14 @@
                     <img src="~/Content/images/Front/assets/upload.png" id="profile-picture" alt="Upload Notes">
                     <h5>Upload a file</h5>
                 </div>*@
+                    @if (Model.NotesPreview != null)
+                    {
+                        @Html.HiddenFor(l => l.NotesPreview)
+                    }
                     @Html.TextBoxFor(l => l.NotesPreviewFile, new { @type = "file", @class = "form-control upload-picture" })
                 </div>
-                <input type="submit" class="btn submit-btn" name="ssave" value="save">
-                <input type="submit" class="btn submit-btn" name="publiish" value="publish">
+                <input type="submit" class="btn submit-btn" name="submit" value="save">
+                <input type="submit" class="btn submit-btn" name="submit" value="publish">
             </div>
         </form>
     </div>

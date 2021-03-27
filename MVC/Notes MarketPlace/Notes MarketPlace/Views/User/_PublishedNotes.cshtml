@@ -21,7 +21,7 @@
                     <th scope="col">category</th>
                     <th scope="col">sell type</th>
                     <th scope="col">price</th>
-                    <th scope="col">action</th>
+                    <th scope="col" class="nosort">action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                     {
 
                         <tr>
-                            <td>@note.CreatedDate</td>
+                            <td>@note.CreatedDate.ToString().Substring(0, 10)</td>
                             <td>@note.Title</td>
                             <td>@note.Category</td>
 
@@ -47,7 +47,7 @@
 
                             <td>@note.SellingPrice</td>
                             <td>
-                                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye" onclick="location.href='@Url.Action("NotesDetails", "User", new { noteid = note.ID})'">
                             </td>
                         </tr>
                     }

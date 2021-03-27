@@ -63,7 +63,7 @@
                             @if (ViewBag.valid == true)
                             {
                                 <li>
-                                    @Html.ActionLink("Search Notes", "Search")
+                                    @Html.ActionLink("Search Notes", "SearchNotes")
                                 </li>
                                 <li>
                                     @Html.ActionLink("Sell Your Notes", "dashboard")
@@ -100,7 +100,7 @@
                             else
                             {
                                 <li>
-                                    @Html.ActionLink("Search Notes", "Search")
+                                    @Html.ActionLink("Search Notes", "SearchNotes")
                                 </li>
                                 <li>
                                     @Html.ActionLink("Sell Your Notes", "dashboard")
@@ -225,7 +225,7 @@
                             <div class="download-logo"><img src="~/Content/images/Front/home/download.png" alt="download"></div>
                             <h3 class="work-text-01">Download Free/Paid Notes</h3>
                             <h5 class="work-text-02">Get Material for your<br>Cource etc.</h5>
-                            <button onclick="location.href='@Url.Action("Search")'" type="submit" class="btn download-btn">download</button>
+                            <button onclick="location.href='@Url.Action("SearchNotes")'" type="submit" class="btn download-btn">download</button>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12 text-center">
                             <div class="download-logo"><img src="~/Content/images/Front/home/seller.png" alt="download"></div>

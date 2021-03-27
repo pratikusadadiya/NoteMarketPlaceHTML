@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Notes_MarketPlace.SellerNote
+@{
     ViewBag.Title = "Notes Details";
     ViewBag.MainClass = "notes-details";
     if (ViewBag.valid == true)
@@ -20,17 +21,27 @@
             <div class="col-md-7 col-sm-12 col-xs-12 notes-details-left">
 
                 <div class="col-md-6 col-sm-5 col-xs-12 book-cover-section">
-                    <img class="book-cover img-responsive" src="~/Content/images/Front/Notes-details/1.jpg" alt="book-cover">
+                    <img class="book-cover img-responsive" src="@Model.DisplayPicture" alt="book-cover">
                 </div>
                 <div class="col-md-6 col-sm-7 col-xs-12">
-                    <h2 class="note-title">Computer Science</h2>
-                    <h5 class="note-type">Sciences</h5>
-                    <p class="note-details-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eaque, quos consectetur voluptatem nemo totam consequatur quibusdam, consequuntur, ab fuga, quis ullam praesentium autem minus perspiciatis temporibus debitis minima odit.</p>
+                    <h2 class="note-title">@Model.Title</h2>
+                    <h5 class="note-type">@Model.NoteType</h5>
+                    <p class="note-details-text">@Model.Description</p>
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal">
-                        Download / $15
+                    <button type="submit" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal" onclick="location.href='@Url.Action("DownloadRequest", "User", new { noteid = @Model.ID})'">
+                        @if (Model.IsPaid == true)
+                        {
+                            <span>Download / $@Model.SellingPrice</span>
+                        }
+                        else
+                        {
+                            <span>Download</span>
+                        }
                     </button>
+
+                    <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
+                    <h5 style="color:darkgreen; text-align:left;">@ViewBag.RequestMsg</h5>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,7 +81,7 @@
                         <h5 class="book-info-caption">Institution:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">University of California, US</h5>
+                        <h5 class="book-info-text">@Model.UniversityName</h5>
                     </div>
                 </div>
 
@@ -79,7 +90,7 @@
                         <h5 class="book-info-caption">Country:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">United States</h5>
+                        <h5 class="book-info-text">@Model.Country</h5>
                     </div>
                 </div>
 
@@ -88,7 +99,7 @@
                         <h5 class="book-info-caption">Course Name:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">Computer Engineering</h5>
+                        <h5 class="book-info-text">@Model.Course</h5>
                     </div>
                 </div>
 
@@ -97,7 +108,7 @@
                         <h5 class="book-info-caption">Country Code:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">248705</h5>
+                        <h5 class="book-info-text">@Model.CourseCode</h5>
                     </div>
                 </div>
 
@@ -106,7 +117,7 @@
                         <h5 class="book-info-caption">Professor:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">Mr. Richard Brown</h5>
+                        <h5 class="book-info-text">@Model.Professor</h5>
                     </div>
                 </div>
 
@@ -115,7 +126,7 @@
                         <h5 class="book-info-caption">Number of Pages:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">277</h5>
+                        <h5 class="book-info-text">@Model.NumberofPages</h5>
                     </div>
                 </div>
 
@@ -124,7 +135,14 @@
                         <h5 class="book-info-caption">Approved Date:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <h5 class="book-info-text">Novenber 25, 2020</h5>
+                        @if (Model.PublishedDate != null)
+                        {
+                            <h5 class="book-info-text">@Model.PublishedDate.ToString().Substring(0, 10)</h5>
+                        }
+                        else
+                        {
+                            <h5 class="book-info-text">Not Approved</h5>
+                        }
                     </div>
                 </div>
 
@@ -155,7 +173,7 @@
         <div class="row">
             <div class="col-md-5 col-sm-12 col-xs-12 notes-preview">
                 <h3 class="notes-details-title">Notes Preview</h3>
-                <iframe src="~/Content/images/Front/Notes-details/sample-pdf.png"></iframe>
+                <iframe src="@Model.NotesPreview"></iframe>
             </div>
 
             <div class="col-md-7 col-sm-12 col-xs-12 customer-review">

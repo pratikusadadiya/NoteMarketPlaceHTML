@@ -1,0 +1,193 @@
+﻿@model IEnumerable<Notes_MarketPlace.Download>
+@{
+    ViewBag.Title = "My Downloads";
+    ViewBag.MainClass = "my-downloads";
+    ViewBag.MyDownloads = "active-link";
+    Layout = "~/Views/Shared/Register.cshtml";
+}
+
+<style>
+    .dataTables_wrapper .dataTables_length {
+        display: none;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        display: none;
+    }
+</style>
+
+<div id="my-downloads-inner" class="book-table-data">
+
+    <div class="container">
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <h3 class="heading">My Downloads</h3>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="my-download-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="my-download-notes">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">buyer</th>
+                            <th scope="col">sell type</th>
+                            <th scope="col">price</th>
+                            <th scope="col">downloaded date/time</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.Downloader == ViewBag.userid && note.IsSellerHasAllowedDownload == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.NoteTitle, "NotesDetails", new { noteid = note.NoteID })</td>
+                                        <td>@note.NoteCategory</td>
+                                        @{
+                                            foreach (User item in ViewBag.user)
+                                            {
+                                                if (note.Downloader == item.ID)
+                                                {
+                                                    <td>@item.EmailID</td>
+                                                }
+                                            }
+                                            if (note.IsPaid == false)
+                                            {
+                                                <td>Free</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Paid</td>
+                                            }
+                                        }
+
+                                        <td>@note.PurchasedPrice</td>
+                                        <td>@note.CreatedDate</td>
+                                        <td class="eye-details-icon">
+                                            <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye" onclick="location.href='@Url.Action("NotesDetails", "User", new { noteid = note.NoteID})'">
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.NoteID})">Download Note</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReviewModal">Add Reviews/Feedback</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#ReportModal">Report as Inappropriate</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Review trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="close-popup">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <h2 class="popup-review-title">Add Review</h2>
+                        <div class="rate">
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="5 star"></label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="4 star"></label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="3 star"></label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="2 star"></label>
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="1 star"></label>
+                        </div>
+                        <br><br><br><br><br>
+                        <label for="input-comment" class="popup-text-02">
+                            <h5>Comments *</h5>
+                        </label>
+                        <textarea class="form-control" id="input-comment" rows="5" placeholder="Comments..." required></textarea>
+                        <button type="submit" class="btn submit-btn">submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report as an Inappropriate modal -->
+        <!-- Modal -->
+        <div class="modal fade reportmodel" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="close-popup">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="popup-review-title">Report as an Inappropriate</h2>
+                        <br />
+                        <label for="input-comment" class="popup-text-02">
+                            <h5>Note Title *</h5>
+                        </label>
+                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" />
+                        <br />
+                        <label for="input-comment" class="popup-text-02">
+                            <h5>Remarks *</h5>
+                        </label>
+                        @*@Html.TextAreaFor(l => l.Comment, new { @placeholder = "Enter remarks...", @class = "form-control", @id = "input-comments", @rows = "5" })*@
+                        <textarea class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
+                        <button type="submit" class="btn submit-btn  5">Report an Issue</button>
+                        <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="my-download-pagination">
+            @*<ul class="pagination">
+                <li class="page-item">
+                    <span class="page-link" href="#" aria-label="Previous">
+                        <img src="~/Content/images/Front/assets/left-arrow.png">
+                    </span>
+                </li>
+                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <span class="page-link" href="#" aria-label="Next">
+                        <img src="~/Content/images/Front/assets/right-arrow.png">
+                    </span>
+                </li>
+            </ul>*@
+        </div>
+
+    </div>
+
+</div>

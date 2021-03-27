@@ -20,14 +20,14 @@
                     <th scope="col">title</th>
                     <th scope="col">category</th>
                     <th scope="col">status</th>
-                    <th scope="col">action</th>
+                    <th scope="col" class="nosort">action</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach (var note in Model)
                 {
-                    if (note.SellerID == ViewBag.userid && note.Status != "Published" && note.IsActive == true)
+                    if (note.SellerID == ViewBag.userid && note.Status != "Published" && note.Status != "Rejected" && note.IsActive == true)
                     {
 
                         <tr>
@@ -39,13 +39,13 @@
                                 @if (note.Status == "Draft")
                                 {
                                     <div class="edit-delete">
-                                        <img class="table-edit" src="~/Content/images/Front/assets/edit.png" alt="edit">
-                                        <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="edit">
+                                        <img class="table-edit" src="~/Content/images/Front/assets/edit.png" alt="edit" onclick="location.href='@Url.Action("EditNote", "User", new { noteid = note.ID})'">
+                                        <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="delete" onclick="location.href='@Url.Action("DeleteNote", "User", new { noteid = note.ID})'">
                                     </div>
                                 }
                                 else
                                 {
-                                    <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                                    <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye" onclick="location.href='@Url.Action("NotesDetails", "User", new { noteid = note.ID})'">
                                 }
                             </td>
                         </tr>

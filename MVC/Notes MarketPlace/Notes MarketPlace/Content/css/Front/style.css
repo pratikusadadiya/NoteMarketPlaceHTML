@@ -327,7 +327,7 @@ h6 {
 
 /* navbar with logged-out */
 .navbar .logged-out .collapse li:nth-child(5) a {
-    padding-right: 15px;
+    padding-right: 0px;
     padding-top: 5px;
 }
 .navbar .logged-out .collapse li:nth-child(5) a:hover {
@@ -447,8 +447,8 @@ h6 {
     text-overflow: ellipsis;
 }
 .form-details .form-inner select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;*/
     background: url("~/Content/images/Front/assets/arrow-down.png") no-repeat right;
     background-position: 97.5% 50%;
     cursor: pointer;
@@ -700,13 +700,6 @@ input[type="date"]:focus {
 /*==============================
         Search Notes
 ================================*/
-#search-notes .navbar .collapse li:nth-child(5) a {
-    padding-right: 0px;
-    padding-top: 5px;
-}
-#search-notes .navbar .collapse li:nth-child(5) a:hover {
-    border-bottom: none;
-}
 #search-notes #search-notes-inner {
     padding: 60px 0;
 }
@@ -743,9 +736,9 @@ input[type="date"]:focus {
     left: 15px;
 }
 #search-notes select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url("../images/assets/down-arrow.png") no-repeat right;
+    /*-webkit-appearance: none;
+    -moz-appearance: none;*/
+    background: url("~/Content/images/Front/assets/down-arrow.png") no-repeat right;
     background-position: 95% 50%;
     cursor: pointer;
 }
@@ -807,9 +800,9 @@ input[type="date"]:focus {
             Pagination
 ================================*/
 .pagination-area {
-    margin-top: 15px;
+    margin-top: 50px;
 }
-.pagination-area li a{
+/*.pagination-area li a{
     display: inline-block;
     font-family: "Open Snas", sans-serif;
     margin: 1px;
@@ -819,8 +812,45 @@ input[type="date"]:focus {
     line-height: 20px;
     font-weight: 400;
     color: #333333;
+}*/
+
+.paginate_button {
+    margin: 1px;
+    display: inline-block;
+    font-family: "Open Snas", sans-serif;
+    padding: 6px 12px;
+    margin: 0 2px;
+    font-size: 16px;
+    border-radius: 50%;
+    color: #333333;
+    cursor: pointer;
+    transition: 200ms all linear;
+    text-decoration: none;
 }
-.pagination-area li span{
+a.paginate_button {
+    text-decoration: none;
+}
+.paginate_button.current,
+.paginate_button.current:hover{
+    background-color: #6255a5;
+    color: #fff;
+}
+.paginate_button:hover {
+    background-color: #d1d1d1;
+    color: #333333;
+    text-transform: none;
+}
+
+.previous,.next {
+    background-color: #fff;
+    color: black;
+}
+.previous:hover,.next:hover {
+    background-color: #fff;
+    color: black;
+}
+
+/*.pagination-area li span {
     border: none;
     padding: 5px 15px;
     cursor: pointer;
@@ -837,7 +867,7 @@ input[type="date"]:focus {
     border-radius: 50%;
     background-color: #6255a5;
     color: #fff;
-}
+}*/
 
 /*==============================
             Rating
@@ -1055,7 +1085,7 @@ input[type="date"]:focus {
 .modal-body .submit-btn {
     margin-top: 30px;
     font-size: 16px;
-    width: 130px !important;
+    width: 130px;
 }
 .modal-body .rate {
     height: 40px;
@@ -1069,6 +1099,29 @@ input[type="date"]:focus {
     cursor: pointer;
     font-size: 60px;
     color: #ccc;
+}
+/*==============================
+    Report inappropriate Popup 
+================================*/
+.reportmodel .modal-body .form-control {
+    height: 50px;
+    line-height: 40px;
+}.reportmodel .modal-body .form-control#input-comment {
+    height: 120px;
+    line-height: 30px;
+}
+.reportmodel .modal-body .submit-btn {
+    width: 120px;
+}
+.reportmodel .modal-body .submit-btn.report-btn {
+    width: 200px;
+    background-color: #FF3636;
+    margin-right: 10px;
+}
+.reportmodel .modal-body .submit-btn.report-btn:hover {
+    background-color: #fff;
+    color: #FF3636;
+    border: 1px solid #FF3636;
 }
 
 /*=======================================
@@ -1187,7 +1240,7 @@ input[type="date"]:focus {
     left: 35px;
     top: 16px;
 }
-.table-section #input-search {
+.table-section .input-search {
     padding-left: 45px;
 }
 .table-section .table-search .submit-btn {
@@ -1217,6 +1270,9 @@ input[type="date"]:focus {
     line-height: 20px;
     font-weight: 600;
     color: #333333;
+}
+table.dataTable tbody td {
+    padding: 8px 18px;
 }
 .table tr td {
     font-family: "Open Sans", sans-serif;

@@ -12,7 +12,6 @@ namespace Notes_MarketPlace
     using System;
     using System.Collections.Generic;
     using System.Web;
-    using System.Web.Mvc;
 
     public partial class SellerNote
     {
@@ -32,13 +31,13 @@ namespace Notes_MarketPlace
         public string AdminRemarks { get; set; }
         public Nullable<System.DateTime> PublishedDate { get; set; }
         public string Title { get; set; }
-        public int Category { get; set; }
+        public string Category { get; set; }
         public string DisplayPicture { get; set; }
-        public Nullable<int> NoteType { get; set; }
+        public string NoteType { get; set; }
         public Nullable<int> NumberofPages { get; set; }
         public string Description { get; set; }
         public string UniversityName { get; set; }
-        public Nullable<int> Country { get; set; }
+        public string Country { get; set; }
         public string Course { get; set; }
         public string CourseCode { get; set; }
         public string Professor { get; set; }
@@ -52,23 +51,12 @@ namespace Notes_MarketPlace
         public Nullable<int> ModifiedBy { get; set; }
         public bool IsActive { get; set; }
 
-
         public HttpPostedFileBase DisplayImageFile { get; set; }
         public HttpPostedFileBase NotesPreviewFile { get; set; }
         public HttpPostedFileBase NotesAttachmentFile { get; set; }
 
-        public IEnumerable<SelectListItem> CategoryId { get; set; }
-        public SelectList Categories { get; set; }
-        public IEnumerable<SelectListItem> NoteTypeId { get; set; }
-        public SelectList NoteTypes { get; set; }
-        public IEnumerable<SelectListItem> CountryId { get; set; }
-        public SelectList CountryList { get; set; }
-
-        public virtual Country Country1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Download> Downloads { get; set; }
-        public virtual NoteCategory NoteCategory { get; set; }
-        public virtual NoteType NoteType1 { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

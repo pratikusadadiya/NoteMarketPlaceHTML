@@ -73,10 +73,10 @@
                                         <img class="profile-img img-responsive img-circle" src="~/Content/images/Front/User-Profile/profile-img.png" alt="logo">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        @Html.ActionLink("My Profile", "UserProfile")
-                                        @Html.ActionLink("My Downloads", "MyDownloads")
-                                        @Html.ActionLink("My Sold Notes", "MySoldNotes")
-                                        @Html.ActionLink("My Rejected Notes", "MyRejectedNotes")
+                                        @Html.ActionLink("My Profile", "UserProfile", null, new { @class = ViewBag.MyProfile })
+                                        @Html.ActionLink("My Downloads", "MyDownloads", null, new { @class = ViewBag.MyDownloads })
+                                        @Html.ActionLink("My Sold Notes", "MySoldNotes", null, new { @class = ViewBag.MySoldNotes })
+                                        @Html.ActionLink("My Rejected Notes", "MyRejectedNotes", null, new { @class = ViewBag.MyRejectedNotes })
                                         @Html.ActionLink("Change Password", "changePassword")
                                         @Html.ActionLink("LOGOUT", "logout", null, new { @id = "submenu-logout" })
                                     </div>
@@ -171,14 +171,21 @@
 
     <script>
         $(document).ready(function () {
-            $('#in-progress,#published,#buyer-request-notes').DataTable({
+            $('#in-progress,#published,#buyer-request-notes,#my-download-notes,#my-rejected-notes,#sold-notes-table').DataTable({
                 "info": false,
-                "iDisplayLength": 5
+                "iDisplayLength": 5,
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': ['nosort']
+                }]
             });
 
             $("#submitted-pagination").append($("#in-progress_paginate"));
             $("#published-pagination").append($("#published_paginate"));
             $("#buyer-request-pagination").append($("#buyer-request-notes_paginate"));
+            $("#my-download-pagination").append($("#my-download-notes_paginate"));
+            $("#rejected-notes-pagination").append($("#my-rejected-notes_paginate"));
+            $("#sold-notes-pagination").append($("#sold-notes-table_paginate"));
 
             oTable = $('#in-progress').DataTable();
             $('#submitted-search').keyup(function () {
@@ -193,6 +200,21 @@
             oTable2 = $('#buyer-request-notes').DataTable();
             $('#buyer-request-search').keyup(function () {
                 oTable2.search($(this).val()).draw();
+            });
+
+            oTable3 = $('#my-download-notes').DataTable();
+            $('#my-download-search').keyup(function () {
+                oTable3.search($(this).val()).draw();
+            });
+
+            oTable4 = $('#my-rejected-notes').DataTable();
+            $('#rejected-notes-search').keyup(function () {
+                oTable4.search($(this).val()).draw();
+            });
+
+            oTable5 = $('#sold-notes-table').DataTable();
+            $('#my-sold-notes-search').keyup(function () {
+                oTable5.search($(this).val()).draw();
             });
 
         });

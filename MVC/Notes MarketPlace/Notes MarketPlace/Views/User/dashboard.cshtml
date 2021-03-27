@@ -38,12 +38,12 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 left-section">
-                        <h3 class="top-section-no text-center">100</h3>
+                        <h3 class="top-section-no text-center">@ViewBag.NoOfSoldNotes</h3>
                         <h5 class="top-section-text text-center">Number of Notes Sold</h5>
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12 left-section">
-                        <h3 class="top-section-no text-center">$10,00,000</h3>
+                        <h3 class="top-section-no text-center">$@ViewBag.MoneyEarned</h3>
                         <h5 class="top-section-text text-center">Money Earned</h5>
                     </div>
                 </div>
@@ -52,21 +52,30 @@
             <div class="col-md-6 col-sm-12 col-xs-12 top-section-right">
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right-section">
-                        <h3 class="top-section-no text-center">38</h3>
+                        <h3 class="top-section-no text-center">@ViewBag.NoOfDownloads</h3>
                         <h5 class="top-section-text text-center">My Downloads</h5>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right-section">
-                        <h3 class="top-section-no text-center">12</h3>
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.SellerID == ViewBag.userid && note.Status == "Rejected" && note.IsActive == true)
+                                {
+                                    count++;
+                                }
+                            }
+                            <h3 class="top-section-no text-center">@count</h3>
+                        }
                         <h5 class="top-section-text text-center">My Rejected Notes</h5>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="right-section">
-                        <h3 class="top-section-no text-center">102</h3>
+                        <h3 class="top-section-no text-center">@ViewBag.NoOfBuyerRequests</h3>
                         <h5 class="top-section-text text-center">Buyer Requests</h5>
                     </div>
                 </div>

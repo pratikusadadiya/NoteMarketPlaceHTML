@@ -47,9 +47,8 @@ $(function () {
     });
 
     function showHideNav() {
-
         if ($(window).scrollTop() > 50) {
-
+            
             // Show White Nav & blue logo
             $("nav").addClass("white-nav-top");
             $("#mobile-nav-open-btn").css("color", "#6255a5");
@@ -58,7 +57,6 @@ $(function () {
             
 
         } else {
-
             // Hide White Nav & Show white logo
             $("nav").removeClass("white-nav-top");
             $(".navbar-brand img").attr("src", "../../Content/images/Front/assets/top-logo.png");
@@ -132,9 +130,6 @@ $(document).ready(function () {
         });
     }
 });
-
-
-
 
 
 

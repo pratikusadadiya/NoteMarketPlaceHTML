@@ -1,0 +1,326 @@
+﻿@model IEnumerable<Notes_MarketPlace.Download>
+@{
+    ViewBag.Title = "My Sold Notes";
+    ViewBag.MainClass = "my-sold-notes";
+    ViewBag.MySoldNotes = "active-link";
+    Layout = "~/Views/Shared/Register.cshtml";
+}
+
+<style>
+    .dataTables_wrapper .dataTables_length {
+        display: none;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        display: none;
+    }
+</style>
+
+
+<div id="my-sold-notes-inner" class="book-table-data">
+
+    <div class="container">
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <h3 class="heading">My Sold Notes</h3>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="my-sold-notes-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="sold-notes-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">buyer</th>
+                            <th scope="col">sell type</th>
+                            <th scope="col">price</th>
+                            <th scope="col">downloaded date/time</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.Seller == ViewBag.userid && note.IsSellerHasAllowedDownload == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.NoteTitle, "NotesDetails", new { noteid = note.NoteID })</td>
+                                        <td>@note.NoteCategory</td>
+                                        @{
+                                            foreach(User item in ViewBag.user)
+                                            {
+                                                if (note.Downloader == item.ID)
+                                                {
+                                                    <td>@item.EmailID</td>
+                                                }
+                                            }
+                                            if (note.IsPaid == false)
+                                            {
+                                                <td>Free</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Paid</td>
+                                            }
+                                        }
+
+                                        <td>@note.PurchasedPrice</td>
+                                        <td>@note.CreatedDate</td>
+                                        <td class="eye-details-icon">
+                                            <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye"  onclick="location.href='@Url.Action("NotesDetails", "User", new { noteid = note.NoteID})'">
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.NoteID})">Download Note</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        @*<tr>
+            <td>1</td>
+            <td>Data Science</td>
+            <td>Science</td>
+            <td>testing123@gmail.com</td>
+            <td>Paid</td>
+            <td>$250</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Accounts</td>
+            <td>Commerce</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Social Studies</td>
+            <td>Social</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>AI</td>
+            <td>IT</td>
+            <td>testing123@gmail.com</td>
+            <td>Paid</td>
+            <td>$158</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Lorem ipsum</td>
+            <td>Lorem</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Data Science</td>
+            <td>Science</td>
+            <td>testing123@gmail.com</td>
+            <td>Paid</td>
+            <td>$555</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Accounts</td>
+            <td>Commerce</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Social Studies</td>
+            <td>Social</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>AI</td>
+            <td>IT</td>
+            <td>testing123@gmail.com</td>
+            <td>Paid</td>
+            <td>$250</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Lorem ipsum</td>
+            <td>Lorem</td>
+            <td>testing123@gmail.com</td>
+            <td>Free</td>
+            <td>$0</td>
+            <td>27 Nov 2020, 11:24:34</td>
+            <td class="eye-details-icon">
+                <img class="table-eye" src="~/Content/images/Front/assets/eye.png" alt="eye">
+                <div class="dropdown" id="row-details-submenu">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="row-details-icon" src="~/Content/images/Front/assets/dots.png" alt="details">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Download Note</a>
+                    </div>
+                </div>
+            </td>
+        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="sold-notes-pagination">
+            @*<ul class="pagination">
+                    <li class="page-item">
+                        <span class="page-link" href="#" aria-label="Previous">
+                            <img src="~/Content/images/Front/assets/left-arrow.png">
+                        </span>
+                    </li>
+                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                        <span class="page-link" href="#" aria-label="Next">
+                            <img src="~/Content/images/Front/assets/right-arrow.png">
+                        </span>
+                    </li>
+                </ul>*@
+        </div>
+
+    </div>
+
+</div>
+

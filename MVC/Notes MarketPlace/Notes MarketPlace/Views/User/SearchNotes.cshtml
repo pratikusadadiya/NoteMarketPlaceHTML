@@ -1,0 +1,588 @@
+﻿@{
+    ViewBag.Title = "Search Notes";
+    ViewBag.MainClass = "search-notes";
+    ViewBag.SearchNotes = "active-link";
+    if (ViewBag.valid == true)
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.valid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/NonRegister.cshtml";
+    }
+}
+
+<!-- Top title -->
+<div id="top-title">
+    <div id="top-title-inner" class="text-center">
+        <h1 id="top-title-text">Search Notes</h1>
+    </div>
+</div>
+
+<!-- Search and filter notes -->
+<div id="search-notes-inner">
+    <div class="container">
+        <h3 class="filter-notes-title">Search and Filter notes</h3>
+        <div class="filter-notes">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control" id="input-search" placeholder="Search notes here...">
+                    <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-type" class="form-control">
+                        <option selected>Select type</option>
+                        <option>Computer Science</option>
+                        <option>Electrical</option>
+                        <option>Mechanical</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-category" class="form-control">
+                        <option selected>Select category</option>
+                        <option>Computer Science</option>
+                        <option>Electrical</option>
+                        <option>Mechanical</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-university" class="form-control">
+                        <option selected>Select university</option>
+                        <option>University of California</option>
+                        <option>University of Germony</option>
+                        <option>Oxford University</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-course" class="form-control">
+                        <option selected>Select course</option>
+                        <option>Computer Science</option>
+                        <option>Electrical</option>
+                        <option>Mechanical</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-country" class="form-control">
+                        <option selected>Select country</option>
+                        <option>India</option>
+                        <option>United States</option>
+                        <option>Germony</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <select id="input-rating" class="form-control">
+                        <option selected>Select rating</option>
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container notes-list">
+        <h3 class="no-of-books">Total 18 notes</h3>
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Book 1 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/1.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Computer Operating System - Final Exam Book With Paper Solution</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 2 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/2.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Computer Science<br><br></h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 3 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/3.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Basic Computer Engineering Tech India Publication Series</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- Book 4 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/4.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Computer Science Illuminated - Seventh Edition</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 5 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/5.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">The Principles of Computer Hardware - Oxford</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 6 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/6.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">The Computer Book<br><br></h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <!-- Book 7 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/1.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Computer Operating System - Final Exam Book With Paper Solution</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 8 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/2.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Computer Science<br><br></h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book 9 -->
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="book-details">
+                        <a href="@Url.Action("NotesDetails","User")"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/3.jpg" alt="book-cover"></a>
+                        <h4 class="book-title">Basic Computer Engineering Tech India Publication Series</h4>
+                        <div class="row book-info">
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">University of California, US</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">204 Pages</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text">Thu, Nov 26 2020</h5>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-3">
+                                <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-9">
+                                <h5 class="book-info-text red-text">5 Users marked this note as inappropriate</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                <div class="rate">
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="5 star">1 star</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="4 star">2 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="3 star">3 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="2 star">4 stars</label>
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="1 star">5 stars</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <h5 class="book-rating-text">100 Reviews</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-area text-center">
+        <ul class="pagination">
+            <li class="page-item">
+                <span class="page-link" href="#" aria-label="Previous">
+                    <img src="~/Content/images/Front/assets/left-arrow.png">
+                </span>
+            </li>
+            <li class="page-item"><a class="page-link active" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+                <span class="page-link" href="#" aria-label="Next">
+                    <img src="~/Content/images/Front/assets/right-arrow.png">
+                </span>
+            </li>
+        </ul>
+    </div>
+
+</div>
