@@ -92,6 +92,76 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <!-- Review trigger modal -->
+                                    <div class="modal fade" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="close-popup">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <h2 class="popup-review-title">Add Review</h2>
+                                                    @using (Html.BeginForm("ReviewNote", "User", FormMethod.Post))
+                                                    {
+                                                        <input name="noteid" value="@note.NoteID" hidden />
+                                                        <div class="rate">
+                                                            <input type="radio" id="star1" name="rate" value="5" />
+                                                            <label for="star1" title="5 star"></label>
+                                                            <input type="radio" id="star2" name="rate" value="4" />
+                                                            <label for="star2" title="4 star"></label>
+                                                            <input type="radio" id="star3" name="rate" value="3" />
+                                                            <label for="star3" title="3 star"></label>
+                                                            <input type="radio" id="star4" name="rate" value="2" />
+                                                            <label for="star4" title="2 star"></label>
+                                                            <input type="radio" id="star5" name="rate" value="1" />
+                                                            <label for="star5" title="1 star"></label>
+                                                        </div>
+                                                        <br><br><br><br><br>
+                                                        <label for="input-comment" class="popup-text-02">
+                                                            <h5>Comments *</h5>
+                                                        </label>
+                                                        <textarea name="comment" class="form-control" id="input-comment" rows="5" placeholder="Comments..." required></textarea>
+                                                        <button type="submit" class="btn submit-btn">submit</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Report as an Inappropriate modal -->
+                                    <div class="modal fade reportmodel" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="close-popup">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h2 class="popup-review-title">Report as an Inappropriate</h2>
+                                                    <br />
+                                                    @using (Html.BeginForm("ReportNote", "User", FormMethod.Post))
+                                                    {
+                                                        <label for="input-comment" class="popup-text-02">
+                                                            <h5>Note Title *</h5>
+                                                        </label>
+                                                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" value="@note.NoteTitle" readonly />
+                                                        <br />
+                                                        <input name="noteid" value="@note.NoteID" hidden />
+                                                        <label for="input-comment" class="popup-text-02">
+                                                            <h5>Remarks *</h5>
+                                                        </label>
+                                                        <textarea name="remark" class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
+                                                        <button type="submit" class="btn submit-btn report-btn">Report an Issue</button>
+                                                        <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
                             }
                         }
@@ -101,71 +171,7 @@
             </div>
         </div>
 
-        <!-- Review trigger modal -->
-        <!-- Modal -->
-        <div class="modal fade" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="close-popup">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <h2 class="popup-review-title">Add Review</h2>
-                        <div class="rate">
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="5 star"></label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="4 star"></label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="3 star"></label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="2 star"></label>
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="1 star"></label>
-                        </div>
-                        <br><br><br><br><br>
-                        <label for="input-comment" class="popup-text-02">
-                            <h5>Comments *</h5>
-                        </label>
-                        <textarea class="form-control" id="input-comment" rows="5" placeholder="Comments..." required></textarea>
-                        <button type="submit" class="btn submit-btn">submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Report as an Inappropriate modal -->
-        <!-- Modal -->
-        <div class="modal fade reportmodel" id="ReportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="close-popup">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h2 class="popup-review-title">Report as an Inappropriate</h2>
-                        <br />
-                        <label for="input-comment" class="popup-text-02">
-                            <h5>Note Title *</h5>
-                        </label>
-                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" />
-                        <br />
-                        <label for="input-comment" class="popup-text-02">
-                            <h5>Remarks *</h5>
-                        </label>
-                        @*@Html.TextAreaFor(l => l.Comment, new { @placeholder = "Enter remarks...", @class = "form-control", @id = "input-comments", @rows = "5" })*@
-                        <textarea class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
-                        <button type="submit" class="btn submit-btn  5">Report an Issue</button>
-                        <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Pagination -->
         <div class="pagination-area text-center" id="my-download-pagination">

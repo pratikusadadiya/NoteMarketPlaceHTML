@@ -334,6 +334,16 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.valid = true;
             }
             SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
+            List<SellerNotesReportedIssue> report = db.SellerNotesReportedIssues.ToList();
+            int NoOfReports = 0;
+            foreach(var item in report)
+            {
+                if(item.NoteID == noteid)
+                {
+                    NoOfReports++;
+                }
+            }
+            ViewBag.NoOfReports = NoOfReports;
             if (note.DisplayPicture == null)
             {
                 note.DisplayPicture = "../../Content/images/Front/Notes-details/1.jpg";
@@ -609,6 +619,73 @@ namespace Notes_MarketPlace.Controllers
             {
                 return RedirectToAction("login");
             }
+        }
+
+        [HttpPost]
+        public ActionResult ReportNote(FormCollection fc)
+        {
+            SellerNotesReportedIssue report = new SellerNotesReportedIssue();
+            report.NoteID = int.Parse(fc["noteid"].ToString());
+            report.ReportedBYID = userid;
+
+            bool Valid = false;
+            List<SellerNotesReportedIssue> reports = db.SellerNotesReportedIssues.ToList();
+            foreach(SellerNotesReportedIssue item in reports)
+            {
+                if(item.NoteID==report.NoteID && item.ReportedBYID == report.ReportedBYID)
+                {
+                    ViewBag.ErrorMsg = "you can't report same book more than 1 time.";
+                    Valid = true;
+                }
+            }
+            if(Valid == false)
+            {
+                report.Remarks = fc["remark"].ToString();
+
+                Download dwn = db.Downloads.FirstOrDefault(n => n.NoteID == report.NoteID & n.Downloader == userid);
+                report.AgainstDownloadID = dwn.ID;
+                report.CreatedDate = DateTime.Now;
+                report.ModifiedDate = DateTime.Now;
+
+                db.SellerNotesReportedIssues.Add(report);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("MyDownloads");
+        }
+
+        [HttpPost]
+        public ActionResult ReviewNote(FormCollection fc)
+        {
+            SellerNotesReview review = new SellerNotesReview();
+            review.NoteID = int.Parse(fc["noteid"].ToString());
+            review.ReviewedByID = userid;
+
+            bool Valid = false;
+            List<SellerNotesReview> reviews = db.SellerNotesReviews.ToList();
+            foreach(SellerNotesReview item in reviews)
+            {
+                if (item.NoteID == review.NoteID && item.ReviewedByID == review.ReviewedByID)
+                {
+                    ViewBag.ErrorMsg = "you can't report same book more than 1 time.";
+                    Valid = true;
+                }
+            }
+
+            if(Valid == false)
+            {
+                review.Ratings = int.Parse(fc["rate"].ToString());
+                review.Comments = fc["comment"].ToString();
+
+                Download dwn = db.Downloads.FirstOrDefault(n => n.NoteID == review.NoteID & n.Downloader == userid);
+                review.AgainstDownloadsID = dwn.ID;
+                review.CreatedDate = DateTime.Now;
+                review.ModifiedDate = DateTime.Now;
+
+                db.SellerNotesReviews.Add(review);
+                db.SaveChanges();
+            }
+            return RedirectToAction("MyDownloads");
         }
 
         public ActionResult MyRejectedNotes()
