@@ -29,7 +29,7 @@
                     <p class="note-details-text">@Model.Description</p>
 
                     <!-- Button trigger modal -->
-                    <button type="submit" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal" onclick="location.href='@Url.Action("DownloadRequest", "User", new { noteid = @Model.ID})'">
+                    <button type="submit" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal" onclick="location.href='@Url.Action("DownloadRequest", "User", new { noteid = @Model.ID })'">
                         @if (Model.IsPaid == true)
                         {
                             <span>Download / $@Model.SellingPrice</span>
@@ -151,19 +151,46 @@
                         <h5 class="book-info-caption">Rating:</h5>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
-                        <div class="rate">
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="5 star">1 star</label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="4 star">2 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="3 star">3 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="2 star">4 stars</label>
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="1 star">5 stars</label>
-                        </div>
-                        <h5 class="book-rating-text"> 100 Reviews</h5>
+
+                        @{
+                            float NoOfReviews = 0, rate = 0, sum = 0;
+                            foreach (SellerNotesReview item in ViewBag.Reviews)
+                            {
+                                if (item.NoteID == Model.ID)
+                                {
+                                    NoOfReviews++;
+                                    sum += int.Parse(item.Ratings.ToString());
+                                }
+                            }
+                            if(NoOfReviews != 0)
+                            {
+                                rate = Convert.ToInt32(sum / NoOfReviews);
+                            }
+                            else
+                            {
+                                rate = 0;
+                            }
+
+
+                            <div class="rate">
+                                @for(int i=1; i<=5; i++)
+                                {
+                                    if(rate != 0)
+                                    {
+                                        rate--;
+                                        <input type="radio" id="star @i" name="rate" />
+                                        <label for="star @i" title="@i star" style="color:#ffc700; margin-right:-3px;">@i star</label>
+                                    }
+                                    else
+                                    { 
+                                        <input type="radio" id="star @i" name="rate" style="color:#d1d1d1;" />
+                                        <label for="star @i" title="@i star" style="margin-right:-3px;">@i star</label>
+                                    }
+                                }
+                            </div>
+
+                            <h5 class="book-rating-text">@NoOfReviews Reviews</h5>
+                        }
                     </div>
                 </div>
                 <h5 class="col-md-12 col-sm-12 col-xs-12 info-red-text">@ViewBag.NoOfReports Users marked this note as inappropriate</h5>
@@ -179,71 +206,99 @@
             <div class="col-md-7 col-sm-12 col-xs-12 customer-review">
                 <h3 class="notes-details-title">Customer Reviews</h3>
                 <div class="customer-review-inner">
-                    <div class="row review-01">
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-1.png" alt="customer">
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <h3 class="customer-name">Richard Brown</h3>
-                            <div class="rate">
-                                <input type="radio" id="star1" name="rate" value="1" />
-                                <label for="star1" title="5 star">1 star</label>
-                                <input type="radio" id="star2" name="rate" value="2" />
-                                <label for="star2" title="4 star">2 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3" />
-                                <label for="star3" title="3 star">3 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4" />
-                                <label for="star4" title="2 star">4 stars</label>
-                                <input type="radio" id="star5" name="rate" value="5" />
-                                <label for="star5" title="1 star">5 stars</label>
+
+                    @{
+                        var count = 0;
+                        foreach (SellerNotesReview item in ViewBag.Reviews)
+                        {
+                            if (count != 3 && item.NoteID == Model.ID && item.IsActive == true)
+                            {
+                                <div class="row review">
+                                    <div class="col-md-2 col-sm-2 col-xs-3">
+                                        <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-1.png" alt="customer">
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-9">
+                                        <h3 class="customer-name">@item.User.FirstName @item.User.LastName</h3>
+                                        @{int rating = int.Parse(item.Ratings.ToString()); }
+                                        <div class="rate">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (rating != 0)
+                                                {
+                                                    rating--;
+                                                    <input type="radio" id="star @i" name="rate" />
+                                                    <label for="star @i" title="@i star" style="color:#ffc700; margin-right:-3px;">@i star</label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" id="star @i" name="rate" style="color:#d1d1d1;" />
+                                                    <label for="star @i" title="@i star">@i star</label>
+                                                }
+                                            }
+                                        </div>
+                                        <p class="customer-text"><br><br>@item.Comments</p>
+                                    </div>
+                                </div>
+                                if (count != 2)
+                                {
+                                    <hr />
+                                }
+                                count++;
+                            }
+                        }
+                        if(count == 0)
+                        { 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="customer-name">No reviews</h5>
+                                </div>
                             </div>
-                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row review-02">
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-2.png" alt="customer">
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <h3 class="customer-name">Alice Ortiaz</h3>
-                            <div class="rate">
-                                <input type="radio" id="star1" name="rate" value="1" />
-                                <label for="star1" title="5 star">1 star</label>
-                                <input type="radio" id="star2" name="rate" value="2" />
-                                <label for="star2" title="4 star">2 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3" />
-                                <label for="star3" title="3 star">3 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4" />
-                                <label for="star4" title="2 star">4 stars</label>
-                                <input type="radio" id="star5" name="rate" value="5" />
-                                <label for="star5" title="1 star">5 stars</label>
-                            </div>
-                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row review-03">
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-3.png" alt="customer">
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <h3 class="customer-name">Sara Passmore</h3>
-                            <div class="rate">
-                                <input type="radio" id="star1" name="rate" value="1" />
-                                <label for="star1" title="5 star">1 star</label>
-                                <input type="radio" id="star2" name="rate" value="2" />
-                                <label for="star2" title="4 star">2 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3" />
-                                <label for="star3" title="3 star">3 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4" />
-                                <label for="star4" title="2 star">4 stars</label>
-                                <input type="radio" id="star5" name="rate" value="5" />
-                                <label for="star5" title="1 star">5 stars</label>
-                            </div>
-                            <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                    </div>
+                        }
+                    }
+
+                    @*<div class="row review-02">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-2.png" alt="customer">
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-9">
+                <h3 class="customer-name">Alice Ortiaz</h3>
+                <div class="rate">
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="5 star">1 star</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="4 star">2 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="3 star">3 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="2 star">4 stars</label>
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="1 star">5 stars</label>
+                </div>
+                <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum rem ipsam numquam itaque eaque rerum fugiat quo quibusdam sit.</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row review-03">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-3.png" alt="customer">
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-9">
+                <h3 class="customer-name">Sara Passmore</h3>
+                <div class="rate">
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="5 star">1 star</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="4 star">2 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="3 star">3 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="2 star">4 stars</label>
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="1 star">5 stars</label>
+                </div>
+                <p class="customer-text"><br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </div>
+        </div>*@
                 </div>
             </div>
         </div>

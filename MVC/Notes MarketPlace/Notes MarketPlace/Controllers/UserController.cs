@@ -14,6 +14,9 @@ namespace Notes_MarketPlace.Controllers
     {
         Notes_MarketPlaceEntities db = new Notes_MarketPlaceEntities();
         static int userid;
+        string defaultProfileImg = "../../Content/images/Front/User-Profile/profile-img.png";
+        string defaultBookImg = "../../Content/images/Front/Notes-details/1.jpg";
+        string defaultBookPreview = "../../Content/images/Front/Notes-details/sample-pdf.png";
 
         public ActionResult home()
         {
@@ -344,6 +347,7 @@ namespace Notes_MarketPlace.Controllers
                 }
             }
             ViewBag.NoOfReports = NoOfReports;
+            ViewBag.Reviews = db.SellerNotesReviews.ToList();
             if (note.DisplayPicture == null)
             {
                 note.DisplayPicture = "../../Content/images/Front/Notes-details/1.jpg";
@@ -364,12 +368,12 @@ namespace Notes_MarketPlace.Controllers
                 if (db.Downloads.Any(d => d.NoteID == noteid & d.Downloader == userid))
                 {
                     ViewBag.ErrorMsg = "This note is already downloaded by you. You can download it from My Downloads.";
-                    return RedirectToAction("NotesDetails");
+                    return RedirectToAction("NotesDetails", noteid);
                 }
                 else if(note.SellerID == userid)
                 {
                     ViewBag.ErrorMsg = "You are the owner of this book.";
-                    return RedirectToAction("Notesdetails");
+                    return RedirectToAction("NotesDetails", noteid);
                 }
                 else
                 {
@@ -390,7 +394,7 @@ namespace Notes_MarketPlace.Controllers
                     db.Downloads.Add(dwn);
                     db.SaveChanges();
                     ViewBag.RequestMsg = "Download Request has been successfully sent to seller. You can download it from My Downloads after Seller allowed to download. Stay Tuned...!!! ";
-                    return RedirectToAction("NotesDetails");
+                    return RedirectToAction("NotesDetails", noteid);
                 }
             }
             else
@@ -667,7 +671,7 @@ namespace Notes_MarketPlace.Controllers
             {
                 if (item.NoteID == review.NoteID && item.ReviewedByID == review.ReviewedByID)
                 {
-                    ViewBag.ErrorMsg = "you can't report same book more than 1 time.";
+                    ViewBag.ErrorMsg = "you can't review same book more than 1 time.";
                     Valid = true;
                 }
             }
@@ -681,6 +685,7 @@ namespace Notes_MarketPlace.Controllers
                 review.AgainstDownloadsID = dwn.ID;
                 review.CreatedDate = DateTime.Now;
                 review.ModifiedDate = DateTime.Now;
+                review.IsActive = true;
 
                 db.SellerNotesReviews.Add(review);
                 db.SaveChanges();
