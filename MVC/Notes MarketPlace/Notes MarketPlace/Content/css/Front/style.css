@@ -24,6 +24,7 @@ h6 {
 	-webkit-transition: all 200ms linear;
     transition: all 200ms linear;
     letter-spacing: .9px;
+    outline: none !important;
 }
 .btn:hover,
 .btn:focus{
@@ -447,9 +448,9 @@ h6 {
     text-overflow: ellipsis;
 }
 .form-details .form-inner select {
-    /*-webkit-appearance: none;
-    -moz-appearance: none;*/
-    background: url("~/Content/images/Front/assets/arrow-down.png") no-repeat right;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("../../../Content/images/Front/assets/down-arrow.png") no-repeat right;
     background-position: 97.5% 50%;
     cursor: pointer;
     padding-right: 20px;
@@ -736,9 +737,9 @@ input[type="date"]:focus {
     left: 15px;
 }
 #search-notes select {
-    /*-webkit-appearance: none;
-    -moz-appearance: none;*/
-    background: url("~/Content/images/Front/assets/down-arrow.png") no-repeat right;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("../../../Content/images/Front/assets/down-arrow.png") no-repeat right;
     background-position: 95% 50%;
     cursor: pointer;
 }
@@ -795,7 +796,13 @@ input[type="date"]:focus {
 #search-notes-inner .book-details .book-info .book-rating-text {
     font-size: 13px;
 }
-
+#search-notes-inner .rate label {
+    cursor: auto;
+}
+#search-notes-inner .rate:not(:checked) > label:hover,
+#search-notes-inner .rate:not(:checked) > label:hover ~ label {
+    color: #d1d1d1;
+}
 /*==============================
             Pagination
 ================================*/
@@ -1002,6 +1009,16 @@ a.paginate_button {
     padding-top: 0px;
     padding-left: 35px;
 }
+
+#notes-details-inner .rate label {
+    cursor: auto;
+}
+
+#notes-details-inner .rate:not(:checked) > label:hover,
+#notes-details-inner .rate:not(:checked) > label:hover ~ label {
+    color: #d1d1d1;
+}
+
 #notes-details-inner .notes-details-right .info-red-text {
     padding: 0px;
     font-size: 14px;
@@ -1303,6 +1320,25 @@ a.paginate_button {
     line-height: 20px;
     font-weight: 600;
     color: #333333;
+}
+table.dataTable tbody tr {
+    background: transparent !important;
+}
+table.dataTable.no-footer,
+table.dataTable thead th {
+    border-bottom: 1px solid #d1d1d1;
+    border-collapse: collapse;
+}
+table.dataTable .sorting,
+table.dataTable .sorting_asc,
+table.dataTable .sorting_desc,
+.pagination-area .paginate_button.previous,
+.pagination-area .paginate_button.next {
+    background: none !important;
+    outline: none !important;
+}
+.pagination-area .paginate_button {
+    outline: none !important;
 }
 table.dataTable tbody td {
     padding: 8px 18px;

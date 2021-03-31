@@ -320,7 +320,6 @@ namespace Notes_MarketPlace.Controllers
             
         }
 
-
         [HttpGet]
         public ActionResult SearchNotes(int? i)
         {
@@ -333,8 +332,8 @@ namespace Notes_MarketPlace.Controllers
             ViewBag.Countries = db.Countries.ToList();
 
             List<SellerNote> AllNotes = db.SellerNotes.ToList();
-            List<String> UniversityList = new List<string>();
-            List<String> CourseList = new List<string>();
+            List<string> UniversityList = new List<string>();
+            List<string> CourseList = new List<string>();
 
             foreach(var note in AllNotes)
             {
@@ -390,16 +389,17 @@ namespace Notes_MarketPlace.Controllers
         {
             if(userid != 0)
             {
+                int notenumber = noteid;
                 SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
                 if (db.Downloads.Any(d => d.NoteID == noteid & d.Downloader == userid))
                 {
                     ViewBag.ErrorMsg = "This note is already downloaded by you. You can download it from My Downloads.";
-                    return RedirectToAction("NotesDetails", noteid);
+                    return RedirectToAction("NotesDetails", new { noteid });
                 }
                 else if(note.SellerID == userid)
                 {
                     ViewBag.ErrorMsg = "You are the owner of this book.";
-                    return RedirectToAction("NotesDetails", noteid);
+                    return RedirectToAction("NotesDetails", new { noteid });
                 }
                 else
                 {
@@ -420,7 +420,7 @@ namespace Notes_MarketPlace.Controllers
                     db.Downloads.Add(dwn);
                     db.SaveChanges();
                     ViewBag.RequestMsg = "Download Request has been successfully sent to seller. You can download it from My Downloads after Seller allowed to download. Stay Tuned...!!! ";
-                    return RedirectToAction("NotesDetails", noteid);
+                    return RedirectToAction("NotesDetails", new { noteid });
                 }
             }
             else
@@ -865,7 +865,6 @@ namespace Notes_MarketPlace.Controllers
                 }
             }
         }
-
 
         [HttpGet]
         public ActionResult contactUs ()

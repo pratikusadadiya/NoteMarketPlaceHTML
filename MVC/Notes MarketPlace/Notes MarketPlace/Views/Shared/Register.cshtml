@@ -177,7 +177,14 @@
                 'aoColumnDefs': [{
                     'bSortable': false,
                     'aTargets': ['nosort']
-                }]
+                }],
+                language: {
+                    "zeroRecords": "No record found",
+                    paginate: {
+                        next: "<img src='../../Content/images/Front/assets/right-arrow.png' alt=''>",
+                        previous: "<img src='../../Content/images/Front/assets/left-arrow.png' alt=''>"
+                    }
+                }
             });
 
             $("#submitted-pagination").append($("#in-progress_paginate"));

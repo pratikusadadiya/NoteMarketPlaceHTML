@@ -30,13 +30,13 @@
         <div class="filter-notes">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input type="text" class="form-control" id="input-search" placeholder="Search notes here...">
+                    <input name="search" type="search" class="form-control" id="input-search" placeholder="Search notes here...">
                     <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select id="input-type" class="form-control">
+                    <select name="NoteType" id="input-type" class="form-control">
                         <option selected>Select type</option>
                         @{
                             List<NoteType> noteTypes = ViewBag.NoteTypes;
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select id="input-category" class="form-control">
+                    <select name="NoteCategory" id="input-category" class="form-control">
                         <option selected>Select category</option>
                         @{
                             List<NoteCategory> categories = ViewBag.Categories;
@@ -84,7 +84,7 @@
                 <option>University of Germony</option>
                 <option>Oxford University</option>
             </select>*@
-                    <select id="input-university" class="form-control">
+                    <select name="university" id="input-university" class="form-control">
                         <option selected>Select university</option>
                         @{
                             foreach (var university in ViewBag.UniversityList)
@@ -105,7 +105,7 @@
                         </select>*@
                     @*@Html.DropDownList("Course Name", ViewBag.CourseList as SelectList, "Select course", new { @class = "form-control" })*@
 
-                    <select id="input-course" class="form-control">
+                    <select name="course" id="input-course" class="form-control">
                         <option selected>Select course</option>
                         @{
                             foreach (var course in ViewBag.CourseList)
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select id="input-country" class="form-control">
+                    <select name="country" id="input-country" class="form-control">
                         <option selected>Select country</option>
                         @{
                             List<Country> countries = ViewBag.Countries;
@@ -158,17 +158,6 @@
         </div>
     </div>
 
-    @{
-        int count = 0;
-        foreach (var list in Model)
-        {
-            if (list.Status == "Published" && list.IsActive == true)
-            {
-                count++;
-            }
-        }
-    }
-
     <div class="container notes-list">
         <h3 class="no-of-books">Total @ViewBag.ResultNotes notes</h3>
         <div class="row">
@@ -177,85 +166,86 @@
                 int j = 0;
                 foreach (var item in Model)
                 {
-                    if (item.Status == "Published" && item.IsActive == true)
-                    {
-                        j++;
-                        <!-- Book @j -->
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="book-details">
-                                <a href="@Url.Action("NotesDetails","User", new { noteid = item.ID })"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/1.jpg" alt="book-cover"></a>
-                                <h4 class="book-title">@item.Title</h4>
-                                <div class="row book-info">
-                                    <div class="col-md-2 col-sm-2 col-xs-3">
-                                        <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-9">
-                                        <h5 class="book-info-text">@item.UniversityName</h5>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-3">
-                                        <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-9">
-                                        <h5 class="book-info-text">@item.NumberofPages Pages</h5>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-3">
-                                        <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-9">
-                                        <h5 class="book-info-text">@item.PublishedDate.ToString().Substring(0, 10)</h5>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2 col-xs-3">
-                                        <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 col-xs-9">
-                                        <h5 class="book-info-text red-text">@item.SellerNotesReportedIssues.Count() Users marked this note as inappropriate</h5>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
-                                        @{
-                                            float rate = 0, sum = 0;
-                                            foreach (SellerNotesReview review in ViewBag.Reviews)
-                                            {
-                                                if (review.NoteID == item.ID)
-                                                {
-                                                    sum += int.Parse(review.Ratings.ToString());
-                                                }
-                                            }
-                                            if (item.SellerNotesReviews.Count() != 0)
-                                            {
-                                                rate = Convert.ToInt32(sum / item.SellerNotesReviews.Count());
-                                            }
-                                            else
-                                            {
-                                                rate = 0;
-                                            }
-
-
-                                            <div class="rate">
-                                                @for (int k = 1; k <= 5; k++)
-                                                {
-                                                    if (rate != 0)
-                                                    {
-                                                        rate--;
-                                                        <input type="radio" id="star @k" name="rate" />
-                                                        <label for="star @k" title="@k star" style="color:#ffc700; margin-right:-3px;">@k star</label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="radio" id="star @k" name="rate" style="color:#d1d1d1;" />
-                                                        <label for="star @k" title="@k star" style="margin-right:-3px;">@k star</label>
-                                                    }
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <h5 class="book-rating-text">@item.SellerNotesReviews.Count() Reviews</h5>
-                                    </div>
-
+                    j++;
+                    <!-- Book @j -->
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="book-details">
+                            <a href="@Url.Action("NotesDetails","User", new { noteid = item.ID })"><img class="book-cover img-responsive" src="~/Content/images/Front/Search/1.jpg" alt="book-cover"></a>
+                            <h4 class="book-title">@item.Title</h4>
+                            <div class="row book-info">
+                                <div class="col-md-2 col-sm-2 col-xs-3">
+                                    <img class="book-info-icon" src="~/Content/images/Front/assets/university.png" alt="university">
                                 </div>
+                                <div class="col-md-10 col-sm-10 col-xs-9">
+                                    <h5 class="book-info-text">@item.UniversityName, @item.Country</h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-3">
+                                    <img class="book-info-icon" src="~/Content/images/Front/assets/pages.png" alt="pages">
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-9">
+                                    <h5 class="book-info-text">@item.NumberofPages Pages</h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-3">
+                                    <img class="book-info-icon" src="~/Content/images/Front/assets/calendar.png" alt="date">
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-9">
+                                    <h5 class="book-info-text">@item.PublishedDate.ToString().Substring(0, 10)</h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-3">
+                                    <img class="book-info-icon" src="~/Content/images/Front/assets/flag.png" alt="flag">
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-9">
+                                    <h5 class="book-info-text red-text">@item.SellerNotesReportedIssues.Count() Users marked this note as inappropriate</h5>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 book-rating">
+                                    @{
+                                        float rate = 0, sum = 0;
+                                        foreach (SellerNotesReview review in ViewBag.Reviews)
+                                        {
+                                            if (review.NoteID == item.ID)
+                                            {
+                                                sum += int.Parse(review.Ratings.ToString());
+                                            }
+                                        }
+                                        if (item.SellerNotesReviews.Count() != 0)
+                                        {
+                                            rate = Convert.ToInt32(sum / item.SellerNotesReviews.Count());
+                                        }
+                                        else
+                                        {
+                                            rate = 0;
+                                        }
+
+
+                                        <div class="rate">
+                                            @for (int k = 1; k <= 5; k++)
+                                            {
+                                                if (rate != 0)
+                                                {
+                                                    rate--;
+                                                    <input type="radio" id="star@k" name="rate" />
+                                                    <label for="star @k" title="@k star" style="color:#ffc700; margin-right:-3px;">@k star</label>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" id="star@k" name="rate" style="color:#d1d1d1;" />
+                                                    <label for="star @k" title="@k star" style="margin-right:-3px;">@k star</label>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-8 col-sm-8 col-xs-8">
+                                    <h5 class="book-rating-text">@item.SellerNotesReviews.Count() Reviews</h5>
+                                </div>
+
                             </div>
                         </div>
-                    }
+                    </div>
+                }
+                if (j == 0)
+                {
+                    <h5 style="margin-left: 15px;">No books available</h5>
                 }
             }
 
