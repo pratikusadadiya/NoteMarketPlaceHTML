@@ -153,18 +153,17 @@
                     <div class="col-md-6 col-sm-6 col-xs-6 notes-info-right">
 
                         @{
-                            float NoOfReviews = 0, rate = 0, sum = 0;
+                            float rate = 0, sum = 0;
                             foreach (SellerNotesReview item in ViewBag.Reviews)
                             {
                                 if (item.NoteID == Model.ID)
                                 {
-                                    NoOfReviews++;
                                     sum += int.Parse(item.Ratings.ToString());
                                 }
                             }
-                            if(NoOfReviews != 0)
+                            if(@Model.SellerNotesReviews.Count() != 0)
                             {
-                                rate = Convert.ToInt32(sum / NoOfReviews);
+                                rate = Convert.ToInt32(sum / @Model.SellerNotesReviews.Count());
                             }
                             else
                             {
@@ -189,11 +188,11 @@
                                 }
                             </div>
 
-                            <h5 class="book-rating-text">@NoOfReviews Reviews</h5>
+                            <h5 class="book-rating-text">@Model.SellerNotesReviews.Count() Reviews</h5>
                         }
                     </div>
                 </div>
-                <h5 class="col-md-12 col-sm-12 col-xs-12 info-red-text">@ViewBag.NoOfReports Users marked this note as inappropriate</h5>
+                <h5 class="col-md-12 col-sm-12 col-xs-12 info-red-text">@Model.SellerNotesReportedIssues.Count() Users marked this note as inappropriate</h5>
             </div>
         </div>
         <hr class="p1-line-p2">
@@ -215,7 +214,20 @@
                             {
                                 <div class="row review">
                                     <div class="col-md-2 col-sm-2 col-xs-3">
-                                        <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-1.png" alt="customer">
+                                        @{ bool IsValid = false;  }
+                                        @foreach(UserProfile profile in ViewBag.UserProfile)
+                                        {
+                                            if(profile.UserID == item.ReviewedByID)
+                                            {
+                                                IsValid = true;
+                                                <img class="customer-photo img-circle" src="@profile.Profile_Picture" alt="customer">
+                                            }
+                                        }
+                                        @if(IsValid == false)
+                                        { 
+                                            <img class="customer-photo img-circle" src="~/Content/images/Front/Notes-details/reviewer-1.png" alt="customer">
+                                        }
+                                        
                                     </div>
                                     <div class="col-md-10 col-sm-10 col-xs-9">
                                         <h3 class="customer-name">@item.User.FirstName @item.User.LastName</h3>

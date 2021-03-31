@@ -869,6 +869,40 @@ a.paginate_button {
     color: #fff;
 }*/
 
+/* Search notes Pagination */
+#pagination {
+    text-align: center;
+}
+#pagination .page-item1 a{
+    margin: 1px;
+    display: inline-block;
+    font-family: "Open Snas", sans-serif;
+    font-size: 16px;
+    border-radius: 50%;
+    border: none;
+    color: #333333;
+    cursor: pointer;
+    transition: 200ms all linear;
+    text-decoration: none;
+}
+#pagination .page-item1.active a {
+    color: #fff;
+    background-color: #6255a5;
+}
+#pagination .page-item1 a:hover {
+    background-color: #d1d1d1;
+    color: #000;
+}
+#pagination .page-item1.active a:hover {
+    color: #fff;
+    background-color: #6255a5;
+}
+#pagination .page-item1.PagedList-skipToNext a:hover,
+#pagination .page-item1.PagedList-skipToPrevious a:hover {
+    background-color: transparent;
+    color: #333333;
+}
+
 /*==============================
             Rating
 ================================*/

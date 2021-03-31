@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Notes_MarketPlace.Models;
+using PagedList;
 
 namespace Notes_MarketPlace.Controllers
 {
@@ -321,13 +322,47 @@ namespace Notes_MarketPlace.Controllers
 
 
         [HttpGet]
-        public ActionResult SearchNotes()
+        public ActionResult SearchNotes(int? i)
         {
             if (userid != 0)
             {
                 ViewBag.valid = true;
             }
-            return View();
+            ViewBag.NoteTypes = db.NoteTypes.ToList();
+            ViewBag.Categories = db.NoteCategories.ToList();
+            ViewBag.Countries = db.Countries.ToList();
+
+            List<SellerNote> AllNotes = db.SellerNotes.ToList();
+            List<String> UniversityList = new List<string>();
+            List<String> CourseList = new List<string>();
+
+            foreach(var note in AllNotes)
+            {
+                if(!UniversityList.Contains(note.UniversityName))
+                {
+                    UniversityList.Add(note.UniversityName);
+                }
+                if(!CourseList.Contains(note.Course))
+                {
+                    CourseList.Add(note.Course);
+                }
+            }
+            ViewBag.UniversityList = UniversityList;
+            ViewBag.CourseList = CourseList;
+
+            ViewBag.Reviews = db.SellerNotesReviews.ToList();
+            List<SellerNote> notes = new List<SellerNote>();
+            int count = 0;
+            foreach (var list in AllNotes.Where(n => n.Status == "Published" & n.IsActive == true ))
+            {
+                if(!notes.Contains(list))
+                {
+                    count++;
+                    notes.Add(list);
+                }
+            }
+            ViewBag.ResultNotes = count;
+            return View(notes.ToList().ToPagedList(i ?? 1, 9));
         }
 
         public ActionResult NotesDetails(int noteid)
@@ -337,24 +372,15 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.valid = true;
             }
             SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
-            List<SellerNotesReportedIssue> report = db.SellerNotesReportedIssues.ToList();
-            int NoOfReports = 0;
-            foreach(var item in report)
-            {
-                if(item.NoteID == noteid)
-                {
-                    NoOfReports++;
-                }
-            }
-            ViewBag.NoOfReports = NoOfReports;
             ViewBag.Reviews = db.SellerNotesReviews.ToList();
+            ViewBag.UserProfile = db.UserProfiles.ToList();
             if (note.DisplayPicture == null)
             {
-                note.DisplayPicture = "../../Content/images/Front/Notes-details/1.jpg";
+                note.DisplayPicture = defaultBookImg;
             }
             if (note.NotesPreview == null)
             {
-                note.NotesPreview = "../../Content/images/Front/Notes-details/sample-pdf.png";
+                note.NotesPreview = defaultBookPreview;
 
             }
             return View(note);
