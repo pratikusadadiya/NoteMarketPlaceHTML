@@ -394,7 +394,7 @@ namespace Notes_MarketPlace.Controllers
             {
                 foreach(var book in notes)
                 {
-                    int rate = 0, sum = 0;
+                    float rate = 0, sum = 0;
                     foreach (var review in ViewBag.Reviews)
                     {
                         if (review.NoteID == book.ID)
@@ -404,7 +404,7 @@ namespace Notes_MarketPlace.Controllers
                     }
                     if (book.SellerNotesReviews.Count() != 0)
                     {
-                        rate = Convert.ToInt32(sum / book.SellerNotesReviews.Count());
+                        rate = (int)Math.Ceiling(sum / book.SellerNotesReviews.Count());
                     }
                     else
                     {
@@ -413,7 +413,7 @@ namespace Notes_MarketPlace.Controllers
                     if (rate >= int.Parse(rating))
                     {
                         var item = notes.FirstOrDefault(m => m.ID == book.ID);
-                        NoteList = new List<SellerNote> { item };
+                        NoteList.Add( item );
                     }
 
                 }
