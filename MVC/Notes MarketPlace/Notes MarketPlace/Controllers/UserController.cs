@@ -321,7 +321,7 @@ namespace Notes_MarketPlace.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchNotes(int? i)
+        public ActionResult SearchNotes(int? i, string search, string NoteType, string NoteCategory, string university, string course, string country, string rating)
         {
             if (userid != 0)
             {
@@ -351,17 +351,84 @@ namespace Notes_MarketPlace.Controllers
 
             ViewBag.Reviews = db.SellerNotesReviews.ToList();
             List<SellerNote> notes = new List<SellerNote>();
-            int count = 0;
             foreach (var list in AllNotes.Where(n => n.Status == "Published" & n.IsActive == true ))
             {
                 if(!notes.Contains(list))
                 {
-                    count++;
                     notes.Add(list);
                 }
             }
-            ViewBag.ResultNotes = count;
-            return View(notes.ToList().ToPagedList(i ?? 1, 9));
+
+            //Filter Notes
+            if (!String.IsNullOrEmpty(search))
+            {
+                notes = notes.Where(m => m.Title.ToLower().StartsWith(search.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(NoteType))
+            {
+                notes = notes.Where(m => m.NoteType != null).ToList();
+                notes = notes.Where(m => m.NoteType.ToLower().Equals(NoteType.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(NoteCategory))
+            {
+                notes = notes.Where(m => m.Category != null).ToList();
+                notes = notes.Where(m => m.Category.ToLower().Equals(NoteCategory.ToLower())).ToList();
+            }
+            if(!String.IsNullOrEmpty(university))
+            {
+                notes = notes.Where(m => m.UniversityName != null).ToList();
+                notes = notes.Where(m => m.UniversityName.ToLower().Equals(university.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(course))
+            {
+                notes = notes.Where(m => m.Course != null).ToList();
+                notes = notes.Where(m => m.Course.ToLower().Equals(course.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(country))
+            {
+                notes = notes.Where(m => m.Country != null).ToList();
+                notes = notes.Where(m => m.Country.ToLower().Equals(country.ToLower())).ToList();
+            }
+            List<SellerNote> NoteList = new List<SellerNote>();
+            if (!String.IsNullOrEmpty(rating))
+            {
+                foreach(var book in notes)
+                {
+                    int rate = 0, sum = 0;
+                    foreach (var review in ViewBag.Reviews)
+                    {
+                        if (review.NoteID == book.ID)
+                        {
+                            sum += int.Parse(review.Ratings.ToString());
+                        }
+                    }
+                    if (book.SellerNotesReviews.Count() != 0)
+                    {
+                        rate = Convert.ToInt32(sum / book.SellerNotesReviews.Count());
+                    }
+                    else
+                    {
+                        rate = 0;
+                    }
+                    if (rate >= int.Parse(rating))
+                    {
+                        var item = notes.FirstOrDefault(m => m.ID == book.ID);
+                        NoteList = new List<SellerNote> { item };
+                    }
+
+                }
+            }
+            if(!String.IsNullOrEmpty(rating))
+            {
+                ViewBag.ResultNotes = NoteList.Count();
+                return View(NoteList.ToList().ToPagedList(i ?? 1, 9));
+            }
+            else
+            {
+                ViewBag.ResultNotes = notes.Count();
+                return View(notes.ToList().ToPagedList(i ?? 1, 9));
+            }
+            
         }
 
         public ActionResult NotesDetails(int noteid)
@@ -389,7 +456,6 @@ namespace Notes_MarketPlace.Controllers
         {
             if(userid != 0)
             {
-                int notenumber = noteid;
                 SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
                 if (db.Downloads.Any(d => d.NoteID == noteid & d.Downloader == userid))
                 {

@@ -16,6 +16,7 @@
     }
 }
 
+
 <!-- Top title -->
 <div id="top-title">
     <div id="top-title-inner" class="text-center">
@@ -28,28 +29,31 @@
     <div class="container">
         <h3 class="filter-notes-title">Search and Filter notes</h3>
         <div class="filter-notes">
-            <div class="row">
+            <form>
+
+                <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <input name="search" type="search" class="form-control" id="input-search" placeholder="Search notes here...">
+                    <input name="search" type="search" class="form-control" id="input-search" value="@Request.QueryString["search"]" placeholder="Search notes here...">
                     <img class="search-icon" src="~/Content/images/Front/assets/search.jpg" alt="search">
                 </div>
-            </div>
+                </div>
+
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select name="NoteType" id="input-type" class="form-control">
-                        <option selected>Select type</option>
+                    <select name="NoteType" id="input-type" class="form-control" value="@Request.QueryString["NoteType"]" onchange="submit()">
+                        <option value="">Select type</option>
                         @{
                             List<NoteType> noteTypes = ViewBag.NoteTypes;
                             foreach (NoteType item in noteTypes)
                             {
-                                @*if (item.Name != null)
+                                if (item.Name != null)
                                     {
-                                        if (item.Name.Equals(Model.NoteType))
+                                        if (item.Name.Equals(@Request.QueryString["NoteType"]))
                                         {
                                             <option selected>@item.Name</option>
                                             continue;
                                         }
-                                    }*@
+                                    }
                                 <option>@item.Name</option>
                             }
                         }
@@ -57,20 +61,20 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select name="NoteCategory" id="input-category" class="form-control">
-                        <option selected>Select category</option>
+                    <select name="NoteCategory" id="input-category" class="form-control" value="@Request.QueryString["NoteCategory"]" onchange="submit()">
+                        <option value="">Select category</option>
                         @{
                             List<NoteCategory> categories = ViewBag.Categories;
                             foreach (NoteCategory item in categories)
                             {
-                                @*if (item.Name != null)
+                                if (item.Name != null)
                                     {
-                                        if (item.Name.Equals(Model.Category))
+                                        if (item.Name.Equals(@Request.QueryString["NoteCategory"]))
                                         {
                                             <option selected>@item.Name</option>
                                             continue;
                                         }
-                                    }*@
+                                    }
                                 <option>@item.Name</option>
                             }
                         }
@@ -84,11 +88,19 @@
                 <option>University of Germony</option>
                 <option>Oxford University</option>
             </select>*@
-                    <select name="university" id="input-university" class="form-control">
-                        <option selected>Select university</option>
+                    <select name="university" id="input-university" class="form-control" value="@Request.QueryString["university"]" onchange="submit()">
+                        <option value="">Select university</option>
                         @{
                             foreach (var university in ViewBag.UniversityList)
                             {
+                                if (university != null)
+                                {
+                                    if (university.Equals(@Request.QueryString["university"]))
+                                    {
+                                        <option selected>@university</option>
+                                        continue;
+                                    }
+                                }
                                 <option>@university</option>
                             }
                         }
@@ -105,11 +117,19 @@
                         </select>*@
                     @*@Html.DropDownList("Course Name", ViewBag.CourseList as SelectList, "Select course", new { @class = "form-control" })*@
 
-                    <select name="course" id="input-course" class="form-control">
-                        <option selected>Select course</option>
+                    <select name="course" id="input-course" class="form-control" value="@Request.QueryString["course"]" onchange="submit()">
+                        <option value="">Select course</option>
                         @{
                             foreach (var course in ViewBag.CourseList)
                             {
+                                if (course != null)
+                                {
+                                    if (course.Equals(@Request.QueryString["course"]))
+                                    {
+                                        <option selected>@course</option>
+                                        continue;
+                                    }
+                                }
                                 <option>@course</option>
                             }
                         }
@@ -117,20 +137,20 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    <select name="country" id="input-country" class="form-control">
-                        <option selected>Select country</option>
+                    <select name="country" id="input-country" class="form-control" value="@Request.QueryString["country"]" onchange="submit()">
+                        <option value="">Select country</option>
                         @{
                             List<Country> countries = ViewBag.Countries;
                             foreach (Country item2 in countries)
                             {
-                                @*if (item2.Name != null)
+                                if (item2.Name != null)
                                     {
-                                        if (item2.Name.Equals(Model.Country))
+                                        if (item2.Name.Equals(@Request.QueryString["country"]))
                                         {
                                             <option selected>@item2.Name</option>
                                             continue;
                                         }
-                                    }*@
+                                    }
                                 <option>@item2.Name</option>
                             }
                         }
@@ -138,23 +158,34 @@
                 </div>
 
                 <div class="col-md-2 col-sm-4 col-xs-6">
-                    @*<select id="input-rating" class="form-control">
-                            <option selected>Select rating</option>
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
-                        </select>*@
-                    @Html.DropDownList("Rating", new List<SelectListItem> {
+                    <select class="form-control" id="Rating" name="rating" value="@Request.QueryString["rating"]" onchange="submit()">
+                        <option value="">Select rating</option>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (@Request.QueryString["rating"] != null)
+                            {
+                                if (@Request.QueryString["rating"].Equals(i.ToString()))
+                                {
+                                    <option selected value="@i">@i</option>
+                                    continue;
+                                }
+                            }
+
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    @*@Html.DropDownList("Rating", new List<SelectListItem> {
                             new SelectListItem {Text="5", Value="5"},
                             new SelectListItem {Text="4", Value="4"},
                             new SelectListItem {Text="3", Value="3"},
                             new SelectListItem {Text="2", Value="2"},
                             new SelectListItem {Text="1", Value="1"}
-                        }, "Select rating", new { @class = "form-control" })
+                        }, "Select rating", new { @class = "form-control" })*@
                 </div>
             </div>
+
+            </form>
+            
         </div>
     </div>
 
@@ -253,34 +284,14 @@
 
     </div>
 
-    <!-- Pagination -->
-    @*<div class="pagination-area text-center">
-            <ul class="pagination">
-                <li class="page-item">
-                    <span class="page-link" href="#" aria-label="Previous">
-                        <img src="~/Content/images/Front/assets/left-arrow.png">
-                    </span>
-                </li>
-                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <span class="page-link" href="#" aria-label="Next">
-                        <img src="~/Content/images/Front/assets/right-arrow.png">
-                    </span>
-                </li>
-            </ul>
-        </div>*@
     <section id="pagination">
-        @Html.PagedListPager(Model, i => Url.Action("SearchNotes", "User", new { i, search = Request.QueryString["search"] }), new PagedList.Mvc.PagedListRenderOptions
+        @Html.PagedListPager(Model, i => Url.Action("SearchNotes", "User", new { i, search = Request.QueryString["search"], NoteType = Request.QueryString["NoteType"], NoteCategory = Request.QueryString["NoteCategory"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"] }), new PagedList.Mvc.PagedListRenderOptions
         {
            ContainerDivClasses = null,
            LiElementClasses = new string[] { "page-item1" },
            UlElementClasses = new string[] { "pagination justify-content-center" },
-           LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
-           LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+           LinkToNextPageFormat = "<img src='../../Content/images/Front/assets/right-arrow.png' alt=''>",
+           LinkToPreviousPageFormat = "<img src='../../Content/images/Front/assets/left-arrow.png' alt=''>",
            MaximumPageNumbersToDisplay = 5,
            DisplayEllipsesWhenNotShowingAllPageNumbers = false,
            DisplayLinkToFirstPage = PagedListDisplayMode.Never,

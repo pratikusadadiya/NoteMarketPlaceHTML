@@ -84,4 +84,3 @@ E:\Study\TatvaSoft Study\Backend Notes MarketPlace\Notes MarketPlace\Notes Marke
 E:\Study\TatvaSoft Study\Backend Notes MarketPlace\Notes MarketPlace\Notes MarketPlace\bin\PagedList.Mvc.dll
 E:\Study\TatvaSoft Study\Backend Notes MarketPlace\Notes MarketPlace\Notes MarketPlace\bin\PagedList.xml
 E:\Study\TatvaSoft Study\Backend Notes MarketPlace\Notes MarketPlace\Notes MarketPlace\bin\PagedList.Mvc.xml
-E:\Study\TatvaSoft Study\Backend Notes MarketPlace\Notes MarketPlace\Notes MarketPlace\obj\Debug\Notes MarketPlace.csprojAssemblyReference.cache

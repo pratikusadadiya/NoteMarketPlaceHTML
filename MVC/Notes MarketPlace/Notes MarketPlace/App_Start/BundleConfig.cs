@@ -21,12 +21,13 @@ namespace Notes_MarketPlace
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/css/bootstrap.min.css",
-                      "~/Content/css/font-awesome.min.css"));
+                      "~/Content/bootstrap-chosen.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                       "~/Scripts/jquery.min.js",
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/jquery.filtertable.min.js"));
+                      "~/Scripts/jquery.filtertable.min.js",
+                      "~/Scripts/chosen.jquery.min.js"));
         }
     }
 }

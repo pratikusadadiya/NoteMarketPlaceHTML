@@ -198,6 +198,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-chosen.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\css\Admin\bootstrap\bootstrap.css" />
     <Content Include="Content\css\Admin\bootstrap\bootstrap.min.css" />
     <Content Include="Content\css\Admin\font-awesome\css\font-awesome.css" />
@@ -332,6 +335,8 @@
     <Content Include="Scripts\Admin\jquery.js" />
     <Content Include="Scripts\Admin\jquery.min.js" />
     <Content Include="Scripts\Admin\main.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\Front\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Front\jquery.js" />
@@ -388,6 +393,8 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <None Include="packages.config" />
     <Content Include="Views\User\Home.cshtml" />
     <Content Include="Views\User\login.cshtml" />
