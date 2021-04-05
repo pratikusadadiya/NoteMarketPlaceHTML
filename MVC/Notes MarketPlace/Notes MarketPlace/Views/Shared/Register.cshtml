@@ -184,6 +184,12 @@
                         next: "<img src='../../Content/images/Front/assets/right-arrow.png' alt=''>",
                         previous: "<img src='../../Content/images/Front/assets/left-arrow.png' alt=''>"
                     }
+                },
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                    //debugger;
+                    var index = iDisplayIndexFull + 1;
+                    $("td:first", nRow).html(index);
+                    return nRow;
                 }
             });
 
@@ -225,12 +231,6 @@
             });
 
         });
-        //$(document).ready(function () {
-        //    var str = '<i class="fa fa-arrow-right"></i>';
-        //    document.getElementById('in-progress_next').innerHTML = str;
-        //    var str = '<i class="fa fa-arrow-left"></i>';
-        //    document.getElementById('in-progress_previous').innerHTML = str;
-        //});
         
     </script>
 

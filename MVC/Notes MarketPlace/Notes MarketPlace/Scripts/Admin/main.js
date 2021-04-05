@@ -53,18 +53,18 @@ $(function () {
             // Show White Nav & blue logo
             $("nav").addClass("white-nav-top");
             $("#mobile-nav-open-btn").css("color", "#6255a5");
-            
-            $(".navbar-brand img").attr("src", "../images/assets/logo-img.png");
+
+            $(".navbar-brand img").attr("src", "../../Content/images/Admin/assets/logo-img.png");
+
 
         } else {
-
             // Hide White Nav & Show white logo
             $("nav").removeClass("white-nav-top");
-            $(".navbar-brand img").attr("src", "../images/assets/top-logo.png");
+            $(".navbar-brand img").attr("src", "../../Content/images/Admin/assets/top-logo.png");
             $("#mobile-nav-open-btn").css("color", "#fff");
-            
+
             $("#top-fixed-nav #mobile-nav-open-btn").css("color", "#6255a5");
-            $("#top-fixed-nav .navbar-brand img").attr("src", "../images/assets/logo-img.png");
+            $("#top-fixed-nav .navbar-brand img").attr("src", "../../Content/images/Admin/assets/logo-img.png");
         }
 
     }

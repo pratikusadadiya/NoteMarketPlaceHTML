@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Notes_MarketPlace.User>
+@{
+    ViewBag.Title = "Members";
+    ViewBag.MainClass = "members";
+    ViewBag.members = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="members-inner">
+
+    <div class="container">
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <h3 class="heading">Members</h3>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                    <input type="search" class="form-control input-search" id="member-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+
+                <table class="table" id="member-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">first name</th>
+                            <th scope="col">last name</th>
+                            <th scope="col">email</th>
+                            <th scope="col">joining date</th>
+                            <th scope="col">under review notes</th>
+                            <th scope="col">published notes</th>
+                            <th scope="col">downloaded notes</th>
+                            <th scope="col">total expenses</th>
+                            <th scope="col">total earning</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int count = 0;
+                            foreach (var member in Model)
+                            {
+                                if (member.RoleID == 1 && member.IsActive == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>count</td>
+                                        <td>@member.FirstName</td>
+                                        <td>@member.LastName</td>
+                                        <td>@member.EmailID</td>
+                                        <td>@member.CreatedDate.ToString().Substring(0, 16)</td>
+
+                                        @{ int underReview = 0, published = 0;}
+                                        @foreach (SellerNote note in ViewBag.notes)
+                                        {
+                                            if (note.SellerID == member.ID && note.Status == "In Review" && note.IsActive == true)
+                                            {
+                                                underReview++;
+                                            }
+                                            if (note.SellerID == member.ID && note.Status == "Published" && note.IsActive == true)
+                                            {
+                                                published++;
+                                            }
+                                        }
+                                        @{ string SellerName = member.FirstName + " " + member.LastName; }
+                                        <td>@Html.ActionLink(underReview.ToString(), "NotesUnderReview", "Admin", new { seller = SellerName }, null)</td>
+                                        <td>@Html.ActionLink(published.ToString(), "NotesUnderReview", "Admin", new { seller = SellerName }, null)</td>
+
+                                        @{ int downloaded = 0; decimal? earning = 0, expenses = 0;}
+                                        @foreach (Download download in ViewBag.downloads)
+                                        {
+                                            if (download.Seller == member.ID && download.IsSellerHasAllowedDownload == true)
+                                            {
+                                                downloaded++;
+                                                earning += download.PurchasedPrice;
+                                            }
+                                            if (download.Downloader == member.ID && download.IsSellerHasAllowedDownload == true)
+                                            {
+                                                expenses += download.PurchasedPrice;
+                                            }
+                                        }
+                                        <td>@Html.ActionLink(downloaded.ToString(), "DownloadedNotes", "Admin", new { buyer = SellerName }, null)</td>
+                                        <td>@Html.ActionLink(expenses.ToString(), "DownloadedNotes", "Admin", new { buyer = SellerName }, null)</td>
+                                        <td>@earning</td>
+
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("MemberDetails", "Admin", new { memberid = member.ID})">View More Details</a>
+                                                    <a class="dropdown-item" href="@Url.Action("DeactivateMember", "Admin", new { memberid = member.ID})">Deactivate</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="member-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>

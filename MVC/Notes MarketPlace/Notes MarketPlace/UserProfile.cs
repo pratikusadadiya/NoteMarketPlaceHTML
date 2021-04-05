@@ -11,6 +11,7 @@ namespace Notes_MarketPlace
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class UserProfile
@@ -24,6 +25,8 @@ namespace Notes_MarketPlace
         public Nullable<int> Gender { get; set; }
         public string ScondaryEmailAddress { get; set; }
         public string Phone_number___Country_Code { get; set; }
+
+        [Required(ErrorMessage = "Please enter phone number.")]
         public string Phone_number { get; set; }
         public HttpPostedFileBase ProfilePictureFile { get; set; }
         public string Profile_Picture { get; set; }

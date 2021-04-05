@@ -242,34 +242,33 @@ namespace Notes_MarketPlace.Controllers
                 Response.Cookies.Add(cookie);
             }
 
-            var valid = db.Users.Where(v => v.EmailID.Equals(user.EmailID) && v.Password.Equals(user.Password)).FirstOrDefault();
+            User valid = db.Users.Where(v => v.EmailID.Equals(user.EmailID) && v.Password.Equals(user.Password)).FirstOrDefault();
 
             if( valid != null)
             {
-                if(valid.RoleID == 1)
+                if (valid.IsActive == true)
                 {
-                    if (valid.IsActive == true)
+                    if (valid.IsEmailVerified == true)
                     {
-                        if (valid.IsEmailVerified == true)
+                        if(valid.RoleID == 1)
                         {
                             userid = valid.ID;
                             return RedirectToAction("dashboard");
                         }
                         else
                         {
-                            ViewBag.ErrorMsg = "Email not verified, Please verify your email first.";
-                            return View("login");
+                            return RedirectToAction("login", "Admin", valid);
                         }
                     }
                     else
                     {
-                        ViewBag.ErrorMsg = "You are Blocked or not an Active member.";
+                        ViewBag.ErrorMsg = "Email not verified, Please verify your email first.";
                         return View("login");
                     }
                 }
                 else
                 {
-                    ViewBag.ErrorMsg = "You are not a member.";
+                    ViewBag.ErrorMsg = "You are Blocked or not an Active member.";
                     return View("login");
                 }
             }
@@ -278,12 +277,12 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.ErrorMsg = "Email address or Password is incorrect.";
                 return View("login");
             }
+            return View();
         }
 
         [HttpGet]
         public ActionResult dashboard()
         {
-            
             if(userid != 0)
             {
                 List<Download> dwn = db.Downloads.ToList();
@@ -389,10 +388,10 @@ namespace Notes_MarketPlace.Controllers
                 notes = notes.Where(m => m.Country != null).ToList();
                 notes = notes.Where(m => m.Country.ToLower().Equals(country.ToLower())).ToList();
             }
-            List<SellerNote> NoteList = new List<SellerNote>();
             if (!String.IsNullOrEmpty(rating))
             {
-                foreach(var book in notes)
+                List<SellerNote> NoteList = new List<SellerNote>();
+                foreach (var book in notes)
                 {
                     float rate = 0, sum = 0;
                     foreach (var review in ViewBag.Reviews)
@@ -415,19 +414,12 @@ namespace Notes_MarketPlace.Controllers
                         var item = notes.FirstOrDefault(m => m.ID == book.ID);
                         NoteList.Add( item );
                     }
-
+                    notes = NoteList.ToList();
                 }
             }
-            if(!String.IsNullOrEmpty(rating))
-            {
-                ViewBag.ResultNotes = NoteList.Count();
-                return View(NoteList.ToList().ToPagedList(i ?? 1, 9));
-            }
-            else
-            {
-                ViewBag.ResultNotes = notes.Count();
-                return View(notes.ToList().ToPagedList(i ?? 1, 9));
-            }
+            
+            ViewBag.ResultNotes = notes.Count();
+            return View(notes.ToList().ToPagedList(i ?? 1, 9));
             
         }
 
@@ -697,6 +689,7 @@ namespace Notes_MarketPlace.Controllers
         {
             Download dwn = db.Downloads.FirstOrDefault(n => n.ID == id);
             dwn.IsSellerHasAllowedDownload = true;
+            dwn.AttachmentDownloadedDate = DateTime.Now;
             db.Entry(dwn).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("buyerRequests");
@@ -884,6 +877,7 @@ namespace Notes_MarketPlace.Controllers
                     else
                     {
                         ViewBag.ErrorMsg = "Please select proper formate image.";
+                        ViewBag.Country = db.Countries.ToList();
                         return View("UserProfile");
                     }
                 }
@@ -927,6 +921,7 @@ namespace Notes_MarketPlace.Controllers
                 else
                 {
                     ViewBag.ErrorMsg = "Please select proper file.";
+                    ViewBag.Country = db.Countries.ToList();
                     return View(profile);
                 }
             }

@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNote>
+@{
+    ViewBag.Title = "Rejected Notes";
+    ViewBag.MainClass = "rejected-notes";
+    ViewBag.RejectedNotes = "active-link";
+    ViewBag.Notes = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+
+<div id="rejected-notes-inner" class="manage-profile-admin-etc publish-reject-download">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Rejected Notes</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+            <form>
+
+                <div class="table-heading">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-md-4 col-sm-5 col-xs-7 seller-dropdown">
+                            <h5 class="seller-label">Seller</h5>
+                            <select name="seller" id="input-seller" class="form-control" value="@Request.QueryString["seller"]" onchange="submit()">
+                                <option value="">Select seller</option>
+                                @foreach (var item1 in ViewBag.Sellers)
+                                {
+                                    if (item1 != null)
+                                    {
+                                        if (item1.Equals(@Request.QueryString["seller"]))
+                                        {
+                                            <option selected>@item1</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option>@item1</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                        <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                        <input type="text" class="form-control input-search" id="rejected-search" placeholder="Search">
+                        <button type="submit" class="btn submit-btn">search</button>
+                    </div>
+                </div>
+
+            </form>
+            
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="rejected-notes-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">seller</th>
+                            <th scope="col" class="nosort"></th>
+                            <th scope="col">date added</th>
+                            <th scope="col">rejected by</th>
+                            <th scope="col">remark</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.Status == "Rejected" && note.IsActive == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.Title, "NotesDetails", "Admin", new { noteid = note.ID }, null)</td>
+                                        <td>@note.Category</td>
+
+                                        <td>@note.User.FirstName @note.User.LastName</td>
+                                        <td>
+                                            <img class="table-eye" src="~/Content/images/Admin/assets/eye.png" alt="show" onclick="location.href='@Url.Action("MemberDetails", "Admin", new { memberid = note.User.ID})'">
+                                        </td>
+                                        <td>@note.CreatedDate.ToString().Substring(0, 16)</td>
+
+                                        @foreach (User user in ViewBag.Users)
+                                        {
+                                            if (user.ID == note.ActionedBy)
+                                            {
+                                                string name = user.FirstName + " " + user.LastName;
+                                                <td>@name</td>
+                                            }
+                                        }
+                                        <td>@note.AdminRemarks</td>
+
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
+                                                    <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="rejected-notes-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+

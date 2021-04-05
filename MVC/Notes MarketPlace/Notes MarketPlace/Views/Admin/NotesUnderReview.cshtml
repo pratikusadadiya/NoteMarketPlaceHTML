@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNote>
+@{
+    ViewBag.Title = "Notes Under Review";
+    ViewBag.MainClass = "notes-under-review";
+    ViewBag.NotesUnderReview = "active-link";
+    ViewBag.Notes = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="notes-under-review-inner" class="manage-profile-admin-etc publish-reject-download">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Notes Under Review</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+            <form>
+
+                <div class="table-heading">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-md-4 col-sm-5 col-xs-7 seller-dropdown">
+                            <h5 class="seller-label">Seller</h5>
+                            <select name="seller" id="input-seller" class="form-control" value="@Request.QueryString["seller"]" onchange="submit()">
+                                <option value="">Select seller</option>
+                                @foreach (var item1 in ViewBag.Sellers)
+                                {
+                                    if (item1 != null)
+                                    {
+                                        if (item1.Equals(@Request.QueryString["seller"]))
+                                        {
+                                            <option selected>@item1</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option>@item1</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                        <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                        <input type="text" class="form-control input-search" id="under-review-search" placeholder="Search">
+                        <button type="submit" class="btn submit-btn">search</button>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="under-review-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">seller</th>
+                            <th scope="col" class="nosort"></th>
+                            <th scope="col">date added</th>
+                            <th scope="col">status</th>
+                            <th scope="col">action</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.Status == "In Review" && note.IsActive == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.Title, "NotesDetails", "Admin", new { noteid = note.ID }, null)</td>
+                                        <td>@note.Category</td>
+
+                                        <td>@note.User.FirstName @note.User.LastName</td>
+                                        <td>
+                                            <img class="table-eye" src="~/Content/images/Admin/assets/eye.png" alt="show" onclick="location.href='@Url.Action("MemberDetails", "Admin", new { memberid = note.User.ID})'">
+                                        </td>
+                                        <td>@note.CreatedDate.ToString().Substring(0, 16)</td>
+
+                                        <td>@note.Status</td>
+
+                                        <td>
+                                            <button type="submit" class="btn approve-btn">Approve</button>
+                                            <button type="submit" class="btn reject-btn" data-toggle="modal" data-target="#exampleModal">Reject</button>
+                                            <button type="submit" class="btn inreview-btn">InReview</button>
+                                        </td>
+
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
+                                                    <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    <!-- Review trigger modal -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="close-popup">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <h2 class="popup-review-title">Human Body - Science</h2>
+                                                    <label for="input-remarks" class="popup-text-02">
+                                                        <h5>Remarks *</h5>
+                                                    </label>
+                                                    <textarea class="form-control" id="input-remarks" rows="5" placeholder="Write remarks" required></textarea>
+                                                    <div class="text-right popup-btn">
+                                                        <button type="submit" class="btn reject-btn">Reject</button>
+                                                        <button type="submit" class="btn inreview-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="under-review-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,143 @@
+﻿
+@model IEnumerable<Notes_MarketPlace.User>
+@{
+    ViewBag.Title = "Manage Administrator";
+    ViewBag.MainClass = "manage-administrator";
+    ViewBag.ManageAdministrator = "active-link";
+    ViewBag.Settings = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="manage-administrator-inner" class="manage-profile-admin-etc">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Manage Administrator</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a href="add-administrator.html"><button type="submit" class="btn submit-btn">Add Administrator</button></a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="administrator-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="administrator-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">first name</th>
+                            <th scope="col">last name</th>
+                            <th scope="col">email</th>
+                            <th scope="col">phone no.</th>
+                            <th scope="col">date added</th>
+                            <th scope="col">active</th>
+                            <th scope="col" class="nosort">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Khayati</td>
+                            <td>Patel</td>
+                            <td>khayatipatel@gmail.com</td>
+                            <td>9897959512</td>
+                            <td>09-10-2020, 10:10</td>
+                            <td>Yes</td>
+                            <td>
+                                <div class="edit-delete">
+                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Rahul</td>
+                            <td>Shah</td>
+                            <td>rahulshah@gmail.com</td>
+                            <td>9945321851</td>
+                            <td>10-10-2020, 12:30</td>
+                            <td>Yes</td>
+                            <td>
+                                <div class="edit-delete">
+                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Suman</td>
+                            <td>Trivedi</td>
+                            <td>sumantrivedi@gmail.com</td>
+                            <td>7852189120</td>
+                            <td>11-10-2020, 01:00</td>
+                            <td>No</td>
+                            <td>
+                                <div class="edit-delete">
+                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Raj</td>
+                            <td>Malhotra</td>
+                            <td>rajmalhotra77@gmail.com</td>
+                            <td>9852656874</td>
+                            <td>12-10-2020, 10:10</td>
+                            <td>Yes</td>
+                            <td>
+                                <div class="edit-delete">
+                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Niya</td>
+                            <td>Patel</td>
+                            <td>niyapatel12@gmail.com</td>
+                            <td>8516794532</td>
+                            <td>13-10-2020, 11:25</td>
+                            <td>Yes</td>
+                            <td>
+                                <div class="edit-delete">
+                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="administrator-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+

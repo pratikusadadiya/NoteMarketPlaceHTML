@@ -1,0 +1,177 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNote>
+@{
+    ViewBag.Title = "Published Notes";
+    ViewBag.MainClass = "published-notes";
+    ViewBag.PublishedNotes = "active-link";
+    ViewBag.Notes = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="published-notes-inner" class="manage-profile-admin-etc publish-reject-download">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Published Notes</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+            <form>
+                <div class="table-heading">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-md-4 col-sm-5 col-xs-7 seller-dropdown">
+                            <h5 class="seller-label">Seller</h5>
+                            <select name="seller" id="input-seller" class="form-control" value="@Request.QueryString["seller"]" onchange="submit()">
+                                <option value="">Select seller</option>
+                                @foreach (var item1 in ViewBag.Sellers)
+                                {
+                                    if (item1 != null)
+                                    {
+                                        if (item1.Equals(@Request.QueryString["seller"]))
+                                        {
+                                            <option selected>@item1</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option>@item1</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                        <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                        <input type="text" class="form-control input-search" id="published-search" placeholder="Search">
+                        <button type="submit" class="btn submit-btn">search</button>
+                    </div>
+                </div>
+            </form>
+            
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="published-notes-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">sell type</th>
+                            <th scope="col">price</th>
+                            <th scope="col">seller</th>
+                            <th scope="col" class="nosort"></th>
+                            <th scope="col">published date</th>
+                            <th scope="col">approved by</th>
+                            <th scope="col">number of<br>downloads</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var note in Model)
+                            {
+                                if (note.Status == "Published" && note.IsActive == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.Title, "NotesDetails", "Admin", new { noteid = note.ID }, null)</td>
+                                        <td>@note.Category</td>
+
+                                        @if (note.IsPaid == false)
+                                        {
+                                            <td>Free</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Paid</td>
+                                        }
+
+                                        <td>@note.SellingPrice</td>
+                                        <td>@note.User.FirstName @note.User.LastName</td>
+                                        <td>
+                                            <img class="table-eye" src="~/Content/images/Admin/assets/eye.png" alt="show" onclick="location.href='@Url.Action("MemberDetails", "Admin", new { memberid = note.User.ID})'">
+                                        </td>
+                                        <td>@note.PublishedDate.ToString().Substring(0, 16)</td>
+
+                                        @foreach(User user in ViewBag.Users)
+                                        {
+                                            if(user.ID == note.ActionedBy)
+                                            {
+                                                string name = user.FirstName + " " + user.LastName;
+                                                <td>@name</td>
+                                            }
+                                        }
+                                        <td>@note.Downloads.Count()</td>
+
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
+                                                    <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UnpublishModal">Unpublish</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <!-- Unpublish modal -->
+                                    <div class="modal fade unpublishmodel" id="UnpublishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="close-popup">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h2 class="popup-review-title">Unpublish - @note.Title</h2>
+                                                    <br />
+                                                    @using (Html.BeginForm("Unpublish", "Admin", FormMethod.Post))
+                                                    {
+                                                        <label for="input-comment" class="popup-text-02">
+                                                            <h5>Note Title *</h5>
+                                                        </label>
+                                                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" value="@note.Title" readonly />
+                                                        <br />
+                                                        <input name="noteid" value="@note.ID" hidden />
+                                                        <label for="input-comment" class="popup-text-02">
+                                                            <h5>Remarks *</h5>
+                                                        </label>
+                                                        <textarea name="AdminRemark" class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
+                                                        <button type="submit" class="btn submit-btn unpublish-btn">Unpublish</button>
+                                                        <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="published-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>

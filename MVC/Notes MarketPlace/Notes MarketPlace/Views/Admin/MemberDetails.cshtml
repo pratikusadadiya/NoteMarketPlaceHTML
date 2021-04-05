@@ -1,0 +1,150 @@
+﻿@model Notes_MarketPlace.UserProfile
+@{
+    ViewBag.Title = "Member Details";
+    ViewBag.MainClass = "member-details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="member-details-inner">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Heading -->
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Member Details</h2>
+                </div>
+            </div>
+
+            <!-- Top section -->
+            <div class="personal-info col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-3 col-sm-3 col-xs-12 member-img">
+                    <img src="~/Content/images/Admin/Member-Details/member.png" alt="member">
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12 member-personal-info">
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">First Name:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.User.FirstName</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Last Name:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.User.LastName</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Email:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.User.EmailID</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">DOB:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.DOB.ToString().Substring(0,10)</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Phone Number:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.Phone_number</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">College/University:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.University</div>
+                </div>
+            </div>
+
+            <div class="address-info col-md-6 col-sm-12 col-xs-12">
+
+                <div class="col-md-9 col-sm-12 col-xs-12">
+
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Address 1:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.Address_Line_1</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Address 2:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.Address_Line_2</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">City:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.City</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">State:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.State</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Country:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.Country</div>
+                    <div class="col-md-5 col-sm-5 col-xs-5 info-title">Zip Code:</div>
+                    <div class="col-md-7 col-sm-7 col-xs-7 info-text">@Model.Zip_Code</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="p1-line-p2">
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="heading">Notes</h3>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="member-notes-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">status</th>
+                            <th scope="col" class="nosort">downloaded notes</th>
+                            <th scope="col">total earning</th>
+                            <th scope="col">date added</th>
+                            <th scope="col">published date</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (SellerNote note in ViewBag.notes)
+                            {
+                                if (note.SellerID == Model.UserID && note.Status == "Published" && note.IsActive == true)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@Html.ActionLink(note.Title, "NotesDetails", "Admin", new { noteid = note.ID }, null)</td>
+                                        <td>@note.Category</td>
+                                        <td>@note.Status</td>
+                                        
+                                        @{int downloaded = 0; decimal? earning = 0;}
+                                        @foreach (Download download in ViewBag.downloads)
+                                        {
+                                            if (download.Seller == Model.ID && download.NoteID == note.ID && download.IsSellerHasAllowedDownload == true)
+                                            {
+                                                downloaded++;
+                                                earning += download.PurchasedPrice;
+                                            }
+                                        }
+                                        @{ string SellerName = note.User.FirstName + " " + note.User.LastName;}
+                                        <td>@Html.ActionLink(downloaded.ToString(), "DownloadedNotes", "Admin", new { notetitle = note.Title, seller = SellerName }, null)</td>
+                                        <td>@earning</td>
+
+                                        <td>@note.CreatedDate.ToString().Substring(0, 16)</td>
+                                        <td>@note.PublishedDate.ToString().Substring(0, 16)</td>
+
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center"id="member-notes-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
