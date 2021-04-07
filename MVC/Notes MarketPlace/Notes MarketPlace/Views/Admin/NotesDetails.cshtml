@@ -13,7 +13,7 @@
             <div class="col-md-7 col-sm-12 col-xs-12 notes-details-left">
 
                 <div class="col-md-6 col-sm-5 col-xs-12 book-cover-section">
-                    <img class="book-cover img-responsive" src="@Model.DisplayPicture" alt="book-cover">
+                    <img class="book-cover img-responsive" src="/Uploads/NoteImage/@Path.GetFileName(Model.DisplayPicture)" alt="book-cover">
                 </div>
                 <div class="col-md-6 col-sm-7 col-xs-12">
                     <h2 class="note-title">@Model.Title</h2>
@@ -21,7 +21,7 @@
                     <p class="note-details-text">@Model.Description</p>
 
                     <!-- Button trigger modal -->
-                    <button type="submit" class="btn submit-btn" data-toggle="modal" data-target="#exampleModal" onclick="location.href='@Url.Action("DownloadNote", "User", new { noteid = @Model.ID })'">
+                    <button type="submit" class="btn submit-btn" onclick="location.href='@Url.Action("DownloadNote", "User", new { noteid = @Model.ID })'">
                         @if (Model.IsPaid == true)
                         {
                             <span>Download / $@Model.SellingPrice</span>
@@ -35,35 +35,6 @@
                     <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
                     <h5 style="color:darkgreen; text-align:left;">@ViewBag.RequestMsg</h5>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true" class="close-popup">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="success-image-section text-center">
-                                        <img class="success-image" src="~/Content/images/Front/Notes-details/SUCCESS.png" alt="success">
-                                    </div>
-                                    <h2 class="popup-success text-center">Thank you for purchasing!</h2>
-                                    <h5 class="popup-text-01">Dear Smith,</h5>
-                                    <h5 class="popup-text-02">
-                                        As this is paid notes - you need to pay to Rahil Shah offline. We will send him an email that you want to download this note. He may contact you further for payment process completion.<br>
-                                        <br>
-                                        In case, you have urgency,<br>
-                                        Please contact us on +9195377345959.<br>
-                                        <br>
-                                        Once he will receives the payment and acknowledge us - selected notes you can see over my downloads tab for download.<br>
-                                        <br>
-                                        Have a good day.
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>

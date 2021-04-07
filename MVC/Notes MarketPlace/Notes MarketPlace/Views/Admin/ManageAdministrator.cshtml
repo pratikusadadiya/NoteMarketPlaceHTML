@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Notes_MarketPlace.User>
+﻿@model IEnumerable<Notes_MarketPlace.AdminProfile>
 @{
     ViewBag.Title = "Manage Administrator";
     ViewBag.MainClass = "manage-administrator";
@@ -27,7 +26,7 @@
 
             <div class="table-heading">
                 <div class="col-md-6 col-sm-6 col-xs-6">
-                    <a href="add-administrator.html"><button type="submit" class="btn submit-btn">Add Administrator</button></a>
+                    <a><button type="submit" class="btn submit-btn" onclick="location.href='@Url.Action("AddAdministrator")'">Add Administrator</button></a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
                     <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
@@ -51,81 +50,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Khayati</td>
-                            <td>Patel</td>
-                            <td>khayatipatel@gmail.com</td>
-                            <td>9897959512</td>
-                            <td>09-10-2020, 10:10</td>
-                            <td>Yes</td>
-                            <td>
-                                <div class="edit-delete">
-                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
-                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Rahul</td>
-                            <td>Shah</td>
-                            <td>rahulshah@gmail.com</td>
-                            <td>9945321851</td>
-                            <td>10-10-2020, 12:30</td>
-                            <td>Yes</td>
-                            <td>
-                                <div class="edit-delete">
-                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
-                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Suman</td>
-                            <td>Trivedi</td>
-                            <td>sumantrivedi@gmail.com</td>
-                            <td>7852189120</td>
-                            <td>11-10-2020, 01:00</td>
-                            <td>No</td>
-                            <td>
-                                <div class="edit-delete">
-                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
-                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Raj</td>
-                            <td>Malhotra</td>
-                            <td>rajmalhotra77@gmail.com</td>
-                            <td>9852656874</td>
-                            <td>12-10-2020, 10:10</td>
-                            <td>Yes</td>
-                            <td>
-                                <div class="edit-delete">
-                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
-                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Niya</td>
-                            <td>Patel</td>
-                            <td>niyapatel12@gmail.com</td>
-                            <td>8516794532</td>
-                            <td>13-10-2020, 11:25</td>
-                            <td>Yes</td>
-                            <td>
-                                <div class="edit-delete">
-                                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
-                                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
-                                </div>
-                            </td>
-                        </tr>
+
+                        @{ int count = 0;
+                            foreach (var admin in Model)
+                            {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@admin.User.FirstName</td>
+                                        <td>@admin.User.LastName</td>
+                                        <td>@admin.User.EmailID</td>
+                                        <td>@admin.phone_number</td>
+                                        <td>@admin.User.CreatedDate.ToString().Substring(0,16)</td>
+                                        
+                                        @if(admin.User.IsActive == true)
+                                        {
+                                            <td>Yes</td>
+                                        }
+                                        else
+                                        {
+                                            <td>No</td>
+                                        }
+
+                                        <td>
+                                            <div class="edit-delete">
+                                                <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit" onclick="location.href='@Url.Action("EditAdministrator", "Admin", new { editid = admin.Id})'">
+                                                @*<img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit" data-id="@admin.Id" onclick="DeleteAdministrator(this)">*@
+                                                <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="delete" data-id="@admin.Id" onclick="DeleteAdministrator(this)">
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -140,4 +98,16 @@
     </div>
 
 </div>
+
+<script>
+
+    function DeleteAdministrator(e) {
+        var deleteid = $(e).data('id');
+        if (confirm("Are you sure you want to make this administrator inactive?") == true)
+            window.location.href = "/Admin/DeleteAdministrator?deleteid=" + deleteid;
+        else
+            event.preventDefault();
+    }
+
+</script>
 

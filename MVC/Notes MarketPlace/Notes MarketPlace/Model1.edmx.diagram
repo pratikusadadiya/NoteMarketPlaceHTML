@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93d9aafccabf413480dc04cf53b39b32" Name="Diagram1" ZoomLevel="52">
+      <Diagram DiagramId="990bc9042d0642b1a05199d0fd48df6b" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="Model.AdminProfile" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Download" Width="1.5" PointX="10.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Download" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.NoteCategory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.NoteType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ReferenceDate" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SellerNote" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SellerNotesAttachement" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SellerNotesReportedIssue" Width="1.5" PointX="12.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SellerNotesReview" Width="1.5" PointX="15.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SystemConfiguration" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UserRole" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNote" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesAttachement" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesReportedIssue" Width="1.5" PointX="9.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SellerNotesReview" Width="1.5" PointX="12.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SystemConfiguration" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserProfile" Width="1.5" PointX="5.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserRole" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_AdminProfile_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Downloads_SellerNotes" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Downloads_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Downloads_Users1" ManuallyRouted="false" />

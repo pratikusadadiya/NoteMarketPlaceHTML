@@ -1,50 +1,42 @@
 ﻿@model Notes_MarketPlace.AdminProfile
 @{
-    ViewBag.Title = "My Profile";
-    ViewBag.MainClass = "my-profile";
-    ViewBag.UpdateProfile = "active-link";
-    ViewBag.MyProfile = "active-link";
+    ViewBag.Title = "Add Administrator";
+    ViewBag.MainClass = "add-administrator";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 
 }
 
-<!-- Profile form -->
-<div class="profile-admin-etc-inner form-details">
-    <div class="container">
+<!-- Add Administrator form -->
+<div class="profile-admin-etc-inner">
+    <div class="container form-details">
         <div class="form-inner">
-
 
             <!-- Basic Profile Details -->
             <div class="row">
-                <form enctype="multipart/form-data" method="post">
+                <form method="post">
 
-                    <h2 class="title text-left">My Profile</h2>
+                    <h2 class="title text-left">Add Administrator</h2>
                     @Html.HiddenFor(l => l.Id)
+                    @Html.HiddenFor(l => l.AdminID)
                     <div class="row">
-                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
                             <label for="input-first-name">First Name *</label>
-                            @Html.TextBoxFor(l => l.FirstName, new { @placeholder = "Enter your first name", @class = "form-control" })
+                            @Html.TextBoxFor(l => l.User.FirstName, new { @placeholder = "Enter your first name", @class = "form-control" })
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
                             <label for="input-last-name">Last Name *</label>
-                            @Html.TextBoxFor(l => l.LastName, new { @placeholder = "Enter your last name", @class = "form-control" })
+                            @Html.TextBoxFor(l => l.User.LastName, new { @placeholder = "Enter your last name", @class = "form-control" })
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                             <label for="input-email">Email *</label>
-                            @Html.TextBoxFor(l => l.EmailID, new { @placeholder = "Enter your email", @class = "form-control", @type = "email" })
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                            <label for="input-secondary-email">Secondary Email</label>
-                            @Html.TextBoxFor(l => l.ScondaryEmailAddress, new { @placeholder = "Enter your secondary email", @class = "form-control", @type = "email" })
+                            @Html.TextBoxFor(l => l.User.EmailID, new { @placeholder = "Enter your email", @class = "form-control", @type = "email" })
+                            <h5 style="color:red;">@ViewBag.DuplicateMsg</h5>
                         </div>
                     </div>
 
@@ -59,7 +51,7 @@
 
                                             foreach (Country item in countries)
                                             {
-                                                if (item.CountryCode != null)
+                                                if (item.CountryCode != null && Model.Phone_number_country_code != null)
                                                 {
                                                     if (item.CountryCode.Equals(Model.Phone_number_country_code))
                                                     {
@@ -79,18 +71,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                            <label for="input-profile-picture">Profile Picture</label>
-                            @if (Model.Profile_Picture != null)
-                            {
-                                @Html.HiddenFor(l => l.Profile_Picture)
-                            }
-                            @Html.TextBoxFor(l => l.ProfilePictureFile, new { @type = "file", @class = "form-control upload-picture" })
-                            <h5 style="color:red; text-align:left;">@ViewBag.ErrorMsg</h5>
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn submit-btn">Submit</button>
                 </form>
             </div>
@@ -99,3 +79,4 @@
         </div>
     </div>
 </div>
+

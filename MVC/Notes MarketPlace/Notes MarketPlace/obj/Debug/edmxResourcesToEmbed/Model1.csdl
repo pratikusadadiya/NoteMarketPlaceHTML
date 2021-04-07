@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <Property Name="ScondaryEmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Phone_number_country_code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Profile_Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AdminProfile_Users" FromRole="AdminProfile" ToRole="Users" />
+  </EntityType>
   <EntityType Name="Country">
     <Key>
       <PropertyRef Name="ID" />
@@ -236,6 +252,7 @@
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedBy" Type="Int32" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AdminProfiles" Relationship="Self.FK_AdminProfile_Users" FromRole="Users" ToRole="AdminProfile" />
     <NavigationProperty Name="Downloads" Relationship="Self.FK_Downloads_Users" FromRole="Users" ToRole="Downloads" />
     <NavigationProperty Name="Downloads1" Relationship="Self.FK_Downloads_Users1" FromRole="Users" ToRole="Downloads" />
     <NavigationProperty Name="SellerNotes" Relationship="Self.FK_SellerNotes_Users" FromRole="Users" ToRole="SellerNotes" />
@@ -245,6 +262,18 @@
     <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_Users" FromRole="Users" ToRole="UserProfile" />
     <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
   </EntityType>
+  <Association Name="FK_AdminProfile_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="AdminProfile" Type="Self.AdminProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AdminProfile">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Downloads_SellerNotes">
     <End Role="SellerNotes" Type="Self.SellerNote" Multiplicity="1" />
     <End Role="Downloads" Type="Self.Download" Multiplicity="*" />
@@ -414,6 +443,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Notes_MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminProfiles" EntityType="Self.AdminProfile" />
     <EntitySet Name="Countries" EntityType="Self.Country" />
     <EntitySet Name="Downloads" EntityType="Self.Download" />
     <EntitySet Name="NoteCategories" EntityType="Self.NoteCategory" />
@@ -427,6 +457,10 @@
     <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
     <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_AdminProfile_Users" Association="Self.FK_AdminProfile_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AdminProfile" EntitySet="AdminProfiles" />
+    </AssociationSet>
     <AssociationSet Name="FK_Downloads_SellerNotes" Association="Self.FK_Downloads_SellerNotes">
       <End Role="SellerNotes" EntitySet="SellerNotes" />
       <End Role="Downloads" EntitySet="Downloads" />

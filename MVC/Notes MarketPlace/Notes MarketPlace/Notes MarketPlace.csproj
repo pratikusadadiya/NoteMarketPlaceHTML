@@ -131,6 +131,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminProfile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -387,6 +390,8 @@
     <Content Include="Content\images\Front\Notes-Details\Thumbs.db" />
     <Content Include="Content\images\Front\pre-login\Thumbs.db" />
     <Content Include="Content\images\Front\User-Profile\Thumbs.db" />
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -394,8 +399,6 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-chosen.scss" />
-    <Content Include="Content\bootstrap-chosen.less" />
     <None Include="packages.config" />
     <Content Include="Views\User\Home.cshtml" />
     <Content Include="Views\User\login.cshtml" />
@@ -431,6 +434,8 @@
     <Content Include="Views\Admin\RejectedNotes.cshtml" />
     <Content Include="Views\Admin\NotesUnderReview.cshtml" />
     <Content Include="Views\Admin\ManageAdministrator.cshtml" />
+    <Content Include="Views\Admin\AddAdministrator.cshtml" />
+    <Content Include="Views\Admin\SpamReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

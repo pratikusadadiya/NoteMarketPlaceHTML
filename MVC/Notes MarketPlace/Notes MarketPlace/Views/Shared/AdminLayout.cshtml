@@ -234,7 +234,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#published-notes-table, #member-table, #downloaded-notes-table, #rejected-notes-table, #under-review-table, #member-notes-table, #administrator-table').DataTable({
+            $('#published-notes-table, #member-table, #downloaded-notes-table, #rejected-notes-table, #under-review-table, #member-notes-table, #administrator-table, #spam-reports-table').DataTable({
                 "info": false,
                 "iDisplayLength": 5,
                 'aoColumnDefs': [{
@@ -265,6 +265,7 @@
             $("#downloaded-pagination").append($("#downloaded-notes-table_paginate"));
             $("#rejected-notes-pagination").append($("#rejected-notes-table_paginate"));
             $("#under-review-pagination").append($("#under-review-table_paginate"));
+            $("#spam-reports-pagination").append($("#spam-reports-table_paginate"));
             $("#member-notes-pagination").append($("#member-notes-table_paginate"));
             $("#administrator-pagination").append($("#administrator-table_paginate"));
 
@@ -296,6 +297,11 @@
             oTable6 = $('#administrator-table').DataTable();
             $('#administrator-search').keyup(function () {
                 oTable6.search($(this).val()).draw();
+            });
+
+            oTable7 = $('#spam-reports-table').DataTable();
+            $('#spam-reports-search').keyup(function () {
+                oTable7.search($(this).val()).draw();
             });
 
         });

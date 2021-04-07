@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Notes_MarketPlace.SellerNotesReportedIssue>
+@{
+    ViewBag.Title = "Spam Reports";
+    ViewBag.MainClass = "spam-reports";
+    ViewBag.SpamReports = "active-link";
+    ViewBag.Reports = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="spam-reports-inner">
+
+    <div class="container">
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-4 col-xs-12">
+                    <h3 class="heading">Spam Reports</h3>
+                </div>
+                <div class="col-md-6 col-sm-8 col-xs-12 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="spam-reports-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="spam-reports-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">reported by</th>
+                            <th scope="col">note title</th>
+                            <th scope="col">category</th>
+                            <th scope="col">date edited</th>
+                            <th scope="col">remark</th>
+                            <th scope="col">action</th>
+                            <th scope="col" class="nosort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var report in Model)
+                            {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        @{ string name = report.User.FirstName + " " + report.User.LastName; }
+                                        <td>@name</td>
+                                        <td>@Html.ActionLink(report.SellerNote.Title, "NotesDetails", "Admin", new { noteid = report.NoteID }, null)</td>
+                                        <td>@report.SellerNote.Category</td>
+                                        <td>@report.CreatedDate.ToString().Substring(0,16)</td>
+                                        <td>@report.Remarks</td>
+                                        <td>
+                                            @*<img class="table-delete" src="~/Content/images/Admin/assets/delete.png" onclick="location.href='@Url.Action("DeleteReport", "Admin", new { reportid = report.ID})'" alt="show">*@
+                                            <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" data-id="@report.ID" onclick="DeleteReport(this)" alt="show">
+                                        </td>
+                                        <td>
+                                            <div class="dropdown" id="row-details-submenu">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = report.NoteID})">Download Note</a>
+                                                    <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = report.NoteID})">View More Details</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="spam-reports-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+  
+<script>
+
+    function DeleteReport(e) {
+        var reportid = $(e).data('id');
+        if (confirm("Are you sure you want to delete reported issue?") == true)
+            window.location.href = "/Admin/DeleteReport?reportid=" + reportid ;
+        else
+            event.preventDefault();
+    }
+
+</script>

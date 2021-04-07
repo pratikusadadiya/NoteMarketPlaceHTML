@@ -107,7 +107,8 @@
                                                     <img class="row-details-icon" src="~/Content/images/Admin/assets/dots.png" alt="details">
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>
+                                                    @*<a class="dropdown-item" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>*@
+                                                    <a class="dropdown-item" data-id="@note.ID" onclick="ApproveNote(this)" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>
                                                     <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
                                                     <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
                                                 </div>
@@ -136,3 +137,14 @@
 
 </div>
 
+<script>
+
+    function ApproveNote(e) {
+        var noteid = $(e).data('id');
+        if (confirm("If you approve the notes – System will publish the notes over portal. Please press yes to continue.") == true)
+            window.location.href = "/Admin/ApproveNote?noteid=" + noteid;
+        else
+            event.preventDefault();
+    }
+
+</script>

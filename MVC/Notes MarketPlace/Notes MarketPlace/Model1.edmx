@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminID" Type="int" Nullable="false" />
+          <Property Name="ScondaryEmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="Phone_number_country_code" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Profile Picture" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="ID" />
@@ -222,6 +237,18 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AdminProfile_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AdminProfile" Type="Self.AdminProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AdminProfile">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Downloads_SellerNotes">
           <End Role="SellerNotes" Type="Self.SellerNotes" Multiplicity="1" />
           <End Role="Downloads" Type="Self.Downloads" Multiplicity="*" />
@@ -391,6 +418,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AdminProfile" EntityType="Self.AdminProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Downloads" EntityType="Self.Downloads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoteCategories" EntityType="Self.NoteCategories" Schema="dbo" store:Type="Tables" />
@@ -404,6 +432,10 @@
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminProfile_Users" Association="Self.FK_AdminProfile_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AdminProfile" EntitySet="AdminProfile" />
+          </AssociationSet>
           <AssociationSet Name="FK_Downloads_SellerNotes" Association="Self.FK_Downloads_SellerNotes">
             <End Role="SellerNotes" EntitySet="SellerNotes" />
             <End Role="Downloads" EntitySet="Downloads" />
@@ -466,6 +498,22 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminID" Type="Int32" Nullable="false" />
+          <Property Name="ScondaryEmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_number_country_code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Profile_Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_AdminProfile_Users" FromRole="AdminProfile" ToRole="Users" />
+        </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="ID" />
@@ -702,6 +750,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdminProfiles" Relationship="Self.FK_AdminProfile_Users" FromRole="Users" ToRole="AdminProfile" />
           <NavigationProperty Name="Downloads" Relationship="Self.FK_Downloads_Users" FromRole="Users" ToRole="Downloads" />
           <NavigationProperty Name="Downloads1" Relationship="Self.FK_Downloads_Users1" FromRole="Users" ToRole="Downloads" />
           <NavigationProperty Name="SellerNotes" Relationship="Self.FK_SellerNotes_Users" FromRole="Users" ToRole="SellerNotes" />
@@ -711,6 +760,18 @@
           <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_Users" FromRole="Users" ToRole="UserProfile" />
           <NavigationProperty Name="UserRole" Relationship="Self.FK_Users_UserRoles" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
+        <Association Name="FK_AdminProfile_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="AdminProfile" Type="Self.AdminProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AdminProfile">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Downloads_SellerNotes">
           <End Role="SellerNotes" Type="Self.SellerNote" Multiplicity="1" />
           <End Role="Downloads" Type="Self.Download" Multiplicity="*" />
@@ -880,6 +941,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Notes_MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminProfiles" EntityType="Self.AdminProfile" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="Downloads" EntityType="Self.Download" />
           <EntitySet Name="NoteCategories" EntityType="Self.NoteCategory" />
@@ -893,6 +955,10 @@
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_AdminProfile_Users" Association="Self.FK_AdminProfile_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AdminProfile" EntitySet="AdminProfiles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Downloads_SellerNotes" Association="Self.FK_Downloads_SellerNotes">
             <End Role="SellerNotes" EntitySet="SellerNotes" />
             <End Role="Downloads" EntitySet="Downloads" />
@@ -956,6 +1022,22 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Notes_MarketPlaceEntities">
+          <EntitySetMapping Name="AdminProfiles">
+            <EntityTypeMapping TypeName="Model.AdminProfile">
+              <MappingFragment StoreEntitySet="AdminProfile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="ScondaryEmailAddress" ColumnName="ScondaryEmailAddress" />
+                <ScalarProperty Name="Phone_number_country_code" ColumnName="Phone_number_country_code" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="Profile_Picture" ColumnName="Profile Picture" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="Model.Country">
               <MappingFragment StoreEntitySet="Countries">

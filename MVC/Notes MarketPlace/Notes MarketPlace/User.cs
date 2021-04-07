@@ -68,6 +68,7 @@ namespace Notes_MarketPlace
         public virtual ICollection<SellerNotesReview> SellerNotesReviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        public virtual ICollection<AdminProfile> AdminProfiles { get; set; }
         public virtual UserRole UserRole { get; set; }
     }
 }

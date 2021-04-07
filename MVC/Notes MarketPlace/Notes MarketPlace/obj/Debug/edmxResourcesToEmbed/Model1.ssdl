@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminProfile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminID" Type="int" Nullable="false" />
+    <Property Name="ScondaryEmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="Phone_number_country_code" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Profile Picture" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
   <EntityType Name="Countries">
     <Key>
       <PropertyRef Name="ID" />
@@ -217,6 +232,18 @@
     <Property Name="ModifiedBy" Type="int" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_AdminProfile_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="AdminProfile" Type="Self.AdminProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AdminProfile">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Downloads_SellerNotes">
     <End Role="SellerNotes" Type="Self.SellerNotes" Multiplicity="1" />
     <End Role="Downloads" Type="Self.Downloads" Multiplicity="*" />
@@ -386,6 +413,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="AdminProfile" EntityType="Self.AdminProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Downloads" EntityType="Self.Downloads" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NoteCategories" EntityType="Self.NoteCategories" Schema="dbo" store:Type="Tables" />
@@ -399,6 +427,10 @@
     <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AdminProfile_Users" Association="Self.FK_AdminProfile_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AdminProfile" EntitySet="AdminProfile" />
+    </AssociationSet>
     <AssociationSet Name="FK_Downloads_SellerNotes" Association="Self.FK_Downloads_SellerNotes">
       <End Role="SellerNotes" EntitySet="SellerNotes" />
       <End Role="Downloads" EntitySet="Downloads" />

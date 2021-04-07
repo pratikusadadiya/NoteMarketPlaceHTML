@@ -25,6 +25,7 @@ namespace Notes_MarketPlace
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AdminProfile> AdminProfiles { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Download> Downloads { get; set; }
         public virtual DbSet<NoteCategory> NoteCategories { get; set; }

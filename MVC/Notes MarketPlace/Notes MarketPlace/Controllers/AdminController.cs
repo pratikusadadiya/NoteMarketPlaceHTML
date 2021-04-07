@@ -1,6 +1,7 @@
 ﻿using Notes_MarketPlace.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -79,7 +80,7 @@ namespace Notes_MarketPlace.Controllers
             {
                 User user = db.Users.FirstOrDefault(u => u.ID == adminid);
 
-                UserProfile profile = db.UserProfiles.FirstOrDefault(p => p.UserID.Equals(adminid));
+                AdminProfile profile = db.AdminProfiles.FirstOrDefault(p => p.AdminID.Equals(adminid));
 
                 ViewBag.Country = db.Countries.ToList();
 
@@ -92,7 +93,7 @@ namespace Notes_MarketPlace.Controllers
                 }
                 else
                 {
-                    UserProfile profile1 = new UserProfile();
+                    AdminProfile profile1 = new AdminProfile();
                     profile1.FirstName = user.FirstName;
                     profile1.LastName = user.LastName;
                     profile1.EmailID = user.EmailID;
@@ -106,12 +107,14 @@ namespace Notes_MarketPlace.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateProfile(UserProfile profile)
+        public ActionResult UpdateProfile(AdminProfile profile)
         {
             User user = db.Users.FirstOrDefault(u => u.ID == adminid);
-            if (db.UserProfiles.Any(x => x.UserID == adminid))
+            user.ConfirmPassword = user.Password;
+            profile.User = user;
+            if (db.AdminProfiles.Any(x => x.AdminID == adminid))
             {
-                profile.UserID = adminid;
+                profile.AdminID = adminid;
                 profile.CreatedDate = user.CreatedDate;
                 profile.ModifiedDate = DateTime.Now;
                 if (profile.ProfilePictureFile != null)
@@ -136,12 +139,6 @@ namespace Notes_MarketPlace.Controllers
                         db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
 
-                        profile.Address_Line_1 = "NULL";
-                        profile.Address_Line_2 = "NULL";
-                        profile.City = "NULL";
-                        profile.State = "NULL";
-                        profile.Zip_Code = "NULL";
-                        profile.Country = "NULL";
                         db.Entry(profile).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
 
@@ -163,12 +160,6 @@ namespace Notes_MarketPlace.Controllers
                     db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
 
-                    profile.Address_Line_1 = "NULL";
-                    profile.Address_Line_2 = "NULL";
-                    profile.City = "NULL";
-                    profile.State = "NULL";
-                    profile.Zip_Code = "NULL";
-                    profile.Country = "NULL";
                     db.Entry(profile).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("dashboard");
@@ -176,7 +167,7 @@ namespace Notes_MarketPlace.Controllers
             }
             else
             {
-                profile.UserID = adminid;
+                profile.AdminID = adminid;
                 profile.CreatedDate = user.CreatedDate;
                 profile.ModifiedDate = DateTime.Now;
 
@@ -193,13 +184,7 @@ namespace Notes_MarketPlace.Controllers
 
                     profile.ProfilePictureFile.SaveAs(ProfileImagePath);
 
-                    profile.Address_Line_1 = "NULL";
-                    profile.Address_Line_2 = "NULL";
-                    profile.City = "NULL";
-                    profile.State = "NULL";
-                    profile.Zip_Code = "NULL";
-                    profile.Country = "NULL";
-                    db.UserProfiles.Add(profile);
+                    db.AdminProfiles.Add(profile);
                     db.SaveChanges();
 
                     return RedirectToAction("dashboard");
@@ -347,16 +332,8 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.notes = db.SellerNotes.ToList();
                 ViewBag.downloads = db.Downloads.ToList();
                 UserProfile profile = db.UserProfiles.FirstOrDefault(p => p.UserID == memberid);
-                if(profile != null)
-                {
-                    return View(profile);
-                }
-                else
-                {
-                    User user = db.Users.FirstOrDefault(p => p.ID == memberid);
-                    return View(user);
-                }
-                
+                    
+                return View(profile);
             }
             else
             {
@@ -370,6 +347,7 @@ namespace Notes_MarketPlace.Controllers
             {
                 User user = db.Users.FirstOrDefault(n => n.ID == memberid);
                 user.ConfirmPassword = user.Password;
+                user.ModifiedDate = DateTime.Now;
                 user.IsActive = false;
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -554,6 +532,7 @@ namespace Notes_MarketPlace.Controllers
                 SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
                 note.Status = "Published";
                 note.ActionedBy = adminid;
+                note.PublishedDate = DateTime.Now;
                 note.AdminRemarks = null;
                 db.Entry(note).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -612,8 +591,159 @@ namespace Notes_MarketPlace.Controllers
 
         public ActionResult ManageAdministrator()
         {
-            
-            return View();
+            if(superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+                List<AdminProfile> admins = db.AdminProfiles.ToList();
+                return View(admins);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddAdministrator()
+        {
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+                ViewBag.Country = db.Countries.ToList();
+                AdminProfile admin = new AdminProfile();
+                admin.CreatedDate = DateTime.Now;
+                return View(admin);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddAdministrator(AdminProfile admin)
+        {
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+                
+                if (db.Users.Any(x => x.EmailID == admin.User.EmailID))
+                {
+                    ViewBag.Country = db.Countries.ToList();
+                    ViewBag.DuplicateMsg = "Email ID already exist.";
+                    return View("AddAdministrator", admin);
+                }
+                User user = new User();
+                user.FirstName = admin.User.FirstName;
+                user.LastName = admin.User.LastName;
+                user.EmailID = admin.User.EmailID;
+                user.Password = admin.User.FirstName;
+                user.ConfirmPassword = user.Password;
+                user.RoleID = 2;
+                user.IsActive = true;
+                user.IsEmailVerified = true;
+                user.CreatedDate = DateTime.Now;
+                user.ModifiedDate = DateTime.Now;
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                User user1 = db.Users.Where(u => u.EmailID.Equals(user.EmailID)).FirstOrDefault();
+                admin.User = user1;
+                admin.AdminID = user1.ID;
+                admin.CreatedDate = user1.CreatedDate;
+                admin.ModifiedDate = user1.CreatedDate;
+                db.AdminProfiles.Add(admin);
+                db.SaveChanges();
+
+                return RedirectToAction("ManageAdministrator");
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditAdministrator(int editid)
+        {
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+                ViewBag.Country = db.Countries.ToList();
+                AdminProfile admin = db.AdminProfiles.Where(a => a.Id == editid).FirstOrDefault();
+                return View("AddAdministrator",admin);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditAdministrator(AdminProfile profile)
+        {
+            if (superadmin != 0)
+            {
+                User user = db.Users.Where(u => u.ID == profile.AdminID).FirstOrDefault();
+                user.FirstName = profile.User.FirstName;
+                user.LastName = profile.User.LastName;
+                user.EmailID = profile.User.EmailID;
+                user.ConfirmPassword = user.Password;
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                profile.User = user;
+                db.Entry(profile).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("ManageAdministrator");
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        public ActionResult DeleteAdministrator(int deleteid)
+        {
+            if (superadmin != 0)
+            {
+                AdminProfile admin = db.AdminProfiles.Where(a => a.Id == deleteid).FirstOrDefault();
+                User user = db.Users.Where(u => u.ID == admin.AdminID).FirstOrDefault();
+                user.IsActive = false;
+                user.ConfirmPassword = user.Password;
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageAdministrator");
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        public ActionResult SpamReports()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                List<SellerNotesReportedIssue> reports = db.SellerNotesReportedIssues.ToList();
+                return View(reports);
+            }
+            else
+            {
+                return RedirectToAction("login","User");
+            }
+        }
+
+        public ActionResult DeleteReport(int reportid)
+        {
+            SellerNotesReportedIssue report = db.SellerNotesReportedIssues.Find(reportid);
+            db.SellerNotesReportedIssues.Remove(report);
+            db.SaveChanges();
+            return RedirectToAction("SpamReports");
         }
 
         public ActionResult logout()

@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Notes_MarketPlaceEntities">
+    <EntitySetMapping Name="AdminProfiles">
+      <EntityTypeMapping TypeName="Model.AdminProfile">
+        <MappingFragment StoreEntitySet="AdminProfile">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+          <ScalarProperty Name="ScondaryEmailAddress" ColumnName="ScondaryEmailAddress" />
+          <ScalarProperty Name="Phone_number_country_code" ColumnName="Phone_number_country_code" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="Profile_Picture" ColumnName="Profile Picture" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Countries">
       <EntityTypeMapping TypeName="Model.Country">
         <MappingFragment StoreEntitySet="Countries">

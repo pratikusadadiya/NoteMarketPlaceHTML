@@ -47,7 +47,7 @@
                             int count = 0;
                             foreach (var member in Model)
                             {
-                                if (member.RoleID == 1 && member.IsActive == true)
+                                if (member.RoleID == 1 && member.IsEmailVerified == true && member.IsActive == true)
                                 {
                                     count++;
                                     <tr>
@@ -97,7 +97,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="@Url.Action("MemberDetails", "Admin", new { memberid = member.ID})">View More Details</a>
-                                                    <a class="dropdown-item" href="@Url.Action("DeactivateMember", "Admin", new { memberid = member.ID})">Deactivate</a>
+                                                    <a class="dropdown-item" data-id="@member.ID" onclick="DeactivateMember(this)" href="@Url.Action("DeactivateMember", "Admin", new { memberid = member.ID})">Deactivate</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -121,3 +121,15 @@
     </div>
 
 </div>
+
+<script>
+
+    function DeactivateMember(e) {
+        var memberid = $(e).data('id');
+        if (confirm("Are you sure you want to make this member inactive?") == true)
+            window.location.href = "/Admin/DeactivateMember?memberid=" + memberid;
+        else
+            event.preventDefault();
+    }
+
+</script>
