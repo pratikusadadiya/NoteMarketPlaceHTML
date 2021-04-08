@@ -1049,16 +1049,24 @@ a.paginate_button {
 }
 
 *==============================
-    Unpublish Popup
+        Unpublish Popup
 ================================*/
 .unpublishmodel .modal-body .form-control {
+    height: 50px;
+    line-height: 40px;
+    font-family: "Open Sans", sans-serif;
+}
+.unpublishmodel .modal-body .form-control[readonly] {
+    background-color: #fff;
+    letter-spacing: .9px;
     height: 50px;
     line-height: 40px;
 }
 
 .unpublishmodel .modal-body .form-control#input-comment {
     height: 120px;
-    line-height: 30px;
+    line-height: 40px;
+    letter-spacing: .9px;
 }
 
 .unpublishmodel .modal-body .submit-btn {
@@ -1067,12 +1075,13 @@ a.paginate_button {
 }
 
 .unpublishmodel .modal-body .submit-btn.unpublish-btn {
-    width: 200px;
+    width: 160px;
     background-color: #FF3636;
     margin-right: 10px;
 }
 
-.unpublishmodel .modal-body .submit-btn.unpublish-btn:hover {
+.unpublishmodel .modal-body .submit-btn.unpublish-btn:hover,
+.unpublishmodel .modal-body .submit-btn.unpublish-btn:focus {
     background-color: #fff;
     color: #FF3636;
     border: 1px solid #FF3636;

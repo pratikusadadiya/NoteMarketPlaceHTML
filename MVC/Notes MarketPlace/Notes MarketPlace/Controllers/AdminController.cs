@@ -292,7 +292,24 @@ namespace Notes_MarketPlace.Controllers
                 note.ActionedBy = adminid;
                 db.Entry(note).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("dashboard");
+
+                MailMessage mail = new MailMessage("poojapatel102938@gmail.com", note.User.EmailID.ToString());
+                mail.Subject = "Sorry! We need to remove your notes from our portal.";
+                string Body = "Hello " + note.User.FirstName + " " + note.User.LastName + ",<br><br> We want to inform you that, your note " + note.Title + " has been removed from the portal." + "<br>Please find our remarks as below -<br><b>" + note.AdminRemarks + "</b><br><br>Regards," + "<br>Notes Marketplace";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+
+                NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+                smtp.EnableSsl = true;
+                smtp.Credentials = nc;
+                smtp.Send(mail);
+
+                return RedirectToAction("PublishedNotes");
             }
             else
             {

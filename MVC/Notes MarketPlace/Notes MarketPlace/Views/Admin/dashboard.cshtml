@@ -144,7 +144,7 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
                                                     <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UnpublishModal">Unpublish</a>
+                                                    <a class="dropdown-item" href="#"  data-id="@note.ID" data-title="@note.Title" onclick="UnpublishPopup(this)" data-toggle="modal" data-target="#UnpublishModal">Unpublish</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -166,17 +166,18 @@
                                                     <br />
                                                     @using (Html.BeginForm("Unpublish", "Admin", FormMethod.Post))
                                                     {
+                                                        <input id="NoteId" name="noteid" value="@Request.QueryString["Noteid"]" hidden />
+                                                        <br />
                                                         <label for="input-comment" class="popup-text-02">
                                                             <h5>Note Title *</h5>
                                                         </label>
-                                                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" value="@note.Title" readonly />
+                                                        <input class="form-control" id="Notetitle" name="Notetitle" placeholder="Note Title" rows="1" value="" readonly />
                                                         <br />
-                                                        <input name="noteid" value="@note.ID" hidden />
                                                         <label for="input-comment" class="popup-text-02">
                                                             <h5>Remarks *</h5>
                                                         </label>
-                                                        <textarea name="AdminRemark" class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
-                                                        <button type="submit" class="btn submit-btn unpublish-btn">Unpublish</button>
+                                                        <textarea name="AdminRemark" class="form-control" id="input-remark" rows="5" placeholder="Enter remarks..." required></textarea>
+                                                        <button type="submit" class="btn submit-btn unpublish-btn" onclick="UnpublishBtn()">Unpublish</button>
                                                         <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
                                                     }
                                                 </div>
@@ -200,3 +201,21 @@
     </div>
 
 </div>
+
+<script>
+
+    function UnpublishPopup(n) {
+        var Noteid = $(n).data('id');
+        var Notetitle = $(n).data('title');
+        $('#NoteId').val(Noteid);
+        $('#Notetitle').val(Notetitle);
+        document.getElementById('UnpublishTitle').innerHTML = Notetitle;
+    }
+
+    function UnpublishBtn() {
+        if (confirm("Are you sure you want to Unpublish this note?") == false) {
+            event.preventDefault();
+        }
+    }
+
+</script>

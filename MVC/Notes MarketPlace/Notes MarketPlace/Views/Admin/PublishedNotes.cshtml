@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </form>
-            
+
 
             <div class="table-responsive-lg" id="table-content">
                 <table class="table" id="published-notes-table">
@@ -100,9 +100,9 @@
                                         </td>
                                         <td>@note.PublishedDate.ToString().Substring(0, 16)</td>
 
-                                        @foreach(User user in ViewBag.Users)
+                                        @foreach (User user in ViewBag.Users)
                                         {
-                                            if(user.ID == note.ActionedBy)
+                                            if (user.ID == note.ActionedBy)
                                             {
                                                 string name = user.FirstName + " " + user.LastName;
                                                 <td>@name</td>
@@ -118,7 +118,7 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
                                                     <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#UnpublishModal">Unpublish</a>
+                                                    <a class="dropdown-item" href="#" data-id="@note.ID" data-title="@note.Title" onclick="UnpublishPopup(this)" data-toggle="modal" data-target="#UnpublishModal">Unpublish</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -126,37 +126,6 @@
 
                                     </tr>
 
-                                    <!-- Unpublish modal -->
-                                    <div class="modal fade unpublishmodel" id="UnpublishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true" class="close-popup">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h2 class="popup-review-title">Unpublish - @note.Title</h2>
-                                                    <br />
-                                                    @using (Html.BeginForm("Unpublish", "Admin", FormMethod.Post))
-                                                    {
-                                                        <label for="input-comment" class="popup-text-02">
-                                                            <h5>Note Title *</h5>
-                                                        </label>
-                                                        <input class="form-control" id="note-title" placeholder="Note Title" rows="1" value="@note.Title" readonly />
-                                                        <br />
-                                                        <input name="noteid" value="@note.ID" hidden />
-                                                        <label for="input-comment" class="popup-text-02">
-                                                            <h5>Remarks *</h5>
-                                                        </label>
-                                                        <textarea name="AdminRemark" class="form-control" id="input-comment" rows="5" placeholder="Enter remarks..." required></textarea>
-                                                        <button type="submit" class="btn submit-btn unpublish-btn">Unpublish</button>
-                                                        <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 }
                             }
                         }
@@ -167,6 +136,39 @@
 
         </div>
 
+        <!-- Unpublish modal -->
+        <div class="modal fade unpublishmodel" id="UnpublishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="close-popup">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="popup-review-title" style="display:inline;">Unpublish - <p id="UnpublishTitle" style="display:inline;"></p></h2>
+                        <br />
+                        @using (Html.BeginForm("Unpublish", "Admin", FormMethod.Post))
+                        {
+                            <input id="NoteId" name="noteid" value="@Request.QueryString["Noteid"]" hidden />
+                            <br />
+                            <label for="input-comment" class="popup-text-02">
+                                <h5>Note Title *</h5>
+                            </label>
+                            <input class="form-control" id="Notetitle" name="Notetitle" placeholder="Note Title" rows="1" value="" readonly />
+                            <br />
+                            <label for="input-comment" class="popup-text-02">
+                                <h5>Remarks *</h5>
+                            </label>
+                            <textarea name="AdminRemark" class="form-control" id="input-remark" rows="5" placeholder="Enter remarks..." required></textarea>
+                            <button type="submit" class="btn submit-btn unpublish-btn" onclick="UnpublishBtn()">Unpublish</button>
+                            <button type="submit" class="btn submit-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Pagination -->
         <div class="pagination-area text-center" id="published-pagination">
             <!-- Pagination appear here -->
@@ -175,3 +177,21 @@
     </div>
 
 </div>
+
+<script>
+
+    function UnpublishPopup(n) {
+        var Noteid = $(n).data('id');
+        var Notetitle = $(n).data('title');
+        $('#NoteId').val(Noteid);
+        $('#Notetitle').val(Notetitle);
+        document.getElementById('UnpublishTitle').innerHTML = Notetitle;
+    }
+
+    function UnpublishBtn() {
+        if (confirm("Are you sure you want to Unpublish this note?") == false) {
+            event.preventDefault();
+        }
+    }
+
+</script>
