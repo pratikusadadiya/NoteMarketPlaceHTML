@@ -1242,6 +1242,7 @@ a.paginate_button {
     line-height: 34px;
     font-weight: 700;
     color: #6255a5;
+    text-decoration: none;
 }
 #dashboard-inner .top-section-text {
     font-size: 16px;
@@ -1260,6 +1261,10 @@ a.paginate_button {
 #dashboard .table td .table-eye {
     margin-left: 18px;
     cursor: pointer;
+}
+#dashboard .table tr td:nth-child(1),
+#dashboard .table tr th:nth-child(1) {
+    text-align: center;
 }
 
 /*==============================

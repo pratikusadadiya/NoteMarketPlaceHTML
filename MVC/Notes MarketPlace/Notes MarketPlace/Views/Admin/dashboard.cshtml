@@ -23,8 +23,7 @@
             <!-- Top section -->
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="top-section">
-
-                    <h3 class="top-section-no">@ViewBag.NoOfinReviewNotes</h3>
+                    <a style="text-decoration: none;" href="@Url.Action("NotesUnderReview", "Admin")"><h3 class="top-section-no">@ViewBag.NoOfinReviewNotes.ToString()</h3></a>
                     <h5 class="top-section-text">Number of Notes in Review for Publish</h5>
 
                 </div>
@@ -32,8 +31,7 @@
 
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="top-section">
-
-                    <h3 class="top-section-no">@ViewBag.NoOfNewDownloads</h3>
+                    <a style="text-decoration: none;" href="@Url.Action("DownloadedNotes", "Admin")"><h3 class="top-section-no">@ViewBag.NoOfNewDownloads.ToString()</h3></a>
                     <h5 class="top-section-text">Number of New Notes Downloaded (Last 7 days)</h5>
 
                 </div>
@@ -41,8 +39,7 @@
 
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="top-section">
-
-                    <h3 class="top-section-no">@ViewBag.NoOfNewUsers</h3>
+                    <a style="text-decoration: none;" href="@Url.Action("Members", "Admin")"><h3 class="top-section-no">@ViewBag.NoOfNewUsers.ToString()</h3></a>
                     <h5 class="top-section-text">Number of New Registrations (Last 7 days)</h5>
 
                 </div>

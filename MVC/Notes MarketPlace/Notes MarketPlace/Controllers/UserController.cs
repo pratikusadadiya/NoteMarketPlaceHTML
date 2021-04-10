@@ -14,10 +14,9 @@ namespace Notes_MarketPlace.Controllers
     public class UserController : Controller
     {
         Notes_MarketPlaceEntities db = new Notes_MarketPlaceEntities();
-        static int userid;
-        string defaultProfileImg = "../../Content/images/Front/User-Profile/profile-img.png";
-        string defaultBookImg = "../../Content/images/Front/Notes-details/1.jpg";
-        string defaultBookPreview = "../../Content/images/Front/Notes-details/sample-pdf.png";
+        static int userid = 0;
+        string defaultProfileImg;
+        string defaultBookImg;
 
         public ActionResult home()
         {
@@ -25,6 +24,9 @@ namespace Notes_MarketPlace.Controllers
             {
                 ViewBag.valid = true;
             }
+            List<SystemConfiguration> list = db.SystemConfigurations.ToList();
+            defaultProfileImg = list.Where(l => l.Key == "DefaultProfileImg").FirstOrDefault().Value;
+            defaultBookImg = list.Where(l => l.Key == "DefaultNoteImg").FirstOrDefault().Value;
             return View("Home");
         }
 
@@ -63,7 +65,7 @@ namespace Notes_MarketPlace.Controllers
 
                 MailMessage mail = new MailMessage("poojapatel102938@gmail.com", user.EmailID.ToString());
                 mail.Subject = "Notes MarketPlace - Email Verification";
-                string Body = "Dear " + user.FirstName + " " + user.LastName + ",\n\n Thank you for signing up with Notes MarketPlace. Please click on below link to verify your email http://localhost:52734/User/emailVerification?emailid="+user.EmailID;
+                string Body = "Dear " + user.FirstName + " " + user.LastName + ",<br><br> Thank you for signing up with Notes MarketPlace. Please click on below link to verify your email http://localhost:52734/User/emailVerification?emailid="+user.EmailID;
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
 
@@ -147,10 +149,10 @@ namespace Notes_MarketPlace.Controllers
                     ViewBag.SuccessMsg = "Your account has been successfully created. Please verify your email to complete your registration.";
 
                     MailMessage mail = new MailMessage("poojapatel102938@gmail.com", user.EmailID.ToString());
-                    mail.Subject = "Notes MarketPlace - Forgot Password";
-                    string Body = "Dear " + valid.FirstName + " " + valid.LastName + ",\n\n Your temporary password is : " + valid.Password;
+                    mail.Subject = "New Temporary Password has been created for you";
+                    string Body = "Hello,<br><br>We have generated a new password for you <br>Password : " + valid.Password + "<br><br>Regards,<br>Notes Marketplace";
                     mail.Body = Body;
-                    
+                    mail.IsBodyHtml = true;
 
                     SmtpClient smtp = new SmtpClient();
                     smtp.Host = "smtp.gmail.com";
@@ -436,11 +438,6 @@ namespace Notes_MarketPlace.Controllers
             {
                 note.DisplayPicture = defaultBookImg;
             }
-            if (note.NotesPreview == null)
-            {
-                note.NotesPreview = defaultBookPreview;
-
-            }
             return View(note);
         }
 
@@ -478,6 +475,26 @@ namespace Notes_MarketPlace.Controllers
                     db.Downloads.Add(dwn);
                     db.SaveChanges();
                     ViewBag.RequestMsg = "Download Request has been successfully sent to seller. You can download it from My Downloads after Seller allowed to download. Stay Tuned...!!! ";
+
+                    User user = db.Users.Where(u => u.ID == note.SellerID).FirstOrDefault();
+                    User user1 = db.Users.Where(u => u.ID == userid).FirstOrDefault();
+
+                    MailMessage mail = new MailMessage("poojapatel102938@gmail.com", user.EmailID.ToString());
+                    mail.Subject = user1.FirstName + " " + user1.LastName + " wants to purchase your notes";
+                    string Body = "Hello " + user.FirstName + " "  + user.LastName + ",<br><br>We would like to inform you that, " + user1.FirstName + " " + user1.LastName + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him.<br><br>Regards,<br>Notes Marketplace";
+                    mail.Body = Body;
+                    mail.IsBodyHtml = true;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+
+                    NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+                    smtp.EnableSsl = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mail);
+
                     return RedirectToAction("NotesDetails", new { noteid });
                 }
             }
@@ -552,6 +569,27 @@ namespace Notes_MarketPlace.Controllers
                 db.SellerNotes.Add(note);
                 db.SaveChanges();
 
+                User user = db.Users.FirstOrDefault(u => u.ID == userid);
+
+                if (fc["submit"].ToString() == "publish")
+                {
+                    MailMessage mail = new MailMessage("poojapatel102938@gmail.com", "poojapatel102938@gmail.com");
+                    mail.Subject = user.FirstName + " " + user.LastName + " sent his note for review";
+                    string Body = "Hello Admins,<br><br>We want to inform you that, " + user.FirstName + " " + user.LastName + " sent his note " + note.Title + " for review. Please look at the notes and take required actions. <br><br>Regards,<br>Notes Marketplace";
+                    mail.Body = Body;
+                    mail.IsBodyHtml = true;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+
+                    NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+                    smtp.EnableSsl = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mail);
+                }
+
                 return RedirectToAction("dashboard");
             }
             else
@@ -564,11 +602,18 @@ namespace Notes_MarketPlace.Controllers
         [HttpGet]
         public ActionResult EditNote(int noteid)
         {
-            ViewBag.Categories = db.NoteCategories.ToList();
-            ViewBag.NoteTypes = db.NoteTypes.ToList();
-            ViewBag.Countries = db.Countries.ToList();
-            SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
-            return View("addnotes",note);
+            if(userid != 0)
+            {
+                ViewBag.Categories = db.NoteCategories.ToList();
+                ViewBag.NoteTypes = db.NoteTypes.ToList();
+                ViewBag.Countries = db.Countries.ToList();
+                SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
+                return View("addnotes", note);
+            }
+            else
+            {
+                return RedirectToAction("login");
+            }
         }
 
         [HttpPost]
@@ -601,6 +646,7 @@ namespace Notes_MarketPlace.Controllers
                 else
                 {
                     ViewBag.ErrorImgFile = "Upload proper image file.";
+                    return View("addnotes", note);
                 }
             }
             if (note.NotesAttachmentFile != null)
@@ -617,6 +663,7 @@ namespace Notes_MarketPlace.Controllers
                 else
                 {
                     ViewBag.ErrorPdfFile = "Upload proper pdf file.";
+                    return View("addnotes", note);
                 }
             }
             if (note.NotesPreviewFile != null)
@@ -633,10 +680,39 @@ namespace Notes_MarketPlace.Controllers
                 else
                 {
                     ViewBag.ErrorPdfFile = "Upload proper pdf file.";
+                    return View("addnotes", note);
                 }
             }
-            db.Entry(note).State = System.Data.Entity.EntityState.Modified;
+            if(note.ID == 0)
+            {
+                db.SellerNotes.Add(note);
+            }
+            else
+            {
+                db.Entry(note).State = System.Data.Entity.EntityState.Modified;
+            }
             db.SaveChanges();
+
+            User user = db.Users.FirstOrDefault(u => u.ID == userid);
+            if (fc["submit"].ToString() == "publish")
+            {
+                MailMessage mail = new MailMessage("poojapatel102938@gmail.com", "poojapatel102938@gmail.com");
+                mail.Subject = user.FirstName + " " + user.LastName + " sent his note for review";
+                string Body = "Hello Admins,<br><br>We want to inform you that, " + user.FirstName + " " + user.LastName + " sent his note " + note.Title + " for review. Please look at the notes and take required actions. <br><br>Regards,<br>Notes Marketplace";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+
+                NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+                smtp.EnableSsl = true;
+                smtp.Credentials = nc;
+                smtp.Send(mail);
+            }
+
             return RedirectToAction("dashboard");
         }
 
@@ -692,6 +768,23 @@ namespace Notes_MarketPlace.Controllers
             dwn.AttachmentDownloadedDate = DateTime.Now;
             db.Entry(dwn).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
+
+            MailMessage mail = new MailMessage("poojapatel102938@gmail.com", dwn.User1.EmailID.ToString());
+            mail.Subject = dwn.User.FirstName + " " + dwn.User.LastName + " Allows you to download a note";
+            string Body = "Hello " + dwn.User1.FirstName + " " + dwn.User1.LastName + ",<br><br>We would like to inform you that, " + dwn.User.FirstName + " " + dwn.User.LastName + "  Allows you to download a note. Please login and see My Download tabs to download particular note.<br><br>Regards,<br>Notes Marketplace";
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+
+            NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+            smtp.EnableSsl = true;
+            smtp.Credentials = nc;
+            smtp.Send(mail);
+
             return RedirectToAction("buyerRequests");
         }
 
@@ -738,6 +831,22 @@ namespace Notes_MarketPlace.Controllers
 
                 db.SellerNotesReportedIssues.Add(report);
                 db.SaveChanges();
+
+                MailMessage mail = new MailMessage("poojapatel102938@gmail.com", "poojapatel102938@gmail.com");
+                mail.Subject = dwn.User1.FirstName + " " + dwn.User1.LastName + " Reported an issue for " + dwn.NoteTitle;
+                string Body = "Hello Admins,<br><br>We want to inform you that, " + dwn.User1.FirstName + " " + dwn.User1.LastName + " Reported an issue for " + dwn.User.FirstName + " " + dwn.User.LastName + "’s Note with title " + dwn.NoteTitle + ". Please look at the notes and take required actions.<br><br>Regards,<br>Notes Marketplace";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+
+                NetworkCredential nc = new NetworkCredential("poojapatel102938@gmail.com", "Pooja102938");
+                smtp.EnableSsl = true;
+                smtp.Credentials = nc;
+                smtp.Send(mail);
             }
 
             return RedirectToAction("MyDownloads");
@@ -790,6 +899,33 @@ namespace Notes_MarketPlace.Controllers
             {
                 return RedirectToAction("login");
             }
+        }
+
+        [HttpGet]
+        public ActionResult CloneNote(int noteid)
+        {
+            if (userid != 0)
+            {
+                SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
+                SellerNote clonenote = note;
+                clonenote.ID = 0;
+                ViewBag.Categories = db.NoteCategories.ToList();
+                ViewBag.NoteTypes = db.NoteTypes.ToList();
+                ViewBag.Countries = db.Countries.ToList();
+
+                return View("addnotes", clonenote);
+            }
+            else
+            {
+                return RedirectToAction("login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CloneNote(SellerNote note, FormCollection fc)
+        {
+            EditNote(note, fc);
+            return RedirectToAction("dashboard");
         }
 
         public ActionResult MySoldNotes()
@@ -944,10 +1080,11 @@ namespace Notes_MarketPlace.Controllers
             {
                 ViewBag.SuccessMsg = "Your query has been successfully sent to system. Our executive will get back to you within 24hr.";
 
-                MailMessage mail = new MailMessage("poojapatel102938@gmail.com", c.EmailID.ToString());
-                mail.Subject = "Notes MarketPlace - Query";
-                string Body = "Dear " + c.FullName + ",\nSubject : " + c.Subject + ",\nComments : " + c.Comment;
+                MailMessage mail = new MailMessage(c.EmailID.ToString(), "poojapatel102938@gmail.com");
+                mail.Subject = c.FullName + " - Query";
+                string Body = "Hello,<br><br>Subject/Question : " + c.Subject + ",<br>Comments : " + c.Comment + "<br><br>Regards,<br>" + c.FullName;
                 mail.Body = Body;
+                mail.IsBodyHtml = true;
 
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
@@ -980,7 +1117,7 @@ namespace Notes_MarketPlace.Controllers
         public ActionResult logout()
         {
             userid = 0;
-            return RedirectToAction("home");
+            return RedirectToAction("login");
         }
     }
 }

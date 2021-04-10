@@ -1,0 +1,44 @@
+﻿@model Notes_MarketPlace.Country
+@{
+    ViewBag.Title = "Add Country";
+    ViewBag.MainClass = "add-country";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<!-- Add Country form -->
+<div class="profile-admin-etc-inner">
+    <div class="container form-details">
+        <div class="form-inner">
+
+
+            <!-- Add country -->
+            <div class="row">
+                <form method="post">
+                    @Html.HiddenFor(l => l.ID)
+                    <h2 class="title text-left">Add Country</h2>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-country-name">Country Name *</label>
+                            @Html.TextBoxFor(l => l.Name, new { @placeholder = "Enter your country name", @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-country-code">Country Code *</label>
+                            @Html.TextBoxFor(l => l.CountryCode, new { @placeholder = "Enter your country code", @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    @Html.HiddenFor(l => l.IsActive)
+                    @Html.HiddenFor(l => l.CreatedDate)
+                    @Html.HiddenFor(l => l.CreatedBy)
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

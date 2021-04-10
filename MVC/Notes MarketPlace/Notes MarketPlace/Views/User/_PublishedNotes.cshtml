@@ -16,6 +16,7 @@
         <table class="table" id="published">
             <thead>
                 <tr>
+                    <th>sr no.</th>
                     <th scope="col">Added date</th>
                     <th scope="col">title</th>
                     <th scope="col">category</th>
@@ -25,13 +26,14 @@
                 </tr>
             </thead>
             <tbody>
-
+                @{ int count = 0;}
                 @foreach (var note in Model)
                 {
                     if (note.SellerID == ViewBag.userid && note.Status == "Published" && note.IsActive == true)
                     {
-
+                        count++;
                         <tr>
+                            <td>@count</td>
                             <td>@note.PublishedDate.ToString().Substring(0, 10)</td>
                             <td>@note.Title</td>
                             <td>@note.Category</td>

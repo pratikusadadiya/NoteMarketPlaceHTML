@@ -59,15 +59,18 @@
 
                                             foreach (Country item in countries)
                                             {
-                                                if (item.CountryCode != null)
+                                                if (item.IsActive == true)
                                                 {
-                                                    if (item.CountryCode.Equals(Model.Phone_number_country_code))
+                                                    if (item.CountryCode != null)
                                                     {
-                                                        <option selected>@item.CountryCode</option>
-                                                        continue;
+                                                        if (item.CountryCode.Equals(Model.Phone_number_country_code))
+                                                        {
+                                                            <option selected>@item.CountryCode</option>
+                                                            continue;
+                                                        }
                                                     }
+                                                    <option>@item.CountryCode</option>
                                                 }
-                                                <option>@item.CountryCode</option>
                                             }
                                         }
                                     </select>

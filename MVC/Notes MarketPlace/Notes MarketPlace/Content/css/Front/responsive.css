@@ -87,7 +87,14 @@
 #mobile-nav li.active-link a{
     color: #333333 !important;
 }
-
+#mobile-nav li:nth-child(6) span:hover {
+    color: #6255a5;
+    border-bottom: 3px solid #6255a5;
+}
+#mobile-nav .mobile-nav-logout:hover {
+    cursor: pointer;
+    border-bottom: 3px solid #6255a5;
+}
 /*===========================
         mobile-dropdown
 ============================*/

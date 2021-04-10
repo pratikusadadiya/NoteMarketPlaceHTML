@@ -94,14 +94,14 @@
                                         <span class="@ViewBag.Settings">Settings</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
-                                        @Html.ActionLink("Manage System Configuration", "ManageSystemConfiguration", null, new { @class = ViewBag.ManageSystemConfiguration })
                                         @if (ViewBag.superadmin == true)
                                         {
+                                            @Html.ActionLink("Manage System Configuration", "ManageSystemConfiguration", null, new { @class = ViewBag.ManageSystemConfiguration })
                                             @Html.ActionLink("Manage Administrator", "ManageAdministrator", null, new { @class = ViewBag.ManageAdministrator })
                                         }
                                         @Html.ActionLink("Manage Category", "ManageCategory", null, new { @class = ViewBag.ManageCategory })
                                         @Html.ActionLink("Manage Type", "ManageType", null, new { @class = ViewBag.ManageType })
-                                        @Html.ActionLink("Manage Countries", "ManageCountries", null, new { @class = ViewBag.ManageCountries })
+                                        @Html.ActionLink("Manage Countries", "ManageCountry", null, new { @class = ViewBag.ManageCountry })
                                     </div>
                                 </div>
 
@@ -121,7 +121,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a><button onclick="location.href='@Url.Action("logout")'" type="submit" class="btn submit-btn">Logout</button></a>
+                                <a><button onclick="Logout()" type="submit" class="btn submit-btn">Logout</button></a>
                             </li>
                         </ul>
                     </div>
@@ -171,11 +171,14 @@
                                             <span>Settings</span>
                                         </button>
                                         <div class="dropdown-menu dropdown-settings" aria-labelledby="dropdownMenuButton">
-                                            @Html.ActionLink("Manage System Configuration", "ManageSystemConfiguration", null, new { @class = ViewBag.ManageSystemConfiguration })
-                                            @Html.ActionLink("Manage Administrator", "ManageAdministrator", null, new { @class = ViewBag.ManageAdministrator })
+                                            @if (ViewBag.superadmin == true)
+                                            {
+                                                @Html.ActionLink("Manage System Configuration", "ManageSystemConfiguration", null, new { @class = ViewBag.ManageSystemConfiguration })
+                                                @Html.ActionLink("Manage Administrator", "ManageAdministrator", null, new { @class = ViewBag.ManageAdministrator })
+                                            }
                                             @Html.ActionLink("Manage Category", "ManageCategory", null, new { @class = ViewBag.ManageCategory })
                                             @Html.ActionLink("Manage Type", "ManageType", null, new { @class = ViewBag.ManageType })
-                                            @Html.ActionLink("Manage Countries", "ManageCountries", null, new { @class = ViewBag.ManageCountries })
+                                            @Html.ActionLink("Manage Countries", "ManageCountry", null, new { @class = ViewBag.ManageCountry })
                                         </div>
                                     </div>
                                 </li>
@@ -234,7 +237,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#published-notes-table, #member-table, #downloaded-notes-table, #rejected-notes-table, #under-review-table, #member-notes-table, #administrator-table, #spam-reports-table').DataTable({
+            $('#published-notes-table, #member-table, #downloaded-notes-table, #rejected-notes-table, #under-review-table, #member-notes-table, #administrator-table, #manage-category-table, #manage-country-table, #manage-type-table, #spam-reports-table').DataTable({
                 "info": false,
                 "iDisplayLength": 5,
                 'aoColumnDefs': [{
@@ -268,6 +271,9 @@
             $("#spam-reports-pagination").append($("#spam-reports-table_paginate"));
             $("#member-notes-pagination").append($("#member-notes-table_paginate"));
             $("#administrator-pagination").append($("#administrator-table_paginate"));
+            $("#manage-category-pagination").append($("#manage-category-table_paginate"));
+            $("#manage-country-pagination").append($("#manage-country-table_paginate"));
+            $("#manage-type-pagination").append($("#manage-type-table_paginate"));
 
             oTable1 = $('#published-notes-table').DataTable();
             $('#published-search').keyup(function () {
@@ -304,7 +310,29 @@
                 oTable7.search($(this).val()).draw();
             });
 
+            oTable8 = $('#manage-category-table').DataTable();
+            $('#category-search').keyup(function () {
+                oTable8.search($(this).val()).draw();
+            });
+
+            oTable9 = $('#manage-country-table').DataTable();
+            $('#manage-country-search').keyup(function () {
+                oTable9.search($(this).val()).draw();
+            });
+
+            oTable10 = $('#manage-type-table').DataTable();
+            $('#manage-type-search').keyup(function () {
+                oTable10.search($(this).val()).draw();
+            });
+
         });
+
+        function Logout() {
+            if (confirm("Are you sure, you want to logout?") == true)
+                window.location.href = "/Admin/logout";
+            else
+                event.preventDefault();
+        }
 
     </script>
 

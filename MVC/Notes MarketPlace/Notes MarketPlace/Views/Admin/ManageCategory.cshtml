@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Notes_MarketPlace.NoteCategory>
+@{
+    ViewBag.Title = "Manage Category";
+    ViewBag.MainClass = "manage-category";
+    ViewBag.ManageCategory = "active-link";
+    ViewBag.Settings = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<div id="manage-category-inner" class="manage-profile-admin-etc">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Manage Category</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a><button type="submit" class="btn submit-btn" onclick="location.href='@Url.Action("AddCategory")'">Add Category</button></a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="category-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="manage-category-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">category</th>
+                            <th scope="col">description</th>
+                            <th scope="col">date added</th>
+                            <th scope="col">added by</th>
+                            <th scope="col">active</th>
+                            <th scope="col" class="nosort">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var category in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@category.Name</td>
+                                    <td>@category.Description</td>
+                                    <td>@category.CreatedDate.ToString().Substring(0, 16)</td>
+
+                                    @foreach(User item in ViewBag.Users)
+                                    {
+                                        if(item.ID == category.CreatedBy)
+                                        {
+                                            <td>@item.FirstName @item.LastName</td>
+                                        }
+                                    }
+
+                                    @if (category.IsActive == true)
+                                    {
+                                        <td>Yes</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No</td>
+                                    }
+
+                                    <td>
+                                        <div class="edit-delete">
+                                            <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit" onclick="location.href='@Url.Action("EditCategory", "Admin", new { editid = category.ID})'">
+                                            <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="delete" data-id="@category.ID" onclick="DeleteCategory(this)">
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="manage-category-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function DeleteCategory(e) {
+        var deleteid = $(e).data('id');
+        if (confirm("Are you sure you want to make this category inactive?") == true)
+            window.location.href = "/Admin/DeleteCategory?deleteid=" + deleteid;
+        else
+            event.preventDefault();
+    }
+
+</script>

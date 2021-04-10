@@ -72,17 +72,21 @@
 
                                     foreach (Country item in countries)
                                     {
-                                        if (item.CountryCode != null)
+                                        if (item.IsActive == true)
                                         {
-                                            if (item.CountryCode.Equals(Model.Phone_number___Country_Code))
+                                            if (item.CountryCode != null)
                                             {
+                                                if (item.CountryCode.Equals(Model.Phone_number___Country_Code))
+                                                {
                                                 <option selected>@item.CountryCode</option>
-                                                continue;
+                                                    continue;
+                                                }
                                             }
+                                            <option>@item.CountryCode</option>
                                         }
-                                        <option>@item.CountryCode</option>
                                     }
                                 }
+                                
                             </select>
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-9">
@@ -140,15 +144,18 @@
                         <option hidden>Select your country</option>
                         @foreach (Country item2 in countries)
                         {
-                            if (item2.Name != null)
+                            if (item2.IsActive == true)
                             {
-                                if (item2.Name.Equals(Model.Country))
+                                if (item2.Name != null)
                                 {
-                                    <option selected>@item2.Name</option>
-                                    continue;
+                                    if (item2.Name.Equals(Model.Country))
+                                    {
+                                        <option selected>@item2.Name</option>
+                                        continue;
+                                    }
                                 }
+                                <option>@item2.Name</option>
                             }
-                            <option>@item2.Name</option>
                         }
                     </select>
                 </div>

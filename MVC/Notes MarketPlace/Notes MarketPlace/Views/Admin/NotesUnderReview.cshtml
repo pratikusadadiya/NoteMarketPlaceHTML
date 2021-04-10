@@ -75,7 +75,7 @@
                         @{ int count = 0;
                             foreach (var note in Model)
                             {
-                                if (note.Status == "In Review" && note.IsActive == true)
+                                if (note.Status == "In Review" || note.Status == "Submitted" && note.IsActive == true)
                                 {
                                     count++;
                                     <tr>
@@ -92,9 +92,9 @@
                                         <td>@note.Status</td>
 
                                         <td>
-                                            <button type="submit" class="btn approve-btn">Approve</button>
-                                            <button type="submit" class="btn reject-btn" data-toggle="modal" data-target="#exampleModal">Reject</button>
-                                            <button type="submit" class="btn inreview-btn">InReview</button>
+                                            <button type="submit" class="btn approve-btn" data-id="@note.ID" onclick="ApproveNote(this)">Approve</button>
+                                            <button type="submit" class="btn reject-btn" data-id="@note.ID" data-title="@note.Title" data-category="@note.Category" onclick="RejectPopup(this)" data-toggle="modal" data-target="#exampleModal">Reject</button>
+                                            <button type="submit" class="btn inreview-btn" data-id="@note.ID" onclick="InReview(this)">InReview</button>
                                         </td>
 
                                         <td>
@@ -122,17 +122,21 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-
-                                                    <h2 class="popup-review-title">Human Body - Science</h2>
-                                                    <label for="input-remarks" class="popup-text-02">
-                                                        <h5>Remarks *</h5>
-                                                    </label>
-                                                    <textarea class="form-control" id="input-remarks" rows="5" placeholder="Write remarks" required></textarea>
-                                                    <div class="text-right popup-btn">
-                                                        <button type="submit" class="btn reject-btn">Reject</button>
-                                                        <button type="submit" class="btn inreview-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                    @using (Html.BeginForm("RejectNote", "Admin", FormMethod.Post))
+                                                    {
+                                                        <input id="NoteId" name="noteid" value="@Request.QueryString["Noteid"]" hidden />
+                                                        <h2 class="popup-review-title" style="display:inline;"><p id="RejectTitle" style="display:inline;"></p> - <p id="RejectCategory" style="display:inline;"></p></h2>
+                                                        <br /><br />
+                                                        <label for="input-remarks" class="popup-text-02">
+                                                            <h5>Remarks *</h5>
+                                                        </label>
+                                                        <textarea name="RejectRemark" class="form-control" id="input-remarks" rows="5" placeholder="Write remarks" required></textarea>
+                                                        <div class="text-right popup-btn">
+                                                            <button type="submit" class="btn reject-btn" onclick="RejectBtn()">Reject</button>
+                                                            <button type="submit" class="btn inreview-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                        </div>
+                                                    }
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -157,3 +161,36 @@
 
 </div>
 
+<script>
+
+    function ApproveNote(e) {
+        var noteid = $(e).data('id');
+        if (confirm("If you approve the notes – System will publish the notes over portal. Please press yes to continue.") == true)
+            window.location.href = "/Admin/ApproveNote?noteid=" + noteid;
+        else
+            event.preventDefault();
+    }
+
+    function RejectPopup(n) {
+        var Noteid = $(n).data('id');
+        var Notetitle = $(n).data('title');
+        var NoteCategory = $(n).data('category');
+        $('#NoteId').val(Noteid);
+        document.getElementById('RejectTitle').innerHTML = Notetitle;
+        document.getElementById('RejectCategory').innerHTML = NoteCategory;
+    }
+
+    function RejectBtn() {
+        if (confirm("Are you sure you want to reject seller request?") == false) {
+            event.preventDefault();
+        }
+    }
+
+    function InReview(e) {
+        var noteid = $(e).data('id');
+        if (confirm("Via marking the note In Review – System will let user know that review process has been initiated. Please press yes to continue.") == true)
+            window.location.href = "/Admin/SetInReview?noteid=" + noteid;
+        else
+            event.preventDefault();
+    }
+</script>

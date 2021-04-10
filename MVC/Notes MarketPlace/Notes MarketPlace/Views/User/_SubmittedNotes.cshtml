@@ -16,6 +16,7 @@
         <table class="table" id="in-progress">
             <thead>
                 <tr>
+                    <th>sr no.</th>
                     <th scope="col">Added date</th>
                     <th scope="col">title</th>
                     <th scope="col">category</th>
@@ -24,13 +25,14 @@
                 </tr>
             </thead>
             <tbody>
-
+                @{ int count = 0;}
                 @foreach (var note in Model)
                 {
-                    if (note.SellerID == ViewBag.userid && note.Status != "Published" && note.Status != "Rejected" && note.IsActive == true)
+                    if (note.SellerID == ViewBag.userid && note.Status != "Published" && note.Status != "Rejected" && note.Status != "Removed" && note.IsActive == true)
                     {
-
+                        count++;
                         <tr>
+                            <td>@count</td>
                             <td>@note.CreatedDate.ToString().Substring(0, 10)</td>
                             <td>@note.Title</td>
                             <td>@note.Category</td>
@@ -40,7 +42,7 @@
                                 {
                                     <div class="edit-delete">
                                         <img class="table-edit" src="~/Content/images/Front/assets/edit.png" alt="edit" onclick="location.href='@Url.Action("EditNote", "User", new { noteid = note.ID})'">
-                                        <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="delete" onclick="location.href='@Url.Action("DeleteNote", "User", new { noteid = note.ID})'">
+                                        <img class="table-delete" src="~/Content/images/Front/assets/delete.png" alt="delete" data-id="@note.ID" onclick="DeleteNote(this)">
                                     </div>
                                 }
                                 else
@@ -78,4 +80,14 @@
     </ul>*@
 </div>
 
+<script>
 
+    function DeleteNote(e) {
+        var noteid = $(e).data('id');
+        if (confirm("Are you sure, you want to delete this note? ") == true)
+            window.location.href = "/User/DeleteNote?noteid=" + noteid;
+        else
+            event.preventDefault();
+    }
+
+</script>

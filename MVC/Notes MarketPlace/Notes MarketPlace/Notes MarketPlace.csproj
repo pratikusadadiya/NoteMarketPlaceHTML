@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Models\changePassword.cs" />
     <Compile Include="Models\ContactUs.cs" />
+    <Compile Include="Models\SystemConfigurationData.cs" />
     <Compile Include="NoteCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -361,6 +362,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\Front\font-awesome\css\" />
+    <Folder Include="Uploads\Default\" />
     <Folder Include="Uploads\NoteFile\" />
     <Folder Include="Uploads\NoteImage\" />
     <Folder Include="Uploads\NotePreview\" />
@@ -436,6 +438,13 @@
     <Content Include="Views\Admin\ManageAdministrator.cshtml" />
     <Content Include="Views\Admin\AddAdministrator.cshtml" />
     <Content Include="Views\Admin\SpamReports.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
+    <Content Include="Views\Admin\AddCountry.cshtml" />
+    <Content Include="Views\Admin\AddType.cshtml" />
+    <Content Include="Views\Admin\ManageCategory.cshtml" />
+    <Content Include="Views\Admin\ManageCountry.cshtml" />
+    <Content Include="Views\Admin\ManageType.cshtml" />
+    <Content Include="Views\Admin\ManageSystemConfiguration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

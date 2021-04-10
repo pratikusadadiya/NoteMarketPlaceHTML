@@ -35,15 +35,18 @@
                             List<NoteCategory> categories = ViewBag.Categories;
                             foreach (NoteCategory item in categories)
                             {
-                                if (item.Name != null)
+                                if (item.IsActive == true)
                                 {
-                                    if (item.Name.Equals(Model.Category))
+                                    if (item.Name != null)
                                     {
-                                        <option selected>@item.Name</option>
-                                        continue;
+                                        if (item.Name.Equals(Model.Category))
+                                        {
+                                            <option selected>@item.Name</option>
+                                            continue;
+                                        }
                                     }
+                                    <option>@item.Name</option>
                                 }
-                                <option>@item.Name</option>
                             }
                         }
                     </select>
@@ -84,15 +87,18 @@
                             List<NoteType> noteTypes = ViewBag.NoteTypes;
                             foreach (NoteType item in noteTypes)
                             {
-                                if (item.Name != null)
+                                if (item.IsActive == true)
                                 {
-                                    if (item.Name.Equals(Model.NoteType))
+                                    if (item.Name != null)
                                     {
-                                        <option selected>@item.Name</option>
-                                        continue;
+                                        if (item.Name.Equals(Model.NoteType))
+                                        {
+                                            <option selected>@item.Name</option>
+                                            continue;
+                                        }
                                     }
+                                    <option>@item.Name</option>
                                 }
-                                <option>@item.Name</option>
                             }
                         }
                     </select>
@@ -121,15 +127,18 @@
                             List<Country> countries = ViewBag.Countries;
                             foreach (Country item2 in countries)
                             {
-                                if (item2.Name != null)
+                                if (item2.IsActive == true)
                                 {
-                                    if (item2.Name.Equals(Model.Country))
+                                    if (item2.Name != null)
                                     {
-                                        <option selected>@item2.Name</option>
-                                        continue;
+                                        if (item2.Name.Equals(Model.Country))
+                                        {
+                                            <option selected>@item2.Name</option>
+                                            continue;
+                                        }
                                     }
+                                    <option>@item2.Name</option>
                                 }
-                                <option>@item2.Name</option>
                             }
                         }
                     </select>

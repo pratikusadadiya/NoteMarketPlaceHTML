@@ -1,0 +1,103 @@
+﻿@model Notes_MarketPlace.Models.SystemConfigurationData
+@{
+    ViewBag.Title = "Manage System Configuration";
+    ViewBag.MainClass = "manage-system-configuration";
+    ViewBag.ManageSystemConfiguration = "active-link";
+    ViewBag.Settings = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<!-- Profile form -->
+<div class="profile-admin-etc-inner">
+    <div class="container form-details">
+        <div class="form-inner">
+
+            <!-- Basic Profile Details -->
+            <div class="row">
+                <form method="post" enctype="multipart/form-data">
+
+                    <h2 class="title text-left">Manage System Configuration</h2>
+                    <h5 style="color:forestgreen; text-align:left; margin-left:15px;">@ViewBag.SuccessMsg</h5>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-email-address">Support email address *</label>
+                            @Html.TextBoxFor(l => l.SupportEmail, new { @placeholder = "Enter support email address", @class = "form-control", @type = "email", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-phone-number">Support phone number *</label>
+                            @Html.TextBoxFor(l => l.SupportMobileNo, new { @placeholder = "Enter support phone number", @class = "form-control", @type = "tel", @pattern = "[0-9]{10}", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-email">Email Address(es) (for various events system will send notifications to these users) *</label>
+                            @Html.TextBoxFor(l => l.NotifyEmails, new { @placeholder = "Enter email address(es)", @class = "form-control", @type = "email", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-facebook-url">Facebook URL</label>
+                            @Html.TextBoxFor(l => l.FacebookURL, new { @placeholder = "Enter facebook url", @class = "form-control", @type = "url" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-twitter-url">Twitter URL</label>
+                            @Html.TextBoxFor(l => l.TwitterURL, new { @placeholder = "Enter twitter url", @class = "form-control", @type = "url" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-linkedin-url">Linkedin URL</label>
+                            @Html.TextBoxFor(l => l.LinekedinURL, new { @placeholder = "Enter linkedin url", @class = "form-control", @type = "url" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-note-cover">Default image for notes (if seller do not upload)</label>
+                            @*<div type=file id="input-note-cover-picture" class="form-control upload-picture">
+                    <img src="~/Content/images/Admin/assets/upload.png" id="profile-picture" alt="Upload a Picture">
+                    <h5>Upload a picture</h5>
+                </div>*@
+                            @if (Model.DefaultNoteImg != null)
+                            {
+                                @Html.HiddenFor(l => l.DefaultNoteImg)
+                            }
+                            @Html.TextBoxFor(l => l.DefaultNoteImgFile, new { @type = "file", @class = "form-control upload-picture" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-profile-picture">Default profile picture (if seller do not upload)</label>
+                            @*<div type=file id="input-profile-picture" class="form-control upload-picture">
+                    <img src="~/Content/images/Admin/assets/upload.png" id="profile-picture" alt="Upload Profile Picture">
+                    <h5>Upload a picture</h5>
+                </div>*@
+                            @if (Model.DefaultProfileImg != null)
+                            {
+                                @Html.HiddenFor(l => l.DefaultProfileImg)
+                            }
+                            @Html.TextBoxFor(l => l.DefaultProfileImgFile, new { @type = "file", @class = "form-control upload-picture" })
+                            <h5 style="color:red; text-align:left; margin-left:15px;">@ViewBag.ErrorMsg</h5>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

@@ -214,7 +214,7 @@ namespace Notes_MarketPlace.Controllers
                 int NoOfinReviewNotes = 0, NoOfNewDownloads = 0, NoOfNewUsers = 0;
                 foreach (var item in notes)
                 {
-                    if (item.Status == "In Review" && item.IsActive == true)
+                    if (item.Status == "In Review" || item.Status == "Submitted" && item.IsActive == true)
                     {
                         NoOfinReviewNotes++;
                     }
@@ -233,7 +233,7 @@ namespace Notes_MarketPlace.Controllers
 
                 foreach (var item2 in user)
                 {
-                    if (item2.CreatedDate > dt)
+                    if (item2.CreatedDate > dt && item2.RoleID == 1)
                     {
                         NoOfNewUsers++;
                     }
@@ -553,7 +553,7 @@ namespace Notes_MarketPlace.Controllers
                 note.AdminRemarks = null;
                 db.Entry(note).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("RejectedNotes");
+                return RedirectToAction("PublishedNotes");
             }
             else
             {
@@ -599,6 +599,43 @@ namespace Notes_MarketPlace.Controllers
                 ViewBag.Sellers = Sellers;
 
                 return View(notes);
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        public ActionResult SetInReview(int noteid)
+        {
+            if (adminid != 0)
+            {
+                SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
+                note.Status = "In Review";
+                note.ActionedBy = adminid;
+                db.Entry(note).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("NotesUnderReview");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+        
+        public ActionResult RejectNote(int noteid, string RejectRemark)
+        {
+            if (adminid != 0)
+            {
+                SellerNote note = db.SellerNotes.FirstOrDefault(n => n.ID == noteid);
+                note.Status = "Rejected";
+                note.AdminRemarks = RejectRemark;
+                note.ActionedBy = adminid;
+                db.Entry(note).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("NotesUnderReview");
             }
             else
             {
@@ -737,6 +774,424 @@ namespace Notes_MarketPlace.Controllers
             }
         }
 
+        public ActionResult ManageCategory()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                List<NoteCategory> categories = db.NoteCategories.ToList();
+                ViewBag.Users = db.Users.ToList();
+                return View(categories);
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        public ActionResult DeleteCategory(int deleteid)
+        {
+            if (adminid != 0)
+            {
+                NoteCategory category = db.NoteCategories.Where(a => a.ID == deleteid).FirstOrDefault();
+                category.IsActive = false;
+                category.ModifiedDate = DateTime.Now;
+                category.ModifiedBy = adminid;
+                db.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageCategory");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditCategory(int editid)
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                NoteCategory category = db.NoteCategories.Where(a => a.ID == editid).FirstOrDefault();
+                return View("AddCategory", category);
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(NoteCategory category)
+        {
+            if (adminid != 0)
+            {
+                category.ModifiedDate = DateTime.Now;
+                category.ModifiedBy = adminid;
+                db.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageCategory");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddCategory()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(NoteCategory category)
+        {
+            if (adminid != 0)
+            {
+                category.IsActive = true;
+                category.CreatedDate = DateTime.Now;
+                category.CreatedBy = adminid;
+                db.NoteCategories.Add(category);
+                db.SaveChanges();
+                return RedirectToAction("ManageCategory");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        public ActionResult ManageCountry()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                List<Country> countries = db.Countries.ToList();
+                ViewBag.Users = db.Users.ToList();
+                return View(countries);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        public ActionResult DeleteCountry(int deleteid)
+        {
+            if (adminid != 0)
+            {
+                Country country = db.Countries.Where(a => a.ID == deleteid).FirstOrDefault();
+                country.IsActive = false;
+                country.ModifiedDate = DateTime.Now;
+                country.ModifiedBy = adminid;
+                db.Entry(country).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageCountry");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditCountry(int editid)
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                Country country = db.Countries.Where(a => a.ID == editid).FirstOrDefault();
+                return View("AddCountry", country);
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCountry(Country country)
+        {
+            if (adminid != 0)
+            {
+                country.ModifiedDate = DateTime.Now;
+                country.ModifiedBy = adminid;
+                db.Entry(country).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageCountry");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddCountry()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddCountry(Country country)
+        {
+            if (adminid != 0)
+            {
+                country.IsActive = true;
+                country.CreatedDate = DateTime.Now;
+                country.CreatedBy = adminid;
+                db.Countries.Add(country);
+                db.SaveChanges();
+                return RedirectToAction("ManageCountry");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        public ActionResult ManageType()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                List<NoteType> noteTypes = db.NoteTypes.ToList();
+                ViewBag.Users = db.Users.ToList();
+                return View(noteTypes);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        public ActionResult DeleteType(int deleteid)
+        {
+            if (adminid != 0)
+            {
+                NoteType type = db.NoteTypes.Where(a => a.ID == deleteid).FirstOrDefault();
+                type.IsActive = false;
+                type.ModifiedDate = DateTime.Now;
+                type.ModifiedBy = adminid;
+                db.Entry(type).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageType");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditType(int editid)
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                NoteType type = db.NoteTypes.Where(a => a.ID == editid).FirstOrDefault();
+                return View("AddType", type);
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditType(NoteType type)
+        {
+            if (adminid != 0)
+            {
+                type.ModifiedDate = DateTime.Now;
+                type.ModifiedBy = adminid;
+                db.Entry(type).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ManageType");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddType()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+            }
+            if (adminid != 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddType(NoteType type)
+        {
+            if (adminid != 0)
+            {
+                type.IsActive = true;
+                type.CreatedDate = DateTime.Now;
+                type.CreatedBy = adminid;
+                db.NoteTypes.Add(type);
+                db.SaveChanges();
+                return RedirectToAction("ManageType");
+            }
+            else
+            {
+                return RedirectToAction("login", "User");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ManageSystemConfiguration()
+        {
+            ViewBag.superadmin = false;
+            if (superadmin != 0)
+            {
+                ViewBag.superadmin = true;
+                List<SystemConfiguration> list = db.SystemConfigurations.ToList();
+                SystemConfigurationData data = new SystemConfigurationData();
+                data.SupportEmail = list.Where(l => l.Key == "SupportEmail").FirstOrDefault().Value;
+                data.SupportMobileNo = list.Where(l => l.Key == "SupportPhoneNo").FirstOrDefault().Value;
+                data.NotifyEmails = list.Where(l => l.Key == "NotifyEmails").FirstOrDefault().Value;
+                data.FacebookURL = list.Where(l => l.Key == "FacebookURL").FirstOrDefault().Value;
+                data.TwitterURL = list.Where(l => l.Key == "TwitterURL").FirstOrDefault().Value;
+                data.LinekedinURL = list.Where(l => l.Key == "LinkedinURL").FirstOrDefault().Value;
+                data.DefaultNoteImg = list.Where(l => l.Key == "DefaultNoteImg").FirstOrDefault().Value;
+                data.DefaultProfileImg = list.Where(l => l.Key == "DefaultProfileImg").FirstOrDefault().Value;
+                return View(data);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ManageSystemConfiguration(SystemConfigurationData sc)
+        {
+            if (superadmin != 0)
+            {
+                List<SystemConfiguration> list = db.SystemConfigurations.ToList();
+                list.Where(l => l.Key == "SupportEmail").FirstOrDefault().Value = sc.SupportEmail;
+                list.Where(l => l.Key == "SupportPhoneNo").FirstOrDefault().Value = sc.SupportMobileNo;
+                list.Where(l => l.Key == "NotifyEmails").FirstOrDefault().Value = sc.NotifyEmails;
+                list.Where(l => l.Key == "FacebookURL").FirstOrDefault().Value = sc.FacebookURL;
+                list.Where(l => l.Key == "TwitterURL").FirstOrDefault().Value = sc.TwitterURL;
+                list.Where(l => l.Key == "LinkedinURL").FirstOrDefault().Value = sc.LinekedinURL;
+
+                if (sc.DefaultProfileImgFile != null)
+                {
+                    var ProfileImageName = "DefaultProfileImage.jpg";
+                    string ProfileImageExtension = Path.GetExtension(sc.DefaultProfileImgFile.FileName);
+
+                    var imageSupportedTypes = new[] { ".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG" };
+
+                    if (imageSupportedTypes.Contains(ProfileImageExtension))
+                    {
+                        var ProfileImagePath = Path.Combine(Server.MapPath("~/Uploads/Default/"), ProfileImageName);
+                        sc.DefaultProfileImg = ProfileImagePath;
+                        sc.DefaultProfileImgFile.SaveAs(ProfileImagePath);
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMsg = "Please select proper formate image.";
+                        return View("ManageSystemConfiguration", sc);
+                    }
+                }
+
+                if (sc.DefaultNoteImgFile != null)
+                {
+                    var NoteImageName = "DefaultNoteImage.jpg";
+                    string NoteImageExtension = Path.GetExtension(sc.DefaultNoteImgFile.FileName);
+
+                    var imageSupportedTypes = new[] { ".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG" };
+
+                    if (imageSupportedTypes.Contains(NoteImageExtension))
+                    {
+                        var NoteImagePath = Path.Combine(Server.MapPath("~/Uploads/Default/"), NoteImageName);
+                        sc.DefaultNoteImg = NoteImagePath;
+                        sc.DefaultNoteImgFile.SaveAs(NoteImagePath);
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMsg = "Please select proper formate image.";
+                        return View("ManageSystemConfiguration", sc);
+                    }
+                }
+
+                list.Where(l => l.Key == "DefaultNoteImg").FirstOrDefault().Value = sc.DefaultNoteImg;
+                list.Where(l => l.Key == "DefaultProfileImg").FirstOrDefault().Value = sc.DefaultProfileImg;
+                db.SaveChanges();
+
+                ViewBag.SuccessMsg = "Data updated successfully.";
+                return View("ManageSystemConfiguration",sc);
+            }
+            else
+            {
+                return RedirectToAction("dashboard");
+            }
+        }
+
         public ActionResult SpamReports()
         {
             ViewBag.superadmin = false;
@@ -766,6 +1221,7 @@ namespace Notes_MarketPlace.Controllers
         public ActionResult logout()
         {
             adminid = 0;
+            superadmin = 0;
             return RedirectToAction("home", "User");
         }
         

@@ -83,7 +83,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a><button onclick="location.href='@Url.Action("logout")'" type="submit" class="btn submit-btn">Logout</button></a>
+                                <a><button onclick="Logout()" type="submit" class="btn submit-btn">Logout</button></a>
                             </li>
                         </ul>
                     </div>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li>@Html.ActionLink("Logout", "logout")</li>
+                                <li><a class="mobile-nav-logout" onclick="Logout()">Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -231,6 +231,13 @@
             });
 
         });
+
+        function Logout() {
+            if (confirm("Are you sure, you want to logout?") == true)
+                window.location.href = "/User/logout";
+            else
+                event.preventDefault();
+        }
         
     </script>
 

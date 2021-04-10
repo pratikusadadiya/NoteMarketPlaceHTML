@@ -1,0 +1,188 @@
+﻿@model IEnumerable<Notes_MarketPlace.NoteType>
+@{
+    ViewBag.Title = "Manage Type";
+    ViewBag.MainClass = "manage-type";
+    ViewBag.ManageType = "active-link";
+    ViewBag.Settings = "active-link";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+
+<div id="manage-type-inner" class="manage-profile-admin-etc">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="heading-section">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="heading">Manage Type</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-section">
+
+            <div class="table-heading">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <a><button type="submit" class="btn submit-btn" onclick="location.href='@Url.Action("AddType")'">Add Type</button></a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 table-search text-right">
+                    <img class="search-icon" src="~/Content/images/Admin/assets/search.jpg" alt="search">
+                    <input type="text" class="form-control input-search" id="manage-type-search" placeholder="Search">
+                    <button type="submit" class="btn submit-btn">search</button>
+                </div>
+            </div>
+
+            <div class="table-responsive-lg" id="table-content">
+                <table class="table" id="manage-type-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">sr no.</th>
+                            <th scope="col">type</th>
+                            <th scope="col">description</th>
+                            <th scope="col">date added</th>
+                            <th scope="col">added by</th>
+                            <th scope="col">active</th>
+                            <th scope="col" class="nosort">action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ int count = 0;
+                            foreach (var type in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@type.Name</td>
+                                    <td>@type.Description</td>
+                                    <td>@type.CreatedDate.ToString().Substring(0, 16)</td>
+
+                                    @foreach (User item in ViewBag.Users)
+                                    {
+                                        if (item.ID == type.CreatedBy)
+                                        {
+                                            <td>@item.FirstName @item.LastName</td>
+                                        }
+                                    }
+
+                                    @if (type.IsActive == true)
+                                    {
+                                        <td>Yes</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No</td>
+                                    }
+
+                                    <td>
+                                        <div class="edit-delete">
+                                            <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit" onclick="location.href='@Url.Action("EditType", "Admin", new { editid = type.ID})'">
+                                            <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="delete" data-id="@type.ID" onclick="DeleteType(this)">
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }
+
+                        @*<tr>
+            <td>1</td>
+            <td>Val 1</td>
+            <td>Lorem ipsum is simply dummy text.</td>
+            <td>09-10-2020, 10:10</td>
+            <td>Khayati Patel</td>
+            <td>Yes</td>
+            <td>
+                <div class="edit-delete">
+                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Val 2</td>
+            <td>Lorem ipsum is simply dummy text.</td>
+            <td>10-10-2020, 12:30</td>
+            <td>Rahul Shah</td>
+            <td>Yes</td>
+            <td>
+                <div class="edit-delete">
+                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Val 3</td>
+            <td>Lorem ipsum is simply dummy text.</td>
+            <td>11-10-2020, 01:00</td>
+            <td>Suman Trivedi</td>
+            <td>No</td>
+            <td>
+                <div class="edit-delete">
+                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Val 4</td>
+            <td>Lorem ipsum is simply dummy text.</td>
+            <td>12-10-2020, 10:10</td>
+            <td>Raj Malhotra</td>
+            <td>Yes</td>
+            <td>
+                <div class="edit-delete">
+                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Val 5</td>
+            <td>Lorem ipsum is simply dummy text.</td>
+            <td>13-10-2020, 11:25</td>
+            <td>Niya Patel</td>
+            <td>Yes</td>
+            <td>
+                <div class="edit-delete">
+                    <img class="table-edit" src="~/Content/images/Admin/assets/edit.png" alt="edit">
+                    <img class="table-delete" src="~/Content/images/Admin/assets/delete.png" alt="edit">
+                </div>
+            </td>
+        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-area text-center" id="manage-type-pagination">
+            <!-- Pagination appear here -->
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function DeleteType(e) {
+        var deleteid = $(e).data('id');
+        if (confirm("Are you sure you want to make this type inactive?") == true)
+            window.location.href = "/Admin/DeleteType?deleteid=" + deleteid;
+        else
+            event.preventDefault();
+    }
+
+</script>

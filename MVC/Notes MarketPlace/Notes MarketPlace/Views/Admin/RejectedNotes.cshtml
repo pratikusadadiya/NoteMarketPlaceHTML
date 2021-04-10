@@ -108,7 +108,7 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     @*<a class="dropdown-item" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>*@
-                                                    <a class="dropdown-item" data-id="@note.ID" onclick="ApproveNote(this)" href="@Url.Action("ApproveNote", "Admin", new { noteid = note.ID})">Approve</a>
+                                                    <a class="dropdown-item" data-id="@note.ID" onclick="ApproveNote(this)">Approve</a>
                                                     <a class="dropdown-item" href="@Url.Action("DownloadNote", "User", new { noteid = note.ID})">Download Note</a>
                                                     <a class="dropdown-item" href="@Url.Action("NotesDetails", "Admin", new { noteid = note.ID})">View More Details</a>
                                                 </div>

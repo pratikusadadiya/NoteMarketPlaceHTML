@@ -1,0 +1,44 @@
+﻿@model Notes_MarketPlace.NoteType
+@{
+    ViewBag.Title = "Add Type";
+    ViewBag.MainClass = "add-type";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+
+}
+
+<!-- Add type form -->
+<div class="profile-admin-etc-inner">
+    <div class="container form-details">
+        <div class="form-inner">
+
+
+            <!-- Add type -->
+            <div class="row">
+                <form method="post">
+                    @Html.HiddenFor(l => l.ID)
+                    <h2 class="title text-left">Add Type</h2>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-type">Type *</label>
+                            @Html.TextBoxFor(l => l.Name, new { @placeholder = "Enter your type", @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                            <label for="input-description">Description *</label>
+                            @Html.TextAreaFor(l => l.Description, new { @placeholder = "Enter your description", @class = "form-control", @id = "input-description", @rows = "10" })
+                        </div>
+                    </div>
+                    @Html.HiddenFor(l => l.IsActive)
+                    @Html.HiddenFor(l => l.CreatedDate)
+                    @Html.HiddenFor(l => l.CreatedBy)
+                    <button type="submit" class="btn submit-btn">Submit</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
