@@ -70,7 +70,7 @@
                                 <!-- Profile Dropdown -->
                                 <div class="dropdown" id="profile-submenu">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="profile-img img-responsive img-circle" src="~/Content/images/Front/User-Profile/profile-img.png" alt="logo">
+                                        <img class="profile-img img-responsive img-circle" src="@Session["ProfileImg"].ToString()" alt="logo">
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         @Html.ActionLink("My Profile", "UserProfile", null, new { @class = ViewBag.MyProfile })

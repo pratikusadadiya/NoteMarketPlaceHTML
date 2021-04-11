@@ -255,6 +255,7 @@ namespace Notes_MarketPlace.Controllers
                         if(valid.RoleID == 1)
                         {
                             userid = valid.ID;
+                            Session["ProfileImg"] = "/Uploads/ProfilePicture/" + @Path.GetFileName(db.UserProfiles.Where(l => l.UserID == userid).FirstOrDefault().Profile_Picture);
                             return RedirectToAction("dashboard");
                         }
                         else

@@ -27,6 +27,7 @@ namespace Notes_MarketPlace.Controllers
             {
                 superadmin = user.ID;
             }
+            Session["ProfileImg"] = "/Uploads/ProfilePicture/" + @Path.GetFileName(db.AdminProfiles.Where(l => l.AdminID == adminid).FirstOrDefault().Profile_Picture);
             return RedirectToAction("dashboard");
         }
 
